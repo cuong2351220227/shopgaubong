@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.shopgaubong.controller.AdminMainController"
+            fx:id="contentPane"
+            prefHeight="700" prefWidth="1200">
+
+    <!-- Top Bar -->
+    <top>
+        <VBox>
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+                <Label text="UCOP - Shop Gấu Bông">
+                    <font>
+                        <Font name="System Bold" size="20"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="welcomeLabel" text="Xin chào, Admin">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <Button text="Đăng xuất" onAction="#handleLogout"/>
+            </HBox>
+            <Separator/>
+        </VBox>
+    </top>
+
+    <!-- Left Menu -->
+    <left>
+        <VBox spacing="5" prefWidth="250">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Label text="QUẢN LÝ HỆ THỐNG">
+                <font>
+                    <Font name="System Bold" size="12"/>
+                </font>
+            </Label>
+
+            <Button text="Quản lý người dùng" onAction="#handleManageUsers"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Separator/>
+
+            <Label text="QUẢN LÝ SẢN PHẨM">
+                <font>
+                    <Font name="System Bold" size="12"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Label>
+
+            <Button text="Quản lý danh mục" onAction="#handleManageCategories"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Button text="Quản lý sản phẩm" onAction="#handleManageItems"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Button text="Quản lý kho" onAction="#handleManageWarehouse"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Separator/>
+
+            <Label text="QUẢN LÝ ĐỐN HÀNG">
+                <font>
+                    <Font name="System Bold" size="12"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Label>
+
+            <Button text="Quản lý đơn hàng" onAction="#handleManageOrders"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Button text="Quản lý khuyến mãi" onAction="#handleManagePromotions"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Separator/>
+
+            <Label text="BÁO CÁO">
+                <font>
+                    <Font name="System Bold" size="12"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Label>
+
+            <Button text="Xem báo cáo" onAction="#handleViewReports"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+        </VBox>
+    </left>
+
+    <!-- Center Content -->
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <padding>
+                <Insets top="50" right="50" bottom="50" left="50"/>
+            </padding>
+
+            <Label text="Chào mừng đến với Hệ thống UCOP">
+                <font>
+                    <Font name="System Bold" size="24"/>
+                </font>
+            </Label>
+
+            <Label text="Vui lòng chọn chức năng từ menu bên trái">
+                <font>
+                    <Font size="16"/>
+                </font>
+            </Label>
+        </VBox>
+    </center>
+
+    <!-- Bottom Status Bar -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            <Separator/>
+            <Label text="UCOP Shop Gấu Bông v1.0">
+                <font>
+                    <Font size="10"/>
+                </font>
+            </Label>
+        </HBox>
+    </bottom>
+</BorderPane>
+

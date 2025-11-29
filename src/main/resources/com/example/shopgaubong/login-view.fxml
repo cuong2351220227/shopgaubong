@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.LoginController"
+      alignment="CENTER" spacing="20" prefHeight="500" prefWidth="400">
+
+    <padding>
+        <Insets top="50" right="50" bottom="50" left="50"/>
+    </padding>
+
+    <Label text="UCOP - Shop Gấu Bông">
+        <font>
+            <Font name="System Bold" size="24"/>
+        </font>
+    </Label>
+
+    <Label text="Đăng Nhập">
+        <font>
+            <Font size="18"/>
+        </font>
+    </Label>
+
+    <VBox spacing="10" prefWidth="300">
+        <Label text="Tên đăng nhập:"/>
+        <TextField fx:id="usernameField" promptText="Nhập tên đăng nhập"/>
+
+        <Label text="Mật khẩu:"/>
+        <PasswordField fx:id="passwordField" promptText="Nhập mật khẩu"/>
+
+        <Label fx:id="messageLabel" textFill="red">
+            <font>
+                <Font size="12"/>
+            </font>
+        </Label>
+
+        <Button fx:id="loginButton" text="Đăng Nhập" onAction="#handleLogin"
+                prefWidth="300" prefHeight="40">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+    </VBox>
+
+    <Label text="Phiên bản 1.0">
+        <font>
+            <Font size="10"/>
+        </font>
+    </Label>
+</VBox>
+

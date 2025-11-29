@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="shopgaubongPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Các Entity Classes -->
+        <class>com.example.shopgaubong.entity.Account</class>
+        <class>com.example.shopgaubong.entity.AccountProfile</class>
+        <class>com.example.shopgaubong.entity.Category</class>
+        <class>com.example.shopgaubong.entity.Item</class>
+        <class>com.example.shopgaubong.entity.Warehouse</class>
+        <class>com.example.shopgaubong.entity.StockItem</class>
+        <class>com.example.shopgaubong.entity.Order</class>
+        <class>com.example.shopgaubong.entity.OrderItem</class>
+        <class>com.example.shopgaubong.entity.Payment</class>
+        <class>com.example.shopgaubong.entity.Shipment</class>
+        <class>com.example.shopgaubong.entity.Promotion</class>
+
+        <properties>
+            <!-- Database connection settings -->
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&amp;serverTimezone=Asia/Ho_Chi_Minh&amp;characterEncoding=utf8mb4"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+
+            <!-- Hibernate settings -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.connection.pool_size" value="10"/>
+            <property name="hibernate.current_session_context_class" value="thread"/>
+
+            <!-- UTF-8 encoding -->
+            <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
+            <property name="hibernate.connection.useUnicode" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

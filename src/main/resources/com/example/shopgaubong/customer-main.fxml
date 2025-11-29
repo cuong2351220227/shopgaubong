@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.shopgaubong.controller.CustomerMainController"
+            fx:id="contentPane"
+            prefHeight="700" prefWidth="1200">
+
+    <top>
+        <VBox>
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+                <Label text="UCOP - Shop Gấu Bông">
+                    <font>
+                        <Font name="System Bold" size="20"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="welcomeLabel" text="Xin chào">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <Button text="Đăng xuất" onAction="#handleLogout"/>
+            </HBox>
+            <Separator/>
+        </VBox>
+    </top>
+
+    <left>
+        <VBox spacing="5" prefWidth="250">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Label text="MENU">
+                <font>
+                    <Font name="System Bold" size="12"/>
+                </font>
+            </Label>
+
+            <Button text="Xem sản phẩm" onAction="#handleBrowseProducts"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Button text="Giỏ hàng" onAction="#handleViewCart"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Button text="Đơn hàng của tôi" onAction="#handleViewOrders"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Separator/>
+
+            <Button text="Thông tin cá nhân" onAction="#handleProfile"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <padding>
+                <Insets top="50" right="50" bottom="50" left="50"/>
+            </padding>
+
+            <Label text="Chào mừng đến với Shop Gấu Bông">
+                <font>
+                    <Font name="System Bold" size="24"/>
+                </font>
+            </Label>
+
+            <Label text="Vui lòng chọn chức năng từ menu bên trái">
+                <font>
+                    <Font size="16"/>
+                </font>
+            </Label>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            <Label text="UCOP Shop Gấu Bông v1.0">
+                <font>
+                    <Font size="10"/>
+                </font>
+            </Label>
+        </HBox>
+    </bottom>
+</BorderPane>
+
