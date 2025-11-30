@@ -52,6 +52,11 @@ public class StaffMainController {
         loadView("/com/example/shopgaubong/shipment-management-view.fxml", "Quản lý vận chuyển");
     }
 
+    @FXML
+    private void handleManagePayments() {
+        loadView("/com/example/shopgaubong/payment-management-view.fxml", "Quản lý thanh toán");
+    }
+
     /**
      * Load a view into the center content pane
      */

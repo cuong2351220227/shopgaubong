@@ -412,6 +412,27 @@ public class PaymentService {
     }
 
     /**
+     * Lấy tất cả thanh toán
+     */
+    public List<Payment> getAllPayments() {
+        return paymentDAO.findAll();
+    }
+
+    /**
+     * Lấy thanh toán theo ID
+     */
+    public Payment getPaymentById(Long id) {
+        return paymentDAO.findById(id).orElse(null);
+    }
+
+    /**
+     * Cập nhật thanh toán
+     */
+    public void updatePayment(Payment payment) {
+        paymentDAO.update(payment);
+    }
+
+    /**
      * Lấy danh sách hoàn tiền của thanh toán
      */
     public List<Refund> getRefundsByPaymentId(Long paymentId) {

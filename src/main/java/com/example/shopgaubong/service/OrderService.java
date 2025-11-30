@@ -425,6 +425,13 @@ public class OrderService {
         }
     }
 
+    /**
+     * Cập nhật đơn hàng (simple update without stock logic)
+     */
+    public void updateOrder(Order order) {
+        orderDAO.update(order);
+    }
+
     // --- Các hàm tiện ích giữ nguyên ---
     private BigDecimal calculateShippingFee(BigDecimal totalWeight) {
         if (totalWeight.compareTo(BigDecimal.ZERO) == 0) return BASE_SHIPPING_FEE;

@@ -6584,3 +6584,100 @@ java.lang.ClassCastException: class javafx.scene.layout.HBox cannot be cast to c
 2025-12-01 05:26:33.778 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
 2025-12-01 05:26:33.862 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
 2025-12-01 05:26:33.862 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-01 05:27:42.943 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-01 05:27:42.955 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-01 05:27:50.029 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-01 05:27:50.149 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-01 05:27:50.174 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-01 05:27:50.194 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-01 05:27:50.381 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-01 05:27:50.386 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-01 05:27:50.386 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-01 05:27:50.386 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-01 05:27:50.386 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-01 05:27:50.387 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-01 05:27:50.519 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-01 05:27:50.858 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-01 05:27:51.544 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@374ba492] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-01 05:27:51.631 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-01 05:27:51.871 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-01 05:27:51.946 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-01 05:27:51.946 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-01 05:27:57.315 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-01 05:27:59.615 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 4 stock items
+2025-12-01 05:27:59.616 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-01 05:28:02.411 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 7 đơn
+2025-12-01 05:28:03.103 [JavaFX Application Thread] INFO  c.e.s.c.PromotionManagementController - Tải khuyến mãi thành công: 1 khuyến mãi
+2025-12-01 05:28:03.855 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 7 đơn
+2025-12-01 05:28:25.352 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 7 đơn
+2025-12-01 05:28:26.869 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 7 đơn
+2025-12-01 05:28:29.188 [JavaFX Application Thread] INFO  c.e.s.c.PromotionManagementController - Tải khuyến mãi thành công: 1 khuyến mãi
+2025-12-01 05:28:31.061 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 7 đơn
+2025-12-01 05:28:54.333 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-01 05:28:54.341 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-01 05:40:09.077 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-01 05:40:09.269 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-01 05:40:09.308 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-01 05:40:09.354 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-01 05:40:09.729 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-01 05:40:09.736 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-01 05:40:09.738 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-01 05:40:09.740 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-01 05:40:09.741 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-01 05:40:09.743 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-01 05:40:10.031 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-01 05:40:10.713 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-01 05:40:12.298 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@25d23478] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-01 05:40:12.458 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-01 05:40:13.251 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-01 05:40:13.702 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-01 05:40:13.702 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-01 05:40:21.801 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-01 05:40:32.911 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 4 stock items
+2025-12-01 05:40:32.913 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-01 05:40:35.851 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 7 đơn
+2025-12-01 05:40:42.692 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-01 05:40:43.324 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 4 stock items
+2025-12-01 05:40:43.324 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-01 05:40:45.137 [JavaFX Application Thread] INFO  c.e.s.c.UserManagementController - Loaded 3 accounts
+2025-12-01 05:40:58.295 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: admin
+2025-12-01 05:41:02.814 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: staff
+2025-12-01 05:41:04.290 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 3 payments
+2025-12-01 05:41:04.291 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-01 05:41:27.836 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Order@f517181
+2025-12-01 05:41:27.842 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 3 payments
+2025-12-01 05:41:28.743 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Updated order status to DELIVERED for order: ORD-20251201043821-607
+2025-12-01 05:41:34.367 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.PaymentDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Payment@9d2e0fb
+2025-12-01 05:41:34.381 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Order@4c1cf072
+2025-12-01 05:41:34.386 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 3 payments
+2025-12-01 05:41:35.147 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Confirmed payment for order: ORD-20251201024257-713
+2025-12-01 05:41:37.762 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.PaymentDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Payment@296e3738
+2025-12-01 05:41:37.770 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Order@7e7efdf4
+2025-12-01 05:41:37.775 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 3 payments
+2025-12-01 05:41:38.442 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Confirmed payment for order: ORD-20251201040417-200
+2025-12-01 05:41:45.213 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.PaymentDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Payment@4f8769c9
+2025-12-01 05:41:45.226 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Order@2140fa61
+2025-12-01 05:41:45.230 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 3 payments
+2025-12-01 05:41:46.118 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Refunded payment for order: ORD-20251201040417-200
+2025-12-01 05:41:50.072 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.PaymentDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Payment@4d60685c
+2025-12-01 05:41:50.084 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Order@753d14aa
+2025-12-01 05:41:50.088 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 3 payments
+2025-12-01 05:41:50.886 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Refunded payment for order: ORD-20251201024257-713
+2025-12-01 05:42:09.202 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 7 đơn
+2025-12-01 05:42:10.444 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 3 payments
+2025-12-01 05:42:10.445 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-01 05:42:13.992 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 3 payments
+2025-12-01 05:42:13.992 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-01 05:42:14.733 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 4 stock items
+2025-12-01 05:42:14.733 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-01 05:42:15.432 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-01 05:42:15.998 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 7 đơn
+2025-12-01 05:42:16.819 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 3 payments
+2025-12-01 05:42:16.819 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-01 05:42:20.363 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 4 stock items
+2025-12-01 05:42:20.363 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-01 05:42:20.921 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 3 payments
+2025-12-01 05:42:20.921 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-01 05:42:27.162 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: staff
+2025-12-01 05:42:36.634 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-01 05:42:36.644 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
