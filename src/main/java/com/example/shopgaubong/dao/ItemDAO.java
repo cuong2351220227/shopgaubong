@@ -17,15 +17,12 @@ public class ItemDAO extends BaseDAO<Item, Long> {
      * Tìm Item theo SKU
      */
     public Optional<Item> findBySku(String sku) {
-        EntityManager em = getEntityManager();
-        try {
-            String jpql = "SELECT i FROM Item i WHERE i.sku = :sku";
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT i FROM Item i JOIN FETCH i.category WHERE i.sku = :sku";
             TypedQuery<Item> query = em.createQuery(jpql, Item.class);
             query.setParameter("sku", sku);
             List<Item> results = query.getResultList();
-            return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
-        } finally {
-            em.close();
+            return results.isEmpty() ? Optional.empty() : Optional.of(results.getFirst());
         }
     }
 
@@ -33,14 +30,30 @@ public class ItemDAO extends BaseDAO<Item, Long> {
      * Tìm các Item theo danh mục
      */
     public List<Item> findByCategoryId(Long categoryId) {
-        EntityManager em = getEntityManager();
-        try {
-            String jpql = "SELECT i FROM Item i WHERE i.category.id = :categoryId AND i.isActive = true";
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT i FROM Item i JOIN FETCH i.category WHERE i.category.id = :categoryId AND i.isActive = true";
             TypedQuery<Item> query = em.createQuery(jpql, Item.class);
             query.setParameter("categoryId", categoryId);
             return query.getResultList();
-        } finally {
-            em.close();
+        }
+    }
+
+    /**
+     * Tìm các Item theo danh mục (alias method)
+     */
+    public List<Item> findByCategory(Long categoryId) {
+        return findByCategoryId(categoryId);
+    }
+
+    /**
+     * Tìm các Item theo trạng thái active
+     */
+    public List<Item> findByActive(Boolean isActive) {
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT i FROM Item i JOIN FETCH i.category WHERE i.isActive = :isActive ORDER BY i.name";
+            TypedQuery<Item> query = em.createQuery(jpql, Item.class);
+            query.setParameter("isActive", isActive);
+            return query.getResultList();
         }
     }
 
@@ -48,13 +61,10 @@ public class ItemDAO extends BaseDAO<Item, Long> {
      * Tìm các Item đang hoạt động
      */
     public List<Item> findActiveItems() {
-        EntityManager em = getEntityManager();
-        try {
-            String jpql = "SELECT i FROM Item i WHERE i.isActive = true ORDER BY i.name";
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT i FROM Item i JOIN FETCH i.category WHERE i.isActive = true ORDER BY i.name";
             TypedQuery<Item> query = em.createQuery(jpql, Item.class);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
 
@@ -62,14 +72,11 @@ public class ItemDAO extends BaseDAO<Item, Long> {
      * Tìm kiếm Item theo tên hoặc SKU
      */
     public List<Item> search(String keyword) {
-        EntityManager em = getEntityManager();
-        try {
-            String jpql = "SELECT i FROM Item i WHERE (LOWER(i.name) LIKE LOWER(:keyword) OR LOWER(i.sku) LIKE LOWER(:keyword)) AND i.isActive = true";
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT i FROM Item i JOIN FETCH i.category WHERE (LOWER(i.name) LIKE LOWER(:keyword) OR LOWER(i.sku) LIKE LOWER(:keyword)) AND i.isActive = true ORDER BY i.name";
             TypedQuery<Item> query = em.createQuery(jpql, Item.class);
             query.setParameter("keyword", "%" + keyword + "%");
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
 
@@ -77,14 +84,11 @@ public class ItemDAO extends BaseDAO<Item, Long> {
      * Kiểm tra SKU đã tồn tại chưa
      */
     public boolean existsBySku(String sku) {
-        EntityManager em = getEntityManager();
-        try {
+        try (EntityManager em = getEntityManager()) {
             String jpql = "SELECT COUNT(i) FROM Item i WHERE i.sku = :sku";
             TypedQuery<Long> query = em.createQuery(jpql, Long.class);
             query.setParameter("sku", sku);
             return query.getSingleResult() > 0;
-        } finally {
-            em.close();
         }
     }
 
@@ -92,10 +96,11 @@ public class ItemDAO extends BaseDAO<Item, Long> {
      * Lấy top sản phẩm bán chạy
      */
     public List<Item> findTopSellingItems(int limit) {
-        EntityManager em = getEntityManager();
-        try {
+        try (EntityManager em = getEntityManager()) {
             String jpql = "SELECT oi.item, SUM(oi.quantity) as totalQty " +
                     "FROM OrderItem oi " +
+                    "JOIN FETCH oi.item i " +
+                    "JOIN FETCH i.category " +
                     "JOIN oi.order o " +
                     "WHERE o.status IN ('DELIVERED', 'CLOSED') " +
                     "GROUP BY oi.item " +
@@ -105,9 +110,71 @@ public class ItemDAO extends BaseDAO<Item, Long> {
             return query.getResultList().stream()
                     .map(result -> (Item) result[0])
                     .toList();
-        } finally {
-            em.close();
+        }
+    }
+
+    /**
+     * Override findAll để thêm JOIN FETCH cho category
+     */
+    @Override
+    public List<Item> findAll() {
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT i FROM Item i JOIN FETCH i.category ORDER BY i.name";
+            TypedQuery<Item> query = em.createQuery(jpql, Item.class);
+            return query.getResultList();
+        }
+    }
+
+    /**
+     * Override findById để thêm JOIN FETCH cho category
+     */
+    @Override
+    public Optional<Item> findById(Long id) {
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT i FROM Item i JOIN FETCH i.category WHERE i.id = :id";
+            TypedQuery<Item> query = em.createQuery(jpql, Item.class);
+            query.setParameter("id", id);
+            List<Item> results = query.getResultList();
+            return results.isEmpty() ? Optional.empty() : Optional.of(results.getFirst());
+        }
+    }
+
+    /**
+     * Tìm các Item với phân trang và sắp xếp
+     */
+    public List<Item> findWithPagination(int page, int size, String sortBy) {
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT i FROM Item i JOIN FETCH i.category WHERE i.isActive = true ORDER BY " +
+                    (sortBy != null ? "i." + sortBy : "i.name");
+            TypedQuery<Item> query = em.createQuery(jpql, Item.class);
+            query.setFirstResult(page * size);
+            query.setMaxResults(size);
+            return query.getResultList();
+        }
+    }
+
+    /**
+     * Đếm tổng số Item active
+     */
+    public Long countActiveItems() {
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT COUNT(i) FROM Item i WHERE i.isActive = true";
+            TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+            return query.getSingleResult();
+        }
+    }
+
+    /**
+     * Tìm Item theo danh mục với phân trang
+     */
+    public List<Item> findByCategoryWithPagination(Long categoryId, int page, int size) {
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT i FROM Item i JOIN FETCH i.category c WHERE c.id = :categoryId AND i.isActive = true ORDER BY i.name";
+            TypedQuery<Item> query = em.createQuery(jpql, Item.class);
+            query.setParameter("categoryId", categoryId);
+            query.setFirstResult(page * size);
+            query.setMaxResults(size);
+            return query.getResultList();
         }
     }
 }
-

@@ -80,5 +80,24 @@ public class PromotionDAO extends BaseDAO<Promotion, Long> {
             em.close();
         }
     }
+
+    /**
+     * Lấy danh sách khuyến mãi hợp lệ (trong thời gian và còn lượt sử dụng)
+     */
+    public List<Promotion> findValidPromotions() {
+        EntityManager em = getEntityManager();
+        try {
+            LocalDateTime now = LocalDateTime.now();
+            String jpql = "SELECT p FROM Promotion p WHERE p.isActive = true " +
+                    "AND p.startDate <= :now AND p.endDate >= :now " +
+                    "AND (p.maxUsage IS NULL OR p.currentUsage < p.maxUsage) " +
+                    "ORDER BY p.value DESC";
+            TypedQuery<Promotion> query = em.createQuery(jpql, Promotion.class);
+            query.setParameter("now", now);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }
 

@@ -43,5 +43,35 @@ public class ShipmentDAO extends BaseDAO<Shipment, Long> {
             em.close();
         }
     }
+
+    /**
+     * Tìm các Shipment theo trạng thái
+     */
+    public List<Shipment> findByStatus(com.example.shopgaubong.enums.ShipmentStatus status) {
+        EntityManager em = getEntityManager();
+        try {
+            String jpql = "SELECT s FROM Shipment s WHERE s.status = :status ORDER BY s.createdAt DESC";
+            TypedQuery<Shipment> query = em.createQuery(jpql, Shipment.class);
+            query.setParameter("status", status);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * Tìm các Shipment quá hạn giao
+     */
+    public List<Shipment> findOverdueShipments() {
+        EntityManager em = getEntityManager();
+        try {
+            String jpql = "SELECT s FROM Shipment s WHERE s.expectedDeliveryDate < CURRENT_DATE " +
+                    "AND s.status NOT IN ('DELIVERED', 'CANCELED') ORDER BY s.expectedDeliveryDate ASC";
+            TypedQuery<Shipment> query = em.createQuery(jpql, Shipment.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }
 

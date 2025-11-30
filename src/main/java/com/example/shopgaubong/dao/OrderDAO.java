@@ -19,15 +19,18 @@ public class OrderDAO extends BaseDAO<Order, Long> {
      * Tìm Order theo orderNumber
      */
     public Optional<Order> findByOrderNumber(String orderNumber) {
-        EntityManager em = getEntityManager();
-        try {
-            String jpql = "SELECT o FROM Order o WHERE o.orderNumber = :orderNumber";
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT o FROM Order o " +
+                    "LEFT JOIN FETCH o.customer c " +
+                    "LEFT JOIN FETCH c.profile " +
+                    "LEFT JOIN FETCH o.orderItems oi " +
+                    "LEFT JOIN FETCH oi.item i " +
+                    "LEFT JOIN FETCH i.category " +
+                    "WHERE o.orderNumber = :orderNumber";
             TypedQuery<Order> query = em.createQuery(jpql, Order.class);
             query.setParameter("orderNumber", orderNumber);
             List<Order> results = query.getResultList();
-            return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
-        } finally {
-            em.close();
+            return results.isEmpty() ? Optional.empty() : Optional.of(results.getFirst());
         }
     }
 
@@ -35,14 +38,18 @@ public class OrderDAO extends BaseDAO<Order, Long> {
      * Tìm các Order theo customer
      */
     public List<Order> findByCustomerId(Long customerId) {
-        EntityManager em = getEntityManager();
-        try {
-            String jpql = "SELECT o FROM Order o WHERE o.customer.id = :customerId ORDER BY o.createdAt DESC";
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT DISTINCT o FROM Order o " +
+                    "LEFT JOIN FETCH o.customer c " +
+                    "LEFT JOIN FETCH c.profile " +
+                    "LEFT JOIN FETCH o.orderItems oi " +
+                    "LEFT JOIN FETCH oi.item i " +
+                    "LEFT JOIN FETCH i.category " +
+                    "WHERE o.customer.id = :customerId " +
+                    "ORDER BY o.createdAt DESC";
             TypedQuery<Order> query = em.createQuery(jpql, Order.class);
             query.setParameter("customerId", customerId);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
 
@@ -50,14 +57,18 @@ public class OrderDAO extends BaseDAO<Order, Long> {
      * Tìm các Order theo trạng thái
      */
     public List<Order> findByStatus(OrderStatus status) {
-        EntityManager em = getEntityManager();
-        try {
-            String jpql = "SELECT o FROM Order o WHERE o.status = :status ORDER BY o.createdAt DESC";
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT DISTINCT o FROM Order o " +
+                    "LEFT JOIN FETCH o.customer c " +
+                    "LEFT JOIN FETCH c.profile " +
+                    "LEFT JOIN FETCH o.orderItems oi " +
+                    "LEFT JOIN FETCH oi.item i " +
+                    "LEFT JOIN FETCH i.category " +
+                    "WHERE o.status = :status " +
+                    "ORDER BY o.createdAt DESC";
             TypedQuery<Order> query = em.createQuery(jpql, Order.class);
             query.setParameter("status", status);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
 
@@ -67,7 +78,13 @@ public class OrderDAO extends BaseDAO<Order, Long> {
     public Optional<Order> findCartByCustomerId(Long customerId) {
         EntityManager em = getEntityManager();
         try {
-            String jpql = "SELECT o FROM Order o WHERE o.customer.id = :customerId AND o.status = :status";
+            String jpql = "SELECT DISTINCT o FROM Order o " +
+                    "LEFT JOIN FETCH o.customer c " +
+                    "LEFT JOIN FETCH c.profile " +
+                    "LEFT JOIN FETCH o.orderItems oi " +
+                    "LEFT JOIN FETCH oi.item i " +
+                    "LEFT JOIN FETCH i.category " +
+                    "WHERE o.customer.id = :customerId AND o.status = :status";
             TypedQuery<Order> query = em.createQuery(jpql, Order.class);
             query.setParameter("customerId", customerId);
             query.setParameter("status", OrderStatus.CART);
@@ -84,7 +101,14 @@ public class OrderDAO extends BaseDAO<Order, Long> {
     public List<Order> findByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
         EntityManager em = getEntityManager();
         try {
-            String jpql = "SELECT o FROM Order o WHERE o.createdAt BETWEEN :startDate AND :endDate ORDER BY o.createdAt DESC";
+            String jpql = "SELECT DISTINCT o FROM Order o " +
+                    "LEFT JOIN FETCH o.customer c " +
+                    "LEFT JOIN FETCH c.profile " +
+                    "LEFT JOIN FETCH o.orderItems oi " +
+                    "LEFT JOIN FETCH oi.item i " +
+                    "LEFT JOIN FETCH i.category " +
+                    "WHERE o.createdAt BETWEEN :startDate AND :endDate " +
+                    "ORDER BY o.createdAt DESC";
             TypedQuery<Order> query = em.createQuery(jpql, Order.class);
             query.setParameter("startDate", startDate);
             query.setParameter("endDate", endDate);
@@ -100,7 +124,15 @@ public class OrderDAO extends BaseDAO<Order, Long> {
     public List<Order> findByStatusAndDateRange(OrderStatus status, LocalDateTime startDate, LocalDateTime endDate) {
         EntityManager em = getEntityManager();
         try {
-            String jpql = "SELECT o FROM Order o WHERE o.status = :status AND o.createdAt BETWEEN :startDate AND :endDate ORDER BY o.createdAt DESC";
+            // Đã thêm LEFT JOIN FETCH và DISTINCT để tránh lỗi Lazy Loading
+            String jpql = "SELECT DISTINCT o FROM Order o " +
+                    "LEFT JOIN FETCH o.customer c " +
+                    "LEFT JOIN FETCH c.profile " +
+                    "LEFT JOIN FETCH o.orderItems oi " +
+                    "LEFT JOIN FETCH oi.item i " +
+                    "LEFT JOIN FETCH i.category " +
+                    "WHERE o.status = :status AND o.createdAt BETWEEN :startDate AND :endDate " +
+                    "ORDER BY o.createdAt DESC";
             TypedQuery<Order> query = em.createQuery(jpql, Order.class);
             query.setParameter("status", status);
             query.setParameter("startDate", startDate);
@@ -110,5 +142,72 @@ public class OrderDAO extends BaseDAO<Order, Long> {
             em.close();
         }
     }
-}
 
+    /**
+     * Tìm các Order theo customer và trạng thái
+     */
+    public List<Order> findByCustomerIdAndStatus(Long customerId, OrderStatus status) {
+        EntityManager em = getEntityManager();
+        try {
+            String jpql = "SELECT DISTINCT o FROM Order o " +
+                    "LEFT JOIN FETCH o.customer c " +
+                    "LEFT JOIN FETCH c.profile " +
+                    "LEFT JOIN FETCH o.orderItems oi " +
+                    "LEFT JOIN FETCH oi.item i " +
+                    "LEFT JOIN FETCH i.category " +
+                    "WHERE o.customer.id = :customerId AND o.status = :status " +
+                    "ORDER BY o.createdAt DESC";
+            TypedQuery<Order> query = em.createQuery(jpql, Order.class);
+            query.setParameter("customerId", customerId);
+            query.setParameter("status", status);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * Override findAll để có eager loading
+     */
+    @Override
+    public List<Order> findAll() {
+        EntityManager em = getEntityManager();
+        try {
+            String jpql = "SELECT DISTINCT o FROM Order o " +
+                    "LEFT JOIN FETCH o.customer c " +
+                    "LEFT JOIN FETCH c.profile " +
+                    "LEFT JOIN FETCH o.orderItems oi " +
+                    "LEFT JOIN FETCH oi.item i " +
+                    "LEFT JOIN FETCH i.category " +
+                    "LEFT JOIN FETCH o.promotion " +
+                    "ORDER BY o.createdAt DESC";
+            return em.createQuery(jpql, Order.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * Override findById để có eager loading
+     */
+    @Override
+    public Optional<Order> findById(Long id) {
+        EntityManager em = getEntityManager();
+        try {
+            String jpql = "SELECT DISTINCT o FROM Order o " +
+                    "LEFT JOIN FETCH o.customer c " +
+                    "LEFT JOIN FETCH c.profile " +
+                    "LEFT JOIN FETCH o.orderItems oi " +
+                    "LEFT JOIN FETCH oi.item i " +
+                    "LEFT JOIN FETCH i.category " +
+                    "LEFT JOIN FETCH o.promotion " +
+                    "WHERE o.id = :id";
+            var query = em.createQuery(jpql, Order.class);
+            query.setParameter("id", id);
+            var results = query.getResultList();
+            return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
+        } finally {
+            em.close();
+        }
+    }
+}

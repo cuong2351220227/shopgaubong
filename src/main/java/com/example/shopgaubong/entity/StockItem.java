@@ -16,12 +16,12 @@ public class StockItem extends AuditEntity {
     private Long id;
 
     @NotNull(message = "Kho không được để trống")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "warehouse_id", nullable = false)
     private Warehouse warehouse;
 
     @NotNull(message = "Sản phẩm không được để trống")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 

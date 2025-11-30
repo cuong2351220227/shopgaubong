@@ -29,6 +29,22 @@ public class Warehouse extends AuditEntity {
     @Column(columnDefinition = "TEXT")
     private String address;
 
+    @Size(max = 100, message = "Thành phố không quá 100 ký tự")
+    @Column(length = 100)
+    private String city;
+
+    @Size(max = 100, message = "Quận/huyện không quá 100 ký tự")
+    @Column(length = 100)
+    private String district;
+
+    @Size(max = 100, message = "Phường/xã không quá 100 ký tự")
+    @Column(length = 100)
+    private String ward;
+
+    @Size(max = 20, message = "Số điện thoại không quá 20 ký tự")
+    @Column(length = 20)
+    private String phone;
+
     @Column(nullable = false)
     private Boolean isActive = true;
 
@@ -77,6 +93,38 @@ public class Warehouse extends AuditEntity {
         this.address = address;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public Boolean getIsActive() {
         return isActive;
     }
@@ -91,6 +139,34 @@ public class Warehouse extends AuditEntity {
 
     public void setStockItems(List<StockItem> stockItems) {
         this.stockItems = stockItems;
+    }
+
+    public String getManagerName() {
+        return "";
+    }
+
+    public void setManagerName(String trim) {
+    }
+
+    public void setManagerPhone(String trim) {
+    }
+
+    public void setManagerEmail(String trim) {
+    }
+
+    public void setDescription(String trim) {
+    }
+
+    public String getManagerPhone() {
+        return "";
+    }
+
+    public String getManagerEmail() {
+        return "";
+    }
+
+    public String getDescription() {
+        return "";
     }
 }
 

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.PromotionManagementController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="🎁 QUẢN LÝ KHUYẾN MÃI" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="🔄 Làm mới" onAction="#handleRefresh"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8 16;"/>
+    </HBox>
+
+    <Separator/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 15;">
+        <Label text="Tìm kiếm:" style="-fx-font-size: 14px;"/>
+        <TextField fx:id="txtSearch" promptText="Nhập mã hoặc tên khuyến mãi..." 
+                   prefWidth="300" style="-fx-font-size: 14px;"/>
+        <CheckBox fx:id="cbActiveOnly" text="Chỉ hiển thị đang hoạt động" style="-fx-font-size: 13px;"/>
+        <Button text="🔍 Tìm" onAction="#handleSearch"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 20;"/>
+    </HBox>
+
+    <SplitPane dividerPositions="0.55" VBox.vgrow="ALWAYS">
+        <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 15;">
+            <Label text="DANH SÁCH KHUYẾN MÃI" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Separator/>
+            
+            <TableView fx:id="promotionTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colCode" text="Mã KM" prefWidth="100"/>
+                    <TableColumn fx:id="colName" text="Tên khuyến mãi" prefWidth="200"/>
+                    <TableColumn fx:id="colType" text="Loại" prefWidth="100"/>
+                    <TableColumn fx:id="colValue" text="Giá trị" prefWidth="100"/>
+                    <TableColumn fx:id="colValidPeriod" text="Thời gian" prefWidth="180"/>
+                    <TableColumn fx:id="colActive" text="Trạng thái" prefWidth="100"/>
+                </columns>
+                <placeholder>
+                    <Label text="Chưa có khuyến mãi nào"/>
+                </placeholder>
+            </TableView>
+        </VBox>
+
+        <VBox spacing="12" style="-fx-background-color: white; -fx-padding: 15;">
+            <Label text="THÔNG TIN KHUYẾN MÃI" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Separator/>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                <VBox spacing="12">
+                    <GridPane hgap="10" vgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="NEVER" minWidth="120"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="Mã KM: *" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="txtCode" promptText="VD: SUMMER2025" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label text="Tên KM: *" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="txtName" promptText="Tên khuyến mãi" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label text="Loại: *" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <ComboBox fx:id="cbType" GridPane.columnIndex="1" GridPane.rowIndex="2" maxWidth="Infinity"/>
+
+                        <Label text="Giá trị: *" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="txtDiscountValue" promptText="10 hoặc 50000" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                        <Label text="ĐH tối thiểu:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <TextField fx:id="txtMinOrderValue" promptText="0" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                        <Label text="Giảm tối đa:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <TextField fx:id="txtMaxDiscount" promptText="Chỉ cho %" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+                        <Label text="Số lần SD:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                        <TextField fx:id="txtUsageLimit" promptText="Để trống = không giới hạn" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+                        <Label text="Ngày bắt đầu: *" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+                        <DatePicker fx:id="dpStartDate" GridPane.columnIndex="1" GridPane.rowIndex="7" maxWidth="Infinity"/>
+
+                        <Label text="Ngày kết thúc: *" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+                        <DatePicker fx:id="dpEndDate" GridPane.columnIndex="1" GridPane.rowIndex="8" maxWidth="Infinity"/>
+                    </GridPane>
+
+                    <Label text="Mô tả:"/>
+                    <TextArea fx:id="txtDescription" promptText="Mô tả chi tiết..." prefRowCount="3" wrapText="true"/>
+
+                    <CheckBox fx:id="cbIsActive" text="Khuyến mãi đang hoạt động" selected="true"/>
+                </VBox>
+            </ScrollPane>
+
+            <Separator/>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="btnSave" text="✚ Thêm mới" onAction="#handleSave"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+                <Button fx:id="btnDelete" text="🗑️ Xóa" onAction="#handleDelete"
+                        style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+                <Button fx:id="btnClear" text="🔄 Làm mới form" onAction="#handleClear"
+                        style="-fx-background-color: #9E9E9E; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+            </HBox>
+        </VBox>
+    </SplitPane>
+
+    <VBox spacing="5" style="-fx-background-color: #e3f2fd; -fx-padding: 10; -fx-border-color: #2196F3; -fx-border-width: 1;">
+        <Label text="ℹ️ Lưu ý:" style="-fx-font-weight: bold; -fx-text-fill: #1976D2;"/>
+        <Label text="• Loại Phần trăm: giảm theo %, cần thiết lập giảm tối đa. VD: giảm 10%, tối đa 50.000đ"
+               wrapText="true" style="-fx-font-size: 12px;"/>
+        <Label text="• Loại Số tiền: giảm cố định. VD: giảm 50.000đ"
+               wrapText="true" style="-fx-font-size: 12px;"/>
+    </VBox>
+
+</VBox>

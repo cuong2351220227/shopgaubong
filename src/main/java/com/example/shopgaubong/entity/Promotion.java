@@ -159,6 +159,20 @@ public class Promotion extends AuditEntity {
         this.value = value;
     }
 
+    /**
+     * Alias for getValue() - for compatibility
+     */
+    public BigDecimal getDiscountValue() {
+        return value;
+    }
+
+    /**
+     * Alias for setValue() - for compatibility
+     */
+    public void setDiscountValue(BigDecimal discountValue) {
+        this.value = discountValue;
+    }
+
     public BigDecimal getMinOrderValue() {
         return minOrderValue;
     }
@@ -173,6 +187,20 @@ public class Promotion extends AuditEntity {
 
     public void setMaxDiscountAmount(BigDecimal maxDiscountAmount) {
         this.maxDiscountAmount = maxDiscountAmount;
+    }
+
+    /**
+     * Alias for getMaxDiscountAmount() - for compatibility
+     */
+    public BigDecimal getMaxDiscount() {
+        return maxDiscountAmount;
+    }
+
+    /**
+     * Alias for setMaxDiscountAmount() - for compatibility
+     */
+    public void setMaxDiscount(BigDecimal maxDiscount) {
+        this.maxDiscountAmount = maxDiscount;
     }
 
     public LocalDateTime getStartDate() {
@@ -221,6 +249,13 @@ public class Promotion extends AuditEntity {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public void setUsageLimit(Integer integer) {
+    }
+
+    public Object getUsageLimit() {
+        return null;
     }
 }
 

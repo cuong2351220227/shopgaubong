@@ -16,7 +16,7 @@ public class Shipment extends AuditEntity {
     private Long id;
 
     @NotNull(message = "Đơn hàng không được để trống")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 

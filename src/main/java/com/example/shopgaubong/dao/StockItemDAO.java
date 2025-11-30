@@ -19,7 +19,7 @@ public class StockItemDAO extends BaseDAO<StockItem, Long> {
     public Optional<StockItem> findByWarehouseAndItem(Long warehouseId, Long itemId) {
         EntityManager em = getEntityManager();
         try {
-            String jpql = "SELECT s FROM StockItem s WHERE s.warehouse.id = :warehouseId AND s.item.id = :itemId";
+            String jpql = "SELECT s FROM StockItem s JOIN FETCH s.warehouse JOIN FETCH s.item WHERE s.warehouse.id = :warehouseId AND s.item.id = :itemId";
             TypedQuery<StockItem> query = em.createQuery(jpql, StockItem.class);
             query.setParameter("warehouseId", warehouseId);
             query.setParameter("itemId", itemId);
@@ -36,7 +36,7 @@ public class StockItemDAO extends BaseDAO<StockItem, Long> {
     public List<StockItem> findByWarehouseId(Long warehouseId) {
         EntityManager em = getEntityManager();
         try {
-            String jpql = "SELECT s FROM StockItem s WHERE s.warehouse.id = :warehouseId";
+            String jpql = "SELECT s FROM StockItem s JOIN FETCH s.warehouse JOIN FETCH s.item WHERE s.warehouse.id = :warehouseId";
             TypedQuery<StockItem> query = em.createQuery(jpql, StockItem.class);
             query.setParameter("warehouseId", warehouseId);
             return query.getResultList();
@@ -46,12 +46,19 @@ public class StockItemDAO extends BaseDAO<StockItem, Long> {
     }
 
     /**
+     * Alias method for findByWarehouseId
+     */
+    public List<StockItem> findByWarehouse(Long warehouseId) {
+        return findByWarehouseId(warehouseId);
+    }
+
+    /**
      * Tìm các StockItem theo item
      */
     public List<StockItem> findByItemId(Long itemId) {
         EntityManager em = getEntityManager();
         try {
-            String jpql = "SELECT s FROM StockItem s WHERE s.item.id = :itemId";
+            String jpql = "SELECT s FROM StockItem s JOIN FETCH s.warehouse JOIN FETCH s.item WHERE s.item.id = :itemId";
             TypedQuery<StockItem> query = em.createQuery(jpql, StockItem.class);
             query.setParameter("itemId", itemId);
             return query.getResultList();
@@ -61,17 +68,31 @@ public class StockItemDAO extends BaseDAO<StockItem, Long> {
     }
 
     /**
+     * Alias method for findByItemId
+     */
+    public List<StockItem> findByItem(Long itemId) {
+        return findByItemId(itemId);
+    }
+
+    /**
      * Tìm các StockItem có tồn kho thấp
      */
     public List<StockItem> findLowStockItems() {
         EntityManager em = getEntityManager();
         try {
-            String jpql = "SELECT s FROM StockItem s WHERE (s.onHand - s.reserved) <= s.lowStockThreshold";
+            String jpql = "SELECT s FROM StockItem s JOIN FETCH s.warehouse JOIN FETCH s.item WHERE (s.onHand - s.reserved) <= s.lowStockThreshold";
             TypedQuery<StockItem> query = em.createQuery(jpql, StockItem.class);
             return query.getResultList();
         } finally {
             em.close();
         }
+    }
+
+    /**
+     * Alias method for findLowStockItems
+     */
+    public List<StockItem> findLowStock() {
+        return findLowStockItems();
     }
 
     /**
@@ -90,4 +111,3 @@ public class StockItemDAO extends BaseDAO<StockItem, Long> {
         }
     }
 }
-

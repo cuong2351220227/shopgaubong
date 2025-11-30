@@ -44,6 +44,21 @@ public class WarehouseDAO extends BaseDAO<Warehouse, Long> {
     }
 
     /**
+     * Alias method - find by active status
+     */
+    public List<Warehouse> findByActive(Boolean isActive) {
+        EntityManager em = getEntityManager();
+        try {
+            String jpql = "SELECT w FROM Warehouse w WHERE w.isActive = :isActive ORDER BY w.name";
+            TypedQuery<Warehouse> query = em.createQuery(jpql, Warehouse.class);
+            query.setParameter("isActive", isActive);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
      * Kiểm tra mã kho đã tồn tại chưa
      */
     public boolean existsByCode(String code) {

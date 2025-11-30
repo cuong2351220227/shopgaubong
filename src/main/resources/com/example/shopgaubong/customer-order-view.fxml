@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.CustomerOrderController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="📦 ĐƠN HÀNG CỦA TÔI" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="🔄 Làm mới" onAction="#handleRefresh"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8 16;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Search & Filter -->
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 15;">
+        <Label text="Tìm kiếm:" style="-fx-font-size: 14px;"/>
+        <TextField fx:id="txtSearch" promptText="Nhập mã đơn hoặc tên người nhận..." 
+                   prefWidth="300" style="-fx-font-size: 14px;"/>
+        
+        <Label text="Trạng thái:" style="-fx-font-size: 14px;"/>
+        <ComboBox fx:id="cbStatus" prefWidth="180" style="-fx-font-size: 14px;"/>
+        
+        <Button text="🔍 Tìm" onAction="#handleSearch"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 20;"/>
+    </HBox>
+
+    <!-- Main Content -->
+    <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+        <!-- Left: Orders List -->
+        <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 15;">
+            <Label text="DANH SÁCH ĐƠN HÀNG" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <Separator/>
+            
+            <TableView fx:id="orderTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colOrderNumber" text="Mã đơn" prefWidth="120"/>
+                    <TableColumn fx:id="colDate" text="Ngày đặt" prefWidth="130"/>
+                    <TableColumn fx:id="colStatus" text="Trạng thái" prefWidth="130"/>
+                    <TableColumn fx:id="colItemCount" text="SL SP" prefWidth="60"/>
+                    <TableColumn fx:id="colTotal" text="Tổng tiền" prefWidth="120"/>
+                </columns>
+                <placeholder>
+                    <Label text="Chưa có đơn hàng nào" style="-fx-text-fill: #999;"/>
+                </placeholder>
+            </TableView>
+        </VBox>
+
+        <!-- Right: Order Details -->
+        <VBox fx:id="detailsPanel" spacing="15" style="-fx-background-color: white; -fx-padding: 15;">
+            <Label text="CHI TIẾT ĐƠN HÀNG" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <Separator/>
+
+            <!-- Order Information -->
+            <GridPane hgap="10" vgap="8">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="NEVER" minWidth="120"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="Mã đơn hàng:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                       style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-font-weight: bold;"/>
+                <Label fx:id="lblOrderNumber" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                       style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+
+                <Label text="Ngày đặt:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                       style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-font-weight: bold;"/>
+                <Label fx:id="lblOrderDate" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                       style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+
+                <Label text="Trạng thái:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                       style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-font-weight: bold;"/>
+                <Label fx:id="lblOrderStatus" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                       style="-fx-font-size: 13px;"/>
+            </GridPane>
+
+            <Separator/>
+
+            <!-- Shipping Information -->
+            <VBox spacing="8">
+                <Label text="THÔNG TIN GIAO HÀNG" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <Label fx:id="lblShippingAddress" text="-" wrapText="true"
+                       style="-fx-font-size: 13px; -fx-text-fill: #555; -fx-background-color: #f5f5f5; -fx-padding: 10;"/>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Order Items -->
+            <Label text="SẢN PHẨM" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <TableView fx:id="itemTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colSKU" text="SKU" prefWidth="80"/>
+                    <TableColumn fx:id="colItemName" text="Sản phẩm" prefWidth="200"/>
+                    <TableColumn fx:id="colQuantity" text="SL" prefWidth="50"/>
+                    <TableColumn fx:id="colUnitPrice" text="Đơn giá" prefWidth="100"/>
+                    <TableColumn fx:id="colLineTotal" text="Thành tiền" prefWidth="100"/>
+                </columns>
+            </TableView>
+
+            <Separator/>
+
+            <!-- Price Summary -->
+            <GridPane hgap="10" vgap="8">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                    <ColumnConstraints hgrow="SOMETIMES" halignment="RIGHT"/>
+                </columnConstraints>
+
+                <Label text="Tạm tính:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                       style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
+                <Label fx:id="lblSubtotal" text="0 ₫" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+
+                <Label text="Thuế (10%):" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                       style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
+                <Label fx:id="lblTax" text="0 ₫" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+
+                <Label text="Giảm giá:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                       style="-fx-font-size: 13px; -fx-text-fill: #4CAF50;"/>
+                <Label fx:id="lblDiscount" text="0 ₫" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+
+                <Label text="Phí vận chuyển:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                       style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
+                <Label fx:id="lblShippingFee" text="0 ₫" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+
+                <Separator GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
+
+                <Label text="TỔNG CỘNG:" GridPane.columnIndex="0" GridPane.rowIndex="5"
+                       style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <Label fx:id="lblGrandTotal" text="0 ₫" GridPane.columnIndex="1" GridPane.rowIndex="5"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #f44336;"/>
+            </GridPane>
+        </VBox>
+    </SplitPane>
+
+    <!-- Info Box -->
+    <VBox spacing="5" style="-fx-background-color: #e3f2fd; -fx-padding: 10; -fx-border-color: #2196F3; -fx-border-width: 1;">
+        <Label text="ℹ️ Hướng dẫn:" style="-fx-font-weight: bold; -fx-text-fill: #1976D2;"/>
+        <Label text="• Chọn đơn hàng trong danh sách để xem chi tiết"
+               wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+        <Label text="• Bạn có thể tìm kiếm theo mã đơn hoặc tên người nhận"
+               wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+        <Label text="• Lọc đơn hàng theo trạng thái để dễ dàng theo dõi"
+               wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+    </VBox>
+
+</VBox>

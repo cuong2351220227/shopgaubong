@@ -31,7 +31,7 @@ public class Account extends AuditEntity {
     @Column(nullable = false)
     private Boolean isActive = true;
 
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private AccountProfile profile;
 
     // Constructors
@@ -94,6 +94,20 @@ public class Account extends AuditEntity {
         if (profile != null) {
             profile.setAccount(this);
         }
+    }
+
+    /**
+     * Alias for getProfile() - for compatibility
+     */
+    public AccountProfile getAccountProfile() {
+        return profile;
+    }
+
+    /**
+     * Alias for setProfile() - for compatibility
+     */
+    public void setAccountProfile(AccountProfile profile) {
+        setProfile(profile);
     }
 }
 

@@ -17,12 +17,12 @@ public class OrderItem extends AuditEntity {
     private Long id;
 
     @NotNull(message = "Đơn hàng không được để trống")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     @NotNull(message = "Sản phẩm không được để trống")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
@@ -34,16 +34,15 @@ public class OrderItem extends AuditEntity {
     @NotNull(message = "Đơn giá không được để trống")
     @DecimalMin(value = "0.0", message = "Đơn giá phải >= 0")
     @Column(nullable = false, precision = 15, scale = 2)
-    private BigDecimal unitPrice; // Giá tại thời điểm đặt hàng
+    private BigDecimal unitPrice;
 
     @DecimalMin(value = "0.0", message = "Giảm giá phải >= 0")
     @Column(precision = 15, scale = 2)
-    private BigDecimal discount = BigDecimal.ZERO; // Giảm giá item-level
+    private BigDecimal discount = BigDecimal.ZERO;
 
     @Column(precision = 15, scale = 2)
-    private BigDecimal lineTotal = BigDecimal.ZERO; // Tổng dòng
+    private BigDecimal lineTotal = BigDecimal.ZERO;
 
-    // Constructors
     public OrderItem() {
     }
 
@@ -54,70 +53,55 @@ public class OrderItem extends AuditEntity {
         calculateLineTotal();
     }
 
-    // Business methods
+    // --- [FIX QUAN TRỌNG] Sửa phương thức này để tránh NullPointerException ---
     public void calculateLineTotal() {
-        BigDecimal total = unitPrice.multiply(BigDecimal.valueOf(quantity));
-        lineTotal = total.subtract(discount);
-    }
+        // Kiểm tra nếu giá hoặc số lượng chưa có thì gán bằng 0 để tránh lỗi
+        if (this.unitPrice == null || this.quantity == null) {
+            this.lineTotal = BigDecimal.ZERO;
+            return;
+        }
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+        BigDecimal safeDiscount = (this.discount == null) ? BigDecimal.ZERO : this.discount;
+        BigDecimal total = this.unitPrice.multiply(BigDecimal.valueOf(this.quantity));
+        this.lineTotal = total.subtract(safeDiscount);
 
-    public void setId(Long id) {
-        this.id = id;
+        // Đảm bảo không âm
+        if (this.lineTotal.compareTo(BigDecimal.ZERO) < 0) {
+            this.lineTotal = BigDecimal.ZERO;
+        }
     }
+    // --------------------------------------------------------------------------
 
-    public Order getOrder() {
-        return order;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+    public Order getOrder() { return order; }
+    public void setOrder(Order order) { this.order = order; }
 
-    public Item getItem() {
-        return item;
-    }
+    public Item getItem() { return item; }
+    public void setItem(Item item) { this.item = item; }
 
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
+    public Integer getQuantity() { return quantity; }
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-        calculateLineTotal();
+        calculateLineTotal(); // Tính lại ngay khi set
     }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
+    public BigDecimal getUnitPrice() { return unitPrice; }
 
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
-        calculateLineTotal();
+        calculateLineTotal(); // Tính lại ngay khi set
     }
 
-    public BigDecimal getDiscount() {
-        return discount;
-    }
+    public BigDecimal getDiscount() { return discount; }
 
     public void setDiscount(BigDecimal discount) {
         this.discount = discount;
-        calculateLineTotal();
+        calculateLineTotal(); // Tính lại ngay khi set
     }
 
-    public BigDecimal getLineTotal() {
-        return lineTotal;
-    }
-
-    public void setLineTotal(BigDecimal lineTotal) {
-        this.lineTotal = lineTotal;
-    }
+    public BigDecimal getLineTotal() { return lineTotal; }
+    public void setLineTotal(BigDecimal lineTotal) { this.lineTotal = lineTotal; }
 }
-

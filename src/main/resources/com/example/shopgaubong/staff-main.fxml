@@ -60,6 +60,13 @@
                 </padding>
             </Button>
 
+            <Button text="Quản lý tồn kho" onAction="#handleManageStock"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
             <Button text="Quản lý vận chuyển" onAction="#handleManageShipments"
                     prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
                 <padding>

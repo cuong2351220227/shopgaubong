@@ -35,7 +35,7 @@ public class Item extends AuditEntity {
     private BigDecimal price;
 
     @NotNull(message = "Danh mục không được để trống")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 

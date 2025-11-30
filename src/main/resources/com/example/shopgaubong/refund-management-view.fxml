@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.RefundManagementController"
+      spacing="15">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="QUẢN LÝ HOÀN TIỀN" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <Separator/>
+
+    <!-- Actions -->
+    <HBox spacing="10">
+        <Button fx:id="refreshButton" text="🔄 Làm mới" onAction="#handleRefresh"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="approveButton" text="✓ Duyệt" onAction="#handleApprove"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Button fx:id="rejectButton" text="✗ Từ chối" onAction="#handleReject"
+                style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+    </HBox>
+
+    <!-- Refund Table -->
+    <TableView fx:id="refundTable" prefHeight="300" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="refundNumberCol" text="Mã hoàn tiền" prefWidth="120"/>
+            <TableColumn fx:id="amountCol" text="Số tiền" prefWidth="120"/>
+            <TableColumn fx:id="statusCol" text="Trạng thái" prefWidth="120"/>
+            <TableColumn fx:id="createdAtCol" text="Ngày yêu cầu" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <Separator/>
+
+    <!-- Refund Details -->
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100" prefWidth="150"/>
+            <ColumnConstraints hgrow="ALWAYS" minWidth="200"/>
+        </columnConstraints>
+
+        <Label text="Chi tiết yêu cầu hoàn tiền" style="-fx-font-weight: bold; -fx-font-size: 14px;"
+               GridPane.columnSpan="2" GridPane.rowIndex="0"/>
+
+        <Label text="Lý do khách hàng:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+               style="-fx-font-weight: bold;"/>
+        <TextArea fx:id="reasonArea" prefHeight="80" editable="false" wrapText="true"
+                  GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Thông tin thanh toán:" GridPane.rowIndex="2" GridPane.columnIndex="0"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="paymentInfoLabel" wrapText="true"
+               GridPane.rowIndex="2" GridPane.columnIndex="1"
+               style="-fx-background-color: #f5f5f5; -fx-padding: 10;"/>
+
+        <Label text="Thông tin khách hàng:" GridPane.rowIndex="3" GridPane.columnIndex="0"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="customerInfoLabel" wrapText="true"
+               GridPane.rowIndex="3" GridPane.columnIndex="1"
+               style="-fx-background-color: #e3f2fd; -fx-padding: 10;"/>
+
+        <Label text="Ghi chú admin:" GridPane.rowIndex="4" GridPane.columnIndex="0"
+               style="-fx-font-weight: bold;"/>
+        <TextArea fx:id="adminNotesArea" prefHeight="60" editable="false" wrapText="true"
+                  GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <Separator/>
+
+    <!-- Info Box -->
+    <VBox spacing="5" style="-fx-background-color: #fff3cd; -fx-padding: 15; -fx-border-color: #ffc107; -fx-border-width: 1;">
+        <Label text="⚠️ Lưu ý:" style="-fx-font-weight: bold;"/>
+        <Label text="• Kiểm tra kỹ thông tin trước khi duyệt hoàn tiền" wrapText="true"/>
+        <Label text="• Hoàn tiền qua Gateway sẽ được xử lý tự động" wrapText="true"/>
+        <Label text="• Hoàn tiền COD/Chuyển khoản cần xử lý thủ công" wrapText="true"/>
+    </VBox>
+</VBox>
+

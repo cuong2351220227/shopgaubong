@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.WarehouseManagementController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="🏭 QUẢN LÝ KHO" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="🔄 Làm mới" onAction="#handleRefresh"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8 16;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Search Bar -->
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 15;">
+        <Label text="Tìm kiếm:" style="-fx-font-size: 14px;"/>
+        <TextField fx:id="txtSearch" promptText="Nhập tên, mã kho hoặc địa chỉ..." 
+                   prefWidth="350" style="-fx-font-size: 14px;"/>
+        <CheckBox fx:id="cbActiveOnly" text="Chỉ hiển thị kho hoạt động" selected="true"
+                  style="-fx-font-size: 13px;"/>
+        <Button text="🔍 Tìm" onAction="#handleSearch"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 20;"/>
+    </HBox>
+
+    <!-- Main Content: SplitPane -->
+    <SplitPane dividerPositions="0.55" VBox.vgrow="ALWAYS">
+        
+        <!-- Left: Table -->
+        <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 15;">
+            <Label text="DANH SÁCH KHO" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <Separator/>
+            
+            <TableView fx:id="warehouseTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colCode" text="Mã kho" prefWidth="100"/>
+                    <TableColumn fx:id="colName" text="Tên kho" prefWidth="200"/>
+                    <TableColumn fx:id="colAddress" text="Địa chỉ" prefWidth="250"/>
+                    <TableColumn fx:id="colPhone" text="Điện thoại" prefWidth="110"/>
+                    <TableColumn fx:id="colManager" text="Quản lý" prefWidth="150"/>
+                    <TableColumn fx:id="colActive" text="Trạng thái" prefWidth="100"/>
+                </columns>
+                <placeholder>
+                    <Label text="Chưa có kho nào" style="-fx-text-fill: #999;"/>
+                </placeholder>
+            </TableView>
+        </VBox>
+
+        <!-- Right: Form -->
+        <VBox spacing="12" style="-fx-background-color: white; -fx-padding: 15;">
+            <Label text="THÔNG TIN KHO" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <Separator/>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: white;">
+                <VBox spacing="12">
+                    <padding>
+                        <Insets right="10"/>
+                    </padding>
+
+                    <!-- Warehouse Information -->
+                    <GridPane hgap="10" vgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="NEVER" minWidth="120"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <!-- Name -->
+                        <Label text="Tên kho: *" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                               style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                        <TextField fx:id="txtName" promptText="Nhập tên kho"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="0"
+                                  style="-fx-font-size: 13px;"/>
+
+                        <!-- Code -->
+                        <Label text="Mã kho: *" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                               style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                        <TextField fx:id="txtCode" promptText="VD: WH001"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                  style="-fx-font-size: 13px;"/>
+
+                        <!-- Address -->
+                        <Label text="Địa chỉ: *" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                               style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                        <TextField fx:id="txtAddress" promptText="Số nhà, tên đường"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                  style="-fx-font-size: 13px;"/>
+
+                        <!-- City -->
+                        <Label text="Thành phố:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                               style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                        <TextField fx:id="txtCity" promptText="Nhập thành phố"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="3"
+                                  style="-fx-font-size: 13px;"/>
+
+                        <!-- District -->
+                        <Label text="Quận/Huyện:" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                               style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                        <TextField fx:id="txtDistrict" promptText="Nhập quận/huyện"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="4"
+                                  style="-fx-font-size: 13px;"/>
+
+                        <!-- Ward -->
+                        <Label text="Phường/Xã:" GridPane.columnIndex="0" GridPane.rowIndex="5"
+                               style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                        <TextField fx:id="txtWard" promptText="Nhập phường/xã"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="5"
+                                  style="-fx-font-size: 13px;"/>
+
+                        <!-- Phone -->
+                        <Label text="Điện thoại: *" GridPane.columnIndex="0" GridPane.rowIndex="6"
+                               style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                        <TextField fx:id="txtPhone" promptText="10-11 chữ số"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="6"
+                                  style="-fx-font-size: 13px;"/>
+                    </GridPane>
+
+                    <Separator/>
+
+                    <!-- Manager Information -->
+                    <Label text="THÔNG TIN QUẢN LÝ" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #666;"/>
+                    
+                    <GridPane hgap="10" vgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="NEVER" minWidth="120"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <!-- Manager Name -->
+                        <Label text="Tên quản lý:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                               style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                        <TextField fx:id="txtManagerName" promptText="Nhập tên quản lý"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="0"
+                                  style="-fx-font-size: 13px;"/>
+
+                        <!-- Manager Phone -->
+                        <Label text="SĐT quản lý:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                               style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                        <TextField fx:id="txtManagerPhone" promptText="Số điện thoại"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                  style="-fx-font-size: 13px;"/>
+
+                        <!-- Manager Email -->
+                        <Label text="Email quản lý:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                               style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                        <TextField fx:id="txtManagerEmail" promptText="email@example.com"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                  style="-fx-font-size: 13px;"/>
+                    </GridPane>
+
+                    <Separator/>
+
+                    <!-- Description -->
+                    <Label text="Mô tả:" style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                    <TextArea fx:id="txtDescription" promptText="Nhập mô tả chi tiết về kho..."
+                             prefRowCount="3" wrapText="true" style="-fx-font-size: 13px;"/>
+
+                    <!-- Active Status -->
+                    <CheckBox fx:id="cbIsActive" text="Kho đang hoạt động" selected="true"
+                             style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+                </VBox>
+            </ScrollPane>
+
+            <Separator/>
+
+            <!-- Action Buttons -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="btnSave" text="✚ Thêm mới" onAction="#handleSave"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-font-weight: bold;"/>
+                <Button fx:id="btnDelete" text="🗑️ Xóa" onAction="#handleDelete"
+                        style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+                <Button fx:id="btnClear" text="🔄 Làm mới form" onAction="#handleClear"
+                        style="-fx-background-color: #9E9E9E; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+            </HBox>
+        </VBox>
+    </SplitPane>
+
+    <!-- Info Box -->
+    <VBox spacing="5" style="-fx-background-color: #e3f2fd; -fx-padding: 10; -fx-border-color: #2196F3; -fx-border-width: 1;">
+        <Label text="ℹ️ Hướng dẫn:" style="-fx-font-weight: bold; -fx-text-fill: #1976D2;"/>
+        <Label text="• Chọn kho trong bảng để xem chi tiết và chỉnh sửa"
+               wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+        <Label text="• Các trường có dấu * là bắt buộc"
+               wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+        <Label text="• Nhấn 'Làm mới form' để hủy chọn và thêm kho mới"
+               wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+    </VBox>
+
+</VBox>

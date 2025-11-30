@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.StockManagementController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="📦 QUẢN LÝ TỒN KHO" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnRefresh" text="🔄 Làm mới" onAction="#handleRefresh"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8 16;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Info Box -->
+    <HBox spacing="10" style="-fx-background-color: #e3f2fd; -fx-padding: 12; -fx-border-radius: 5; -fx-background-radius: 5;">
+        <Label text="ℹ️" style="-fx-font-size: 16px;"/>
+        <VBox spacing="3">
+            <Label text="💡 Hướng dẫn:" style="-fx-font-weight: bold; -fx-font-size: 13px;"/>
+            <Label text="• Tạo mới: Chọn kho + sản phẩm, nhập số lượng → Lưu" style="-fx-font-size: 12px;"/>
+            <Label text="• Nhập kho: Chọn tồn kho → Nhập số lượng → Nhập hàng" style="-fx-font-size: 12px;"/>
+            <Label text="• Tồn kho thấp được đánh dấu màu đỏ ⚠️" style="-fx-font-size: 12px;"/>
+        </VBox>
+    </HBox>
+
+    <!-- Search & Filter Bar -->
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 15;">
+        <Label text="Tìm kiếm:" style="-fx-font-size: 14px;"/>
+        <TextField fx:id="txtSearch" promptText="Tìm theo tên, SKU hoặc kho..." 
+                   prefWidth="250" style="-fx-font-size: 14px;"/>
+        
+        <Label text="Kho:" style="-fx-font-size: 14px;"/>
+        <ComboBox fx:id="cboWarehouseFilter" prefWidth="200" style="-fx-font-size: 13px;"/>
+        
+        <CheckBox fx:id="cbLowStockOnly" text="⚠️ Chỉ hiển thị tồn kho thấp"
+                  style="-fx-font-size: 13px; -fx-text-fill: #f44336;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Main Content: SplitPane -->
+    <SplitPane dividerPositions="0.6" VBox.vgrow="ALWAYS">
+        
+        <!-- Left: Table -->
+        <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 15;">
+            <Label text="DANH SÁCH TỒN KHO" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <Separator/>
+            
+            <TableView fx:id="stockTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colWarehouse" text="Kho" prefWidth="120"/>
+                    <TableColumn fx:id="colItemSku" text="SKU" prefWidth="100"/>
+                    <TableColumn fx:id="colItemName" text="Sản phẩm" prefWidth="180"/>
+                    <TableColumn fx:id="colOnHand" text="Tồn kho" prefWidth="80"/>
+                    <TableColumn fx:id="colReserved" text="Đã giữ" prefWidth="80"/>
+                    <TableColumn fx:id="colAvailable" text="Khả dụng" prefWidth="80"/>
+                    <TableColumn fx:id="colLowStockThreshold" text="Ngưỡng" prefWidth="80"/>
+                    <TableColumn fx:id="colStatus" text="Trạng thái" prefWidth="110"/>
+                </columns>
+                <placeholder>
+                    <Label text="Chưa có tồn kho nào" style="-fx-text-fill: #999;"/>
+                </placeholder>
+            </TableView>
+        </VBox>
+
+        <!-- Right: Form -->
+        <VBox spacing="12" style="-fx-background-color: white; -fx-padding: 15;">
+            <Label text="THÔNG TIN TỒN KHO" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <Separator/>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: white;">
+                <VBox spacing="15">
+                    <padding>
+                        <Insets right="10"/>
+                    </padding>
+
+                    <!-- Stock Information -->
+                    <VBox spacing="12">
+                        <Label text="📋 Thông tin cơ bản" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #555;"/>
+                        
+                        <GridPane hgap="10" vgap="12">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="NEVER" minWidth="120"/>
+                                <ColumnConstraints hgrow="ALWAYS"/>
+                            </columnConstraints>
+
+                            <!-- Warehouse -->
+                            <Label text="Kho: *" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                   style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                            <ComboBox fx:id="cboWarehouse" prefWidth="250"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="0"
+                                      style="-fx-font-size: 13px;"/>
+
+                            <!-- Item -->
+                            <Label text="Sản phẩm: *" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                                   style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                            <ComboBox fx:id="cboItem" prefWidth="250"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                      style="-fx-font-size: 13px;"/>
+
+                            <!-- On Hand -->
+                            <Label text="Số lượng tồn: *" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                                   style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                            <TextField fx:id="txtOnHand" promptText="0"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                      style="-fx-font-size: 13px;"/>
+
+                            <!-- Low Stock Threshold -->
+                            <Label text="Ngưỡng cảnh báo: *" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                                   style="-fx-font-size: 13px; -fx-text-fill: #333;"/>
+                            <TextField fx:id="txtLowStockThreshold" promptText="10" text="10"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="3"
+                                      style="-fx-font-size: 13px;"/>
+                        </GridPane>
+                    </VBox>
+
+                    <Separator/>
+
+                    <!-- Current Stock Status -->
+                    <VBox spacing="12">
+                        <Label text="📊 Trạng thái hiện tại" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #555;"/>
+                        
+                        <GridPane hgap="10" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="NEVER" minWidth="120"/>
+                                <ColumnConstraints hgrow="ALWAYS"/>
+                            </columnConstraints>
+
+                            <Label text="Tồn kho:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                   style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
+                            <Label fx:id="lblCurrentOnHand" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+
+                            <Label text="Đã giữ chỗ:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                                   style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
+                            <Label fx:id="lblCurrentReserved" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #ff9800;"/>
+
+                            <Label text="Khả dụng:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                                   style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
+                            <Label fx:id="lblCurrentAvailable" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+                        </GridPane>
+                    </VBox>
+
+                    <Separator/>
+
+                    <!-- Add Stock Section -->
+                    <VBox spacing="12">
+                        <Label text="📥 Nhập hàng vào kho" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #555;"/>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="Số lượng:" style="-fx-font-size: 13px;"/>
+                            <TextField fx:id="txtQuantity" promptText="Nhập số lượng cần nhập" prefWidth="180"
+                                      style="-fx-font-size: 13px;"/>
+                            <Button fx:id="btnAddStock" text="📥 Nhập hàng" onAction="#handleAddStock" disable="true"
+                                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 16;"/>
+                        </HBox>
+                        
+                        <Label text="💡 Chọn một tồn kho từ bảng để nhập hàng" 
+                               style="-fx-font-size: 11px; -fx-text-fill: #999; -fx-font-style: italic;"/>
+                    </VBox>
+
+                    <Separator/>
+
+                    <!-- Action Buttons -->
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button fx:id="btnSave" text="💾 Lưu" onAction="#handleSave"
+                                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 30;"/>
+                        <Button fx:id="btnDelete" text="🗑️ Xóa" onAction="#handleDelete" disable="true"
+                                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 30;"/>
+                        <Button fx:id="btnClear" text="🔄 Làm mới form" onAction="#handleClear"
+                                style="-fx-background-color: #9E9E9E; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 30;"/>
+                    </HBox>
+
+                    <!-- Notes -->
+                    <VBox spacing="5" style="-fx-background-color: #fff3e0; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;">
+                        <Label text="📌 Ghi chú:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                        <Label text="• (*) là trường bắt buộc" style="-fx-font-size: 11px;"/>
+                        <Label text="• Khả dụng = Tồn kho - Đã giữ chỗ" style="-fx-font-size: 11px;"/>
+                        <Label text="• Không thể sửa kho và sản phẩm khi cập nhật" style="-fx-font-size: 11px;"/>
+                        <Label text="• Sử dụng 'Nhập hàng' để tăng tồn kho hiện có" style="-fx-font-size: 11px;"/>
+                    </VBox>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </SplitPane>
+</VBox>

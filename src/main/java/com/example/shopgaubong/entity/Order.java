@@ -22,7 +22,7 @@ public class Order extends AuditEntity {
     private String orderNumber; // Mã đơn hàng
 
     @NotNull(message = "Khách hàng không được để trống")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     private Account customer;
 
@@ -81,7 +81,7 @@ public class Order extends AuditEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Shipment> shipments = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "promotion_id")
     private Promotion promotion; // Khuyến mãi áp dụng
 

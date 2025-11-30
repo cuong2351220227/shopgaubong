@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.CategoryManagementController"
+      spacing="10" style="-fx-background-color: #f5f5f5;">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="📁 QUẢN LÝ DANH MỤC">
+            <font>
+                <Font name="System Bold" size="20"/>
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="txtSearch" promptText="🔍 Tìm kiếm danh mục..."
+                   prefWidth="300" style="-fx-font-size: 13px;"/>
+        <Button text="🔄 Làm mới" onAction="#handleRefresh"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 13px;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Split: Table (Left) and Form (Right) -->
+    <SplitPane dividerPositions="0.6" VBox.vgrow="ALWAYS">
+
+        <!-- LEFT: Table View -->
+        <VBox spacing="10">
+            <Label text="Danh sách danh mục">
+                <font>
+                    <Font name="System Bold" size="14"/>
+                </font>
+            </Label>
+
+            <TableView fx:id="categoryTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colName" text="Tên danh mục" prefWidth="250"/>
+                    <TableColumn fx:id="colDescription" text="Mô tả" prefWidth="300"/>
+                    <TableColumn fx:id="colActive" text="Trạng thái" prefWidth="100"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button text="🗑️ Xóa" onAction="#handleDelete"
+                        style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+            </HBox>
+        </VBox>
+
+        <!-- RIGHT: Form -->
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 15;">
+            <Label text="Thông tin danh mục">
+                <font>
+                    <Font name="System Bold" size="14"/>
+                </font>
+            </Label>
+
+            <GridPane hgap="10" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="100" prefWidth="100"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <!-- Row 0: Name -->
+                <Label text="Tên danh mục:" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <TextField fx:id="txtName" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                           promptText="Nhập tên danh mục"/>
+
+                <!-- Row 1: Parent Category -->
+                <Label text="Danh mục cha:" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <ComboBox fx:id="cmbParent" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                          prefWidth="9999" promptText="Chọn danh mục cha (tùy chọn)"/>
+
+                <!-- Row 2: Description -->
+                <Label text="Mô tả:" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <TextArea fx:id="txtDescription" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                          prefRowCount="4" promptText="Nhập mô tả danh mục"/>
+
+                <!-- Row 3: Active Status -->
+                <Label text="Trạng thái:" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <CheckBox fx:id="chkActive" text="Đang hoạt động" selected="true"
+                          GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <Separator/>
+
+            <!-- Action Buttons -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="➕ Thêm mới" onAction="#handleNew"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 10 20;"/>
+                <Button text="💾 Lưu" onAction="#handleSave"
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 10 20;"/>
+                <Button text="✖ Hủy" onAction="#handleCancel"
+                        style="-fx-background-color: #9E9E9E; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 10 20;"/>
+            </HBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- Info Box -->
+            <VBox spacing="5" style="-fx-background-color: #e3f2fd; -fx-padding: 10; -fx-border-color: #2196F3; -fx-border-width: 1;">
+                <Label text="💡 Hướng dẫn:">
+                    <font><Font name="System Bold" size="11"/></font>
+                </Label>
+                <Label text="• Để tạo danh mục gốc: Không chọn danh mục cha" wrapText="true">
+                    <font><Font size="11"/></font>
+                </Label>
+                <Label text="• Để tạo danh mục con: Chọn danh mục cha" wrapText="true">
+                    <font><Font size="11"/></font>
+                </Label>
+                <Label text="• Click vào dòng trong bảng để chỉnh sửa" wrapText="true">
+                    <font><Font size="11"/></font>
+                </Label>
+            </VBox>
+        </VBox>
+    </SplitPane>
+</VBox>
+

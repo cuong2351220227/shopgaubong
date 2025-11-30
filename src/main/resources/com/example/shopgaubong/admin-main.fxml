@@ -87,6 +87,13 @@
                 </padding>
             </Button>
 
+            <Button text="Quản lý tồn kho" onAction="#handleManageStock"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
             <Separator/>
 
             <Label text="QUẢN LÝ ĐỐN HÀNG">
@@ -107,6 +114,32 @@
 
             <Button text="Quản lý khuyến mãi" onAction="#handleManagePromotions"
                     prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Separator/>
+
+            <Label text="QUẢN LÝ THANH TOÁN">
+                <font>
+                    <Font name="System Bold" size="12"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Label>
+
+            <Button text="Quản lý thanh toán" onAction="#handleManagePayments"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Button>
+
+            <Button text="Quản lý hoàn tiền" onAction="#handleManageRefunds"
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT"
+                    style="-fx-background-color: #ff9800; -fx-text-fill: white;">
                 <padding>
                     <Insets left="10"/>
                 </padding>

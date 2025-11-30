@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.CustomerProfileController"
+      spacing="20" style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="THÔNG TIN CÁ NHÂN" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnSaveAll" text="💾 Lưu tất cả" onAction="#handleSaveAll"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 25; -fx-background-radius: 5; -fx-cursor: hand;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Content Container -->
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+        <VBox spacing="20" style="-fx-background-color: transparent;">
+
+            <!-- Account Information Card (Read-only) -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="📋 Thông tin tài khoản" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="(Chỉ xem)" style="-fx-font-size: 12px; -fx-text-fill: #95a5a6; -fx-font-style: italic;"/>
+                </HBox>
+                <Separator/>
+
+                <GridPane hgap="15" vgap="12">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150" prefWidth="150"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="200"/>
+                        <ColumnConstraints minWidth="150" prefWidth="150"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="200"/>
+                    </columnConstraints>
+
+                    <!-- Username -->
+                    <Label text="Tên đăng nhập:" GridPane.columnIndex="0" GridPane.rowIndex="0" 
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <Label fx:id="lblUsername" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                           style="-fx-font-size: 14px; -fx-text-fill: #2c3e50;"/>
+
+                    <!-- Role -->
+                    <Label text="Vai trò:" GridPane.columnIndex="2" GridPane.rowIndex="0"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <Label fx:id="lblRole" GridPane.columnIndex="3" GridPane.rowIndex="0"
+                           style="-fx-font-size: 14px; -fx-text-fill: #2c3e50;"/>
+
+                    <!-- Created At -->
+                    <Label text="Ngày tạo:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <Label fx:id="lblCreatedAt" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                           style="-fx-font-size: 14px; -fx-text-fill: #2c3e50;"/>
+
+                    <!-- Account Status -->
+                    <Label text="Trạng thái:" GridPane.columnIndex="2" GridPane.rowIndex="1"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <Label fx:id="lblStatus" GridPane.columnIndex="3" GridPane.rowIndex="1"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                </GridPane>
+            </VBox>
+
+            <!-- Profile Information Card (Editable) -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="👤 Thông tin cá nhân" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="(Có thể chỉnh sửa)" style="-fx-font-size: 12px; -fx-text-fill: #3498db; -fx-font-style: italic;"/>
+                </HBox>
+                <Separator/>
+
+                <GridPane hgap="15" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150" prefWidth="150"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="300"/>
+                    </columnConstraints>
+
+                    <!-- Full Name -->
+                    <Label text="Họ và tên: *" GridPane.columnIndex="0" GridPane.rowIndex="0" 
+                           style="-fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+                    <TextField fx:id="txtFullName" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                               promptText="Nhập họ và tên đầy đủ" 
+                               style="-fx-font-size: 14px; -fx-padding: 8;"/>
+
+                    <!-- Email -->
+                    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                               promptText="example@email.com" 
+                               style="-fx-font-size: 14px; -fx-padding: 8;"/>
+
+                    <!-- Phone -->
+                    <Label text="Số điện thoại:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <TextField fx:id="txtPhone" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                               promptText="0xxxxxxxxx (10-11 số)" 
+                               style="-fx-font-size: 14px; -fx-padding: 8;"/>
+                </GridPane>
+            </VBox>
+
+            <!-- Address Information Card (Editable) -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                <Label text="📍 Địa chỉ liên hệ" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                <Separator/>
+
+                <GridPane hgap="15" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150" prefWidth="150"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="300"/>
+                    </columnConstraints>
+
+                    <!-- Address -->
+                    <Label text="Địa chỉ:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <TextArea fx:id="txtAddress" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                              promptText="Số nhà, tên đường..." prefRowCount="3" wrapText="true"
+                              style="-fx-font-size: 14px;"/>
+
+                    <!-- City -->
+                    <Label text="Tỉnh/Thành phố:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <TextField fx:id="txtCity" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                               promptText="VD: TP. Hồ Chí Minh" 
+                               style="-fx-font-size: 14px; -fx-padding: 8;"/>
+
+                    <!-- District -->
+                    <Label text="Quận/Huyện:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <TextField fx:id="txtDistrict" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                               promptText="VD: Quận 1" 
+                               style="-fx-font-size: 14px; -fx-padding: 8;"/>
+
+                    <!-- Ward -->
+                    <Label text="Phường/Xã:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <TextField fx:id="txtWard" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                               promptText="VD: Phường Bến Nghé" 
+                               style="-fx-font-size: 14px; -fx-padding: 8;"/>
+                </GridPane>
+
+                <!-- Save Profile Button -->
+                <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
+                    <Button text="💾 Cập nhật thông tin" onAction="#handleUpdateProfile"
+                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                    <Button text="🔄 Làm mới" onAction="#handleRefreshProfile"
+                            style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+
+            <!-- Change Password Card -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                <Label text="🔐 Đổi mật khẩu" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                <Separator/>
+
+                <GridPane hgap="15" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150" prefWidth="150"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="300"/>
+                    </columnConstraints>
+
+                    <!-- Current Password -->
+                    <Label text="Mật khẩu hiện tại: *" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                           style="-fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+                    <PasswordField fx:id="txtCurrentPassword" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                                   promptText="Nhập mật khẩu hiện tại" 
+                                   style="-fx-font-size: 14px; -fx-padding: 8;"/>
+
+                    <!-- New Password -->
+                    <Label text="Mật khẩu mới: *" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                           style="-fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+                    <PasswordField fx:id="txtNewPassword" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                   promptText="Nhập mật khẩu mới (tối thiểu 6 ký tự)" 
+                                   style="-fx-font-size: 14px; -fx-padding: 8;"/>
+
+                    <!-- Confirm Password -->
+                    <Label text="Xác nhận mật khẩu: *" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                           style="-fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+                    <PasswordField fx:id="txtConfirmPassword" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                   promptText="Nhập lại mật khẩu mới" 
+                                   style="-fx-font-size: 14px; -fx-padding: 8;"/>
+                </GridPane>
+
+                <!-- Password Helper Text -->
+                <HBox spacing="5" style="-fx-padding: 5 0 0 0;">
+                    <Label text="ℹ️" style="-fx-text-fill: #3498db; -fx-font-size: 14px;"/>
+                    <Label text="Mật khẩu phải có ít nhất 6 ký tự. Nên bao gồm chữ hoa, chữ thường và số để bảo mật tốt hơn."
+                           style="-fx-text-fill: #7f8c8d; -fx-font-size: 12px; -fx-font-style: italic;"
+                           wrapText="true"/>
+                </HBox>
+
+                <!-- Change Password Buttons -->
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="🔑 Đổi mật khẩu" onAction="#handleChangePassword"
+                            style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                    <Button text="❌ Hủy" onAction="#handleCancelPassword"
+                            style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </ScrollPane>
+</VBox>

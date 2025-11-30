@@ -19,7 +19,7 @@ public abstract class BaseDAO<T, ID> {
         this.entityClass = entityClass;
     }
 
-    protected EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         return HibernateUtil.getEntityManager();
     }
 

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.ItemManagementController"
+      spacing="10" style="-fx-background-color: #f5f5f5;">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="📦 QUẢN LÝ SẢN PHẨM">
+            <font>
+                <Font name="System Bold" size="20"/>
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="txtSearch" promptText="🔍 Tìm kiếm (SKU, tên, danh mục)..."
+                   prefWidth="300" style="-fx-font-size: 13px;"/>
+        <Button text="🔄 Làm mới" onAction="#handleRefresh"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 13px;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Split: Table (Left) and Form (Right) -->
+    <SplitPane dividerPositions="0.6" VBox.vgrow="ALWAYS">
+
+        <!-- LEFT: Table View -->
+        <VBox spacing="10">
+            <Label text="Danh sách sản phẩm">
+                <font>
+                    <Font name="System Bold" size="14"/>
+                </font>
+            </Label>
+
+            <TableView fx:id="itemTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colSku" text="Mã SKU" prefWidth="100"/>
+                    <TableColumn fx:id="colName" text="Tên sản phẩm" prefWidth="200"/>
+                    <TableColumn fx:id="colCategory" text="Danh mục" prefWidth="120"/>
+                    <TableColumn fx:id="colPrice" text="Giá" prefWidth="100"/>
+                    <TableColumn fx:id="colUnit" text="Đơn vị" prefWidth="70"/>
+                    <TableColumn fx:id="colActive" text="Trạng thái" prefWidth="100"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button text="🗑️ Xóa" onAction="#handleDelete"
+                        style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+            </HBox>
+        </VBox>
+
+        <!-- RIGHT: Form -->
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 15;">
+            <Label text="Thông tin sản phẩm">
+                <font>
+                    <Font name="System Bold" size="14"/>
+                </font>
+            </Label>
+
+            <GridPane hgap="10" vgap="12">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="100" prefWidth="100"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <!-- Row 0: SKU -->
+                <Label text="Mã SKU:" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <TextField fx:id="txtSku" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                           promptText="Nhập mã SKU (VD: TB-001)"/>
+
+                <!-- Row 1: Name -->
+                <Label text="Tên SP:" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <TextField fx:id="txtName" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                           promptText="Nhập tên sản phẩm"/>
+
+                <!-- Row 2: Category -->
+                <Label text="Danh mục:" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <ComboBox fx:id="cmbCategory" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                          prefWidth="9999" promptText="Chọn danh mục"/>
+
+                <!-- Row 3: Price -->
+                <Label text="Giá:" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <HBox spacing="5" GridPane.rowIndex="3" GridPane.columnIndex="1">
+                    <TextField fx:id="txtPrice" HBox.hgrow="ALWAYS"
+                               promptText="Nhập giá (VNĐ)"/>
+                    <Label text="đ" style="-fx-font-weight: bold;">
+                        <HBox.margin>
+                            <Insets top="5"/>
+                        </HBox.margin>
+                    </Label>
+                </HBox>
+
+                <!-- Row 4: Unit & Weight -->
+                <Label text="Đơn vị:" GridPane.rowIndex="4" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <HBox spacing="10" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                    <TextField fx:id="txtUnit" HBox.hgrow="ALWAYS" text="Cái"
+                               promptText="Đơn vị"/>
+                    <Label text="Khối lượng:" style="-fx-font-weight: bold;">
+                        <HBox.margin>
+                            <Insets top="5"/>
+                        </HBox.margin>
+                    </Label>
+                    <TextField fx:id="txtWeight" prefWidth="100"
+                               promptText="kg"/>
+                </HBox>
+
+                <!-- Row 5: Image URL -->
+                <Label text="Hình ảnh:" GridPane.rowIndex="5" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <TextField fx:id="txtImageUrl" GridPane.rowIndex="5" GridPane.columnIndex="1"
+                           promptText="URL hình ảnh"/>
+
+                <!-- Row 6: Description -->
+                <Label text="Mô tả:" GridPane.rowIndex="6" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <TextArea fx:id="txtDescription" GridPane.rowIndex="6" GridPane.columnIndex="1"
+                          prefRowCount="3" promptText="Nhập mô tả sản phẩm"/>
+
+                <!-- Row 7: Active Status -->
+                <Label text="Trạng thái:" GridPane.rowIndex="7" GridPane.columnIndex="0">
+                    <font><Font name="System Bold" size="12"/></font>
+                </Label>
+                <CheckBox fx:id="chkActive" text="Đang hoạt động" selected="true"
+                          GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <Separator/>
+
+            <!-- Action Buttons -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="➕ Thêm mới" onAction="#handleNew"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 10 20;"/>
+                <Button fx:id="btnSave" text="💾 Lưu" onAction="#handleSave"
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 10 20;"/>
+                <Button fx:id="btnCancel" text="✖ Hủy" onAction="#handleCancel"
+                        style="-fx-background-color: #9E9E9E; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 10 20;"/>
+            </HBox>
+        </VBox>
+    </SplitPane>
+</VBox>
+

@@ -15,7 +15,7 @@ public class AccountProfile extends AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id", nullable = false, unique = true)
     private Account account;
 
@@ -91,6 +91,20 @@ public class AccountProfile extends AuditEntity {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    /**
+     * Alias for getPhone() - for compatibility
+     */
+    public String getPhoneNumber() {
+        return phone;
+    }
+
+    /**
+     * Alias for setPhone() - for compatibility
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phone = phoneNumber;
     }
 
     public String getAddress() {
