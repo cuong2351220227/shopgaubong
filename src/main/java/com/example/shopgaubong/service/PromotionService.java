@@ -108,6 +108,22 @@ public class PromotionService {
     }
 
     /**
+     * Cập nhật khuyến mãi (phiên bản đơn giản)
+     */
+    public Promotion updatePromotion(Promotion promotion) {
+        if (promotion.getId() == null) {
+            throw new IllegalArgumentException("Khuyến mãi chưa được lưu");
+        }
+        
+        String currentUser = SessionManager.getInstance().getCurrentUsername();
+        promotion.setUpdatedBy(currentUser);
+        
+        Promotion updated = promotionDAO.update(promotion);
+        logger.info("Cập nhật khuyến mãi: {}", promotion.getCode());
+        return updated;
+    }
+
+    /**
      * Xóa khuyến mãi (soft delete)
      */
     public void deletePromotion(Long id) {
@@ -203,13 +219,6 @@ public class PromotionService {
      */
     public List<Promotion> getValidPromotions() {
         return promotionDAO.findValidPromotions();
-    }
-
-    public Promotion createPromotion(String code, String name, PromotionType type, BigDecimal discountValue, BigDecimal minOrderValue, BigDecimal maxDiscount, Integer usageLimit, LocalDateTime startDate, LocalDateTime endDate) {
-        return null;
-    }
-
-    public void updatePromotion(Promotion promotion) {
     }
 }
 

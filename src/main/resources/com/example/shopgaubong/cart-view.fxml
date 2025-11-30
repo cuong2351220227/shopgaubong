@@ -57,19 +57,6 @@
             <Label text="TỔNG ĐƠN HÀNG" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
             <Separator/>
 
-            <!-- Promotion Code -->
-            <VBox spacing="8">
-                <Label text="Mã khuyến mãi" style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
-                <HBox spacing="8">
-                    <TextField fx:id="txtPromotionCode" promptText="Nhập mã khuyến mãi" HBox.hgrow="ALWAYS"
-                               style="-fx-font-size: 13px;"/>
-                    <Button fx:id="btnApplyPromotion" text="Áp dụng" onAction="#handleApplyPromotion"
-                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8 16;"/>
-                </HBox>
-            </VBox>
-
-            <Separator/>
-
             <!-- Price Breakdown -->
             <GridPane hgap="10" vgap="12">
                 <columnConstraints>
@@ -123,7 +110,7 @@
                        wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
                 <Label text="• Phí vận chuyển sẽ được tính dựa trên khối lượng"
                        wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
-                <Label text="• Mã khuyến mãi có thể được áp dụng trước khi thanh toán"
+                <Label text="• Mã khuyến mãi có thể được áp dụng tại trang thanh toán"
                        wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
             </VBox>
         </VBox>

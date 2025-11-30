@@ -43,6 +43,11 @@ public class CustomerMainController {
     }
 
     @FXML
+    private void handleViewPromotions() {
+        loadView("/com/example/shopgaubong/promotion-list-view.fxml", "Khuyến mãi");
+    }
+
+    @FXML
     private void handleViewOrders() {
         // Load customer order view
         loadView("/com/example/shopgaubong/customer-order-view.fxml", "Đơn hàng của tôi");

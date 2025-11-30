@@ -64,8 +64,9 @@ public class PromotionManagementController {
         this.promotionService = promotionService;
     }
 
-    // No-arg constructor for FXML loader, with optional setter for DI
+    // No-arg constructor for FXML loader
     public PromotionManagementController() {
+        this.promotionService = new PromotionService();
     }
 
     public void setPromotionService(PromotionService promotionService) {
@@ -223,6 +224,7 @@ public class PromotionManagementController {
     private void createPromotion() {
         String code = txtCode.getText().trim().toUpperCase();
         String name = txtName.getText().trim();
+        String description = txtDescription.getText().trim();
         PromotionType type = getTypeFromText(cbType.getValue());
         BigDecimal discountValue = new BigDecimal(txtDiscountValue.getText().trim());
         BigDecimal minOrderValue = txtMinOrderValue.getText().isEmpty() ? 
@@ -237,13 +239,14 @@ public class PromotionManagementController {
         LocalDateTime endDate = dpEndDate.getValue().atTime(23, 59, 59);
         
         Promotion promotion = promotionService.createPromotion(
-            code, name, type, discountValue, minOrderValue, maxDiscount,
-            usageLimit, startDate, endDate
+            code, name, description, type, discountValue, minOrderValue, maxDiscount,
+            startDate, endDate, usageLimit
         );
         
-        promotion.setDescription(txtDescription.getText().trim());
-        promotion.setIsActive(cbIsActive.isSelected());
-        promotionService.updatePromotion(promotion);
+        if (!cbIsActive.isSelected()) {
+            promotion.setIsActive(false);
+            promotionService.updatePromotion(promotion);
+        }
         
         showSuccess("Tạo khuyến mãi mới thành công!");
         logger.info("Tạo khuyến mãi mới: {}", promotion.getCode());

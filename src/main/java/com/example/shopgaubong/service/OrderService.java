@@ -151,12 +151,22 @@ public class OrderService {
                     .findFirst()
                     .orElseThrow(() -> new IllegalArgumentException("Sản phẩm không tồn tại"));
 
-            // Kiểm tra tồn kho với số lượng mới (đã bao gồm toàn bộ)
-            if (!stockService.checkAvailability(warehouseId, orderItem.getItem().getId(), newQuantity)) {
+            Integer oldQuantity = orderItem.getQuantity();
+
+            // Kiểm tra tồn kho: 
+            // Vì đây là CART (chưa place order), số lượng cũ CHƯA bị reserve
+            // Nên cần kiểm tra: available + oldQuantity >= newQuantity
+            // Tương đương: available >= (newQuantity - oldQuantity)
+            Integer additionalQuantity = newQuantity - oldQuantity;
+            
+            if (additionalQuantity > 0) {
+                // Chỉ kiểm tra nếu tăng số lượng
                 Integer availableQty = stockService.getAvailableQuantity(warehouseId, orderItem.getItem().getId());
-                throw new IllegalStateException(
-                    String.format("Không đủ hàng trong kho. Sản phẩm: %s, Tồn kho khả dụng: %d, Số lượng mới yêu cầu: %d (hiện tại trong giỏ: %d)",
-                    orderItem.getItem().getName(), availableQty, newQuantity, orderItem.getQuantity()));
+                if (availableQty < additionalQuantity) {
+                    throw new IllegalStateException(
+                        String.format("Không đủ hàng trong kho. Sản phẩm: %s, Tồn kho khả dụng: %d, Số lượng hiện tại: %d, Muốn tăng thêm: %d, Tổng sau khi tăng: %d",
+                        orderItem.getItem().getName(), availableQty, oldQuantity, additionalQuantity, newQuantity));
+                }
             }
 
             orderItem.setQuantity(newQuantity);
@@ -236,12 +246,65 @@ public class OrderService {
             Promotion promotion = promotionService.applyPromotion(promotionCode, order.getSubtotal());
             order.setPromotion(promotion);
 
+            // Tính item discount (từ các OrderItem)
+            BigDecimal itemDiscount = order.getOrderItems().stream()
+                    .map(OrderItem::getDiscount)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            
+            // Tính promotion discount
             BigDecimal promotionDiscount = promotionService.calculateDiscount(promotion, order.getSubtotal());
-            order.setDiscount(order.getDiscount().add(promotionDiscount));
+            
+            logger.info("DEBUG: Subtotal={}, ItemDiscount={}, PromotionDiscount={}, OldDiscount={}", 
+                order.getSubtotal(), itemDiscount, promotionDiscount, order.getDiscount());
+            
+            // Set discount = item discount + promotion discount (không cộng dồn với old discount)
+            order.setDiscount(itemDiscount.add(promotionDiscount));
+            order.calculateTotals(TAX_RATE);
+            
+            logger.info("DEBUG: After apply - NewDiscount={}, GrandTotal={}", 
+                order.getDiscount(), order.getGrandTotal());
+
+            em.merge(order);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * Xóa khuyến mãi khỏi đơn hàng
+     */
+    public void removePromotion(Long orderId) {
+        EntityManager em = HibernateUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            Order order = em.find(Order.class, orderId);
+            if (order == null) throw new IllegalArgumentException("Đơn hàng không tồn tại");
+            Hibernate.initialize(order.getOrderItems());
+
+            if (order.getStatus() != OrderStatus.CART) {
+                throw new IllegalStateException("Chỉ có thể xóa khuyến mãi cho giỏ hàng");
+            }
+
+            // Remove promotion
+            order.setPromotion(null);
+            
+            // Recalculate discount (only item discount)
+            BigDecimal itemDiscount = order.getOrderItems().stream()
+                    .map(OrderItem::getDiscount)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            
+            order.setDiscount(itemDiscount);
             order.calculateTotals(TAX_RATE);
 
             em.merge(order);
             em.getTransaction().commit();
+            
+            logger.info("Đã xóa khuyến mãi khỏi đơn hàng {}", order.getOrderNumber());
         } catch (Exception e) {
             if (em.getTransaction().isActive()) em.getTransaction().rollback();
             throw e;
@@ -498,20 +561,36 @@ public class OrderService {
     public Optional<Order> getOrderWithFullDetails(Long orderId) {
         EntityManager em = HibernateUtil.getEntityManager();
         try {
-            String jpql = "SELECT DISTINCT o FROM Order o " +
+            // First query: fetch order with orderItems (first collection)
+            String jpql1 = "SELECT DISTINCT o FROM Order o " +
                     "LEFT JOIN FETCH o.customer c " +
                     "LEFT JOIN FETCH c.profile " +
                     "LEFT JOIN FETCH o.orderItems oi " +
                     "LEFT JOIN FETCH oi.item i " +
                     "LEFT JOIN FETCH i.category " +
                     "LEFT JOIN FETCH o.promotion p " +
-                    "LEFT JOIN FETCH o.payments pay " +
                     "WHERE o.id = :orderId";
 
-            var query = em.createQuery(jpql, Order.class);
-            query.setParameter("orderId", orderId);
-            List<Order> results = query.getResultList();
-            return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
+            var query1 = em.createQuery(jpql1, Order.class);
+            query1.setParameter("orderId", orderId);
+            List<Order> results = query1.getResultList();
+            
+            if (results.isEmpty()) {
+                return Optional.empty();
+            }
+            
+            Order order = results.get(0);
+            
+            // Second query: fetch payments (second collection) separately
+            String jpql2 = "SELECT DISTINCT o FROM Order o " +
+                    "LEFT JOIN FETCH o.payments pay " +
+                    "WHERE o.id = :orderId";
+            
+            var query2 = em.createQuery(jpql2, Order.class);
+            query2.setParameter("orderId", orderId);
+            query2.getResultList(); // This will populate the payments collection
+            
+            return Optional.of(order);
         } catch (Exception e) {
             logger.error("Lỗi khi lấy Order với full details {}: {}", orderId, e.getMessage());
             return Optional.empty();

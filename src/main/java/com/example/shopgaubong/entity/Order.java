@@ -115,7 +115,13 @@ public class Order extends AuditEntity {
                 .map(OrderItem::getDiscount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        discount = itemDiscount;
+        // FIXED: Không ghi đè discount, chỉ cập nhật nếu chưa có promotion discount
+        // Discount có thể bao gồm: item discount + promotion discount
+        // Nếu có promotion, discount đã được set ở applyPromotion
+        if (promotion == null) {
+            discount = itemDiscount;
+        }
+        // Nếu có promotion, giữ nguyên discount đã set (bao gồm cả promotion discount)
 
         // Tính thuế
         BigDecimal taxableAmount = subtotal.subtract(discount);

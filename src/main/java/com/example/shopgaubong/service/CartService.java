@@ -81,6 +81,15 @@ public class CartService {
     }
 
     /**
+     * Xóa mã khuyến mãi
+     */
+    public void removePromotionCode(Long customerId) {
+        Order cart = getCurrentCart(customerId);
+        orderService.removePromotion(cart.getId());
+        logger.info("Xóa mã khuyến mãi cho khách hàng ID {}", customerId);
+    }
+
+    /**
      * Lấy tổng số lượng sản phẩm trong giỏ
      */
     public Integer getCartItemCount(Long customerId) {

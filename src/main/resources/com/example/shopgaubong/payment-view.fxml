@@ -8,92 +8,229 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.shopgaubong.controller.PaymentController"
-      spacing="15">
+      spacing="15" style="-fx-background-color: #f5f5f5;">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="THANH TOÁN ĐƠN HÀNG" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
-
-    <Separator/>
-
-    <!-- Order Selection Section -->
-    <VBox spacing="10">
-        <Label text="1. Chọn đơn hàng cần thanh toán:" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
-
-        <TableView fx:id="orderTable" prefHeight="200">
-            <columns>
-                <TableColumn fx:id="orderNumberCol" text="Mã đơn hàng" prefWidth="150"/>
-                <TableColumn fx:id="statusCol" text="Trạng thái" prefWidth="120"/>
-                <TableColumn fx:id="totalCol" text="Tổng tiền" prefWidth="150"/>
-            </columns>
-        </TableView>
-
-        <TextArea fx:id="orderDetailsArea" prefHeight="100" editable="false"
-                  promptText="Chọn đơn hàng để xem chi tiết"/>
-    </VBox>
-
-    <Separator/>
-
-    <!-- Payment Method Selection -->
-    <VBox spacing="10">
-        <Label text="2. Chọn phương thức thanh toán:" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
-
-        <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Phương thức:"/>
-            <ComboBox fx:id="paymentMethodCombo" prefWidth="250"/>
-        </HBox>
-
-        <VBox spacing="5" style="-fx-background-color: #f5f5f5; -fx-padding: 10;">
-            <Label text="Thông tin phí:" style="-fx-font-weight: bold;"/>
-
-            <GridPane hgap="20" vgap="5">
-                <Label text="Tiền hàng:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <Label fx:id="subtotalLabel" text="0 VND" GridPane.rowIndex="0" GridPane.columnIndex="1"
-                       style="-fx-font-weight: bold;"/>
-
-                <Label text="Phí COD:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <Label fx:id="codFeeLabel" text="0 VND" GridPane.rowIndex="1" GridPane.columnIndex="1"
-                       style="-fx-text-fill: #ff6600;"/>
-
-                <Label text="Phí Gateway:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <Label fx:id="gatewayFeeLabel" text="0 VND" GridPane.rowIndex="2" GridPane.columnIndex="1"
-                       style="-fx-text-fill: #ff6600;"/>
-
-                <Label text="Phí vận chuyển:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                <Label fx:id="shippingFeeLabel" text="0 VND" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
-                <Separator GridPane.rowIndex="4" GridPane.columnSpan="2">
-                    <GridPane.margin>
-                        <Insets top="5" bottom="5"/>
-                    </GridPane.margin>
-                </Separator>
-
-                <Label text="TỔNG CỘNG:" GridPane.rowIndex="5" GridPane.columnIndex="0"
-                       style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-                <Label fx:id="totalLabel" text="0 VND" GridPane.rowIndex="5" GridPane.columnIndex="1"
-                       style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #d32f2f;"/>
-            </GridPane>
-        </VBox>
-    </VBox>
-
-    <Separator/>
-
-    <!-- Payment Button -->
-    <HBox spacing="10" alignment="CENTER">
-        <Button fx:id="payButton" text="THANH TOÁN NGAY" onAction="#handlePayment"
-                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"
-                prefWidth="250" prefHeight="45"/>
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="💳 THANH TOÁN ĐƠN HÀNG" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
     </HBox>
 
-    <!-- Payment Methods Info -->
-    <VBox spacing="5" style="-fx-background-color: #e3f2fd; -fx-padding: 15; -fx-border-color: #2196F3; -fx-border-width: 1;">
-        <Label text="Thông tin phương thức thanh toán:" style="-fx-font-weight: bold;"/>
-        <Label text="• COD: Thanh toán khi nhận hàng (Phí 2%, tối thiểu 10,000đ, tối đa 50,000đ)" wrapText="true"/>
-        <Label text="• Chuyển khoản: Miễn phí giao dịch" wrapText="true"/>
-        <Label text="• VNPay: Thanh toán qua cổng VNPay (Phí 2.2%)" wrapText="true"/>
-        <Label text="• MoMo: Thanh toán qua ví MoMo (Phí 2.5%)" wrapText="true"/>
-        <Label text="• SePay: Thanh toán qua SePay (Phí 1.8%)" wrapText="true"/>
-    </VBox>
+    <Separator/>
+
+    <!-- Main Content Split -->
+    <SplitPane dividerPositions="0.6" VBox.vgrow="ALWAYS">
+        
+        <!-- Left: Order Information -->
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20;">
+            
+            <!-- Order Details Card -->
+            <VBox spacing="10" style="-fx-background-color: #f8f9fa; -fx-padding: 15; -fx-border-radius: 5; -fx-background-radius: 5;">
+                <Label text="📦 Thông tin đơn hàng" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <Separator/>
+                
+                <GridPane hgap="15" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120" prefWidth="120"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+                    
+                    <Label text="Mã đơn hàng:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <Label fx:id="lblOrderNumber" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                           style="-fx-font-size: 14px; -fx-text-fill: #2c3e50;"/>
+                    
+                    <Label text="Trạng thái:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <Label fx:id="lblOrderStatus" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                           style="-fx-font-size: 14px;"/>
+                    
+                    <Label text="Người nhận:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <Label fx:id="lblReceiverName" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                           style="-fx-font-size: 14px; -fx-text-fill: #2c3e50;"/>
+                    
+                    <Label text="SĐT:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <Label fx:id="lblReceiverPhone" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                           style="-fx-font-size: 14px; -fx-text-fill: #2c3e50;"/>
+                    
+                    <Label text="Địa chỉ:" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                           style="-fx-font-weight: bold; -fx-text-fill: #555;"/>
+                    <Label fx:id="lblAddress" text="-" GridPane.columnIndex="1" GridPane.rowIndex="4"
+                           wrapText="true" style="-fx-font-size: 14px; -fx-text-fill: #2c3e50;"/>
+                </GridPane>
+            </VBox>
+
+            <!-- Products Table -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <Label text="📋 Danh sách sản phẩm" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <TableView fx:id="orderItemsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colProductName" text="Sản phẩm" prefWidth="250"/>
+                        <TableColumn fx:id="colQuantity" text="SL" prefWidth="60" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="colUnitPrice" text="Đơn giá" prefWidth="100" style="-fx-alignment: CENTER-RIGHT;"/>
+                        <TableColumn fx:id="colTotal" text="Thành tiền" prefWidth="120" style="-fx-alignment: CENTER-RIGHT;"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="Chưa có sản phẩm" style="-fx-text-fill: #999;"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+        </VBox>
+
+        <!-- Right: Payment Section -->
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20;">
+            
+            <!-- Payment Method Selection -->
+            <VBox spacing="10">
+                <Label text="💰 Phương thức thanh toán" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <Separator/>
+                
+                <ComboBox fx:id="paymentMethodCombo" promptText="Chọn phương thức thanh toán" 
+                         maxWidth="Infinity" style="-fx-font-size: 14px;"/>
+            </VBox>
+
+            <!-- Fee Breakdown -->
+            <VBox spacing="10" style="-fx-background-color: #f8f9fa; -fx-padding: 15; -fx-border-radius: 5; -fx-background-radius: 5;">
+                <Label text="📊 Chi tiết thanh toán" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <Separator/>
+
+                <GridPane hgap="20" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="120"/>
+                        <ColumnConstraints hgrow="SOMETIMES" halignment="RIGHT"/>
+                    </columnConstraints>
+
+                    <Label text="Tiền hàng:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                           style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+                    <Label fx:id="subtotalLabel" text="0 ₫" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                    <Label text="Phí vận chuyển:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                           style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+                    <Label fx:id="shippingFeeLabel" text="0 ₫" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                    <Label text="Phí COD:" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                           style="-fx-font-size: 14px; -fx-text-fill: #ff6600;"/>
+                    <Label fx:id="codFeeLabel" text="0 ₫" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                           style="-fx-font-size: 14px; -fx-text-fill: #ff6600; -fx-font-weight: bold;"/>
+
+                    <Label text="Phí Gateway:" GridPane.rowIndex="3" GridPane.columnIndex="0"
+                           style="-fx-font-size: 14px; -fx-text-fill: #ff6600;"/>
+                    <Label fx:id="gatewayFeeLabel" text="0 ₫" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                           style="-fx-font-size: 14px; -fx-text-fill: #ff6600; -fx-font-weight: bold;"/>
+
+                    <Separator GridPane.rowIndex="4" GridPane.columnSpan="2">
+                        <GridPane.margin>
+                            <Insets top="5" bottom="5"/>
+                        </GridPane.margin>
+                    </Separator>
+
+                    <Label text="TỔNG CỘNG:" GridPane.rowIndex="5" GridPane.columnIndex="0"
+                           style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #2c3e50;"/>
+                    <Label fx:id="totalLabel" text="0 ₫" GridPane.rowIndex="5" GridPane.columnIndex="1"
+                           style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #e74c3c;"/>
+                </GridPane>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Payment Button -->
+            <Button fx:id="payButton" text="💳 THANH TOÁN NGAY" onAction="#handlePayment"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;"
+                    maxWidth="Infinity" prefHeight="50"/>
+
+            <!-- Payment Method Details (Dynamic) -->
+            <VBox fx:id="paymentDetailsBox" spacing="10" managed="false" visible="false">
+                <Separator/>
+                
+                <!-- COD Details -->
+                <VBox fx:id="codDetailsBox" spacing="8" style="-fx-background-color: #fff3cd; -fx-padding: 12; -fx-border-radius: 5; -fx-background-radius: 5;" managed="false" visible="false">
+                    <Label text="💵 Thanh toán khi nhận hàng (COD)" style="-fx-font-weight: bold; -fx-text-fill: #856404;"/>
+                    <Separator/>
+                    <Label text="• Phí COD: 2% giá trị đơn hàng (tối thiểu 10,000₫)" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Vui lòng chuẩn bị đủ tiền mặt khi nhận hàng" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Kiểm tra hàng trước khi thanh toán cho shipper" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                </VBox>
+                
+                <!-- Bank Transfer Details -->
+                <VBox fx:id="bankTransferDetailsBox" spacing="8" style="-fx-background-color: #d1ecf1; -fx-padding: 12; -fx-border-radius: 5; -fx-background-radius: 5;" managed="false" visible="false">
+                    <Label text="🏦 Chuyển khoản ngân hàng" style="-fx-font-weight: bold; -fx-text-fill: #0c5460;"/>
+                    <Separator/>
+                    <GridPane hgap="10" vgap="5">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="100" prefWidth="100"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        <Label text="Ngân hàng:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                        <Label text="Vietcombank - Chi nhánh Hà Nội" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        
+                        <Label text="Số tài khoản:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                        <Label text="1234567890" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        
+                        <Label text="Chủ tài khoản:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                        <Label text="SHOP GẤU BÔNG" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        
+                        <Label text="Nội dung CK:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="bankTransferContent" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3" 
+                               style="-fx-text-fill: #e74c3c; -fx-font-weight: bold;"/>
+                    </GridPane>
+                    <Label text="⚠️ Sau khi chuyển khoản, đơn hàng sẽ được xử lý trong 1-2 giờ" 
+                           wrapText="true" style="-fx-font-size: 11px; -fx-text-fill: #666; -fx-font-style: italic;"/>
+                </VBox>
+                
+                <!-- VNPay Details -->
+                <VBox fx:id="vnpayDetailsBox" spacing="8" style="-fx-background-color: #cfe2ff; -fx-padding: 12; -fx-border-radius: 5; -fx-background-radius: 5;" managed="false" visible="false">
+                    <Label text="💳 VNPay - Cổng thanh toán điện tử" style="-fx-font-weight: bold; -fx-text-fill: #084298;"/>
+                    <Separator/>
+                    <Label text="• Phí giao dịch: 2.2% giá trị đơn hàng" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Hỗ trợ thanh toán: Thẻ ATM, Visa, MasterCard, JCB, QR Code" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Giao dịch được mã hóa an toàn với chuẩn PCI-DSS" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Bấm 'Thanh toán' để chuyển đến cổng VNPay" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555; -fx-font-weight: bold;"/>
+                </VBox>
+                
+                <!-- MoMo Details -->
+                <VBox fx:id="momoDetailsBox" spacing="8" style="-fx-background-color: #f8d7da; -fx-padding: 12; -fx-border-radius: 5; -fx-background-radius: 5;" managed="false" visible="false">
+                    <Label text="📱 MoMo - Ví điện tử" style="-fx-font-weight: bold; -fx-text-fill: #842029;"/>
+                    <Separator/>
+                    <Label text="• Phí giao dịch: 2.5% giá trị đơn hàng" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Thanh toán nhanh bằng ví MoMo trên điện thoại" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Hỗ trợ liên kết thẻ ngân hàng hoặc thanh toán từ số dư ví" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Quét QR code hoặc nhập OTP để xác nhận thanh toán" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                </VBox>
+                
+                <!-- SePay Details -->
+                <VBox fx:id="sepayDetailsBox" spacing="8" style="-fx-background-color: #d3f9d8; -fx-padding: 12; -fx-border-radius: 5; -fx-background-radius: 5;" managed="false" visible="false">
+                    <Label text="⚡ SePay - Cổng thanh toán nhanh" style="-fx-font-weight: bold; -fx-text-fill: #0f5132;"/>
+                    <Separator/>
+                    <Label text="• Phí giao dịch: 1.8% giá trị đơn hàng (Thấp nhất!)" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Hỗ trợ: Thẻ ATM nội địa, Visa, MasterCard" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Xử lý giao dịch tức thì, xác nhận đơn hàng ngay lập tức" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                    <Label text="• Giao diện đơn giản, thanh toán nhanh chóng" 
+                           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555;"/>
+                </VBox>
+            </VBox>
+
+        </VBox>
+    </SplitPane>
+
 </VBox>
 

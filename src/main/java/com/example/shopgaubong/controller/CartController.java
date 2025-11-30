@@ -41,10 +41,6 @@ public class CartController {
     @FXML private Label lblGrandTotal;
     @FXML private Label lblItemCount;
 
-    @FXML private TextField txtPromotionCode;
-    @FXML private Button btnApplyPromotion;
-    @FXML private Button btnRemovePromotion;
-
     private final CartService cartService = new CartService();
     private final AuthService authService = new AuthService();
     private final WarehouseService warehouseService = new WarehouseService();
@@ -145,7 +141,8 @@ public class CartController {
     private void updateQuantity(OrderItem orderItem, Integer newQuantity) {
         try {
             Long customerId = authService.getCurrentAccount().getId();
-            Long warehouseId = getDefaultWarehouseId();
+            // Find warehouse that has this item
+            Long warehouseId = findWarehouseForItem(orderItem.getItem().getId());
             
             cartService.updateCartItem(customerId, orderItem.getId(), newQuantity, warehouseId);
             
@@ -177,32 +174,6 @@ public class CartController {
                 showError("Không thể xóa sản phẩm: " + e.getMessage());
             }
         }
-    }
-
-    @FXML
-    private void handleApplyPromotion() {
-        String code = txtPromotionCode.getText().trim();
-        if (code.isEmpty()) {
-            showWarning("Vui lòng nhập mã khuyến mãi!");
-            return;
-        }
-
-        try {
-            Long customerId = authService.getCurrentAccount().getId();
-            cartService.applyPromotionCode(customerId, code);
-            
-            loadCart();
-            showSuccess("Áp dụng mã khuyến mãi thành công!");
-        } catch (Exception e) {
-            logger.error("Lỗi khi áp dụng khuyến mãi: {}", e.getMessage(), e);
-            showError("Không thể áp dụng mã khuyến mãi: " + e.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleRemovePromotion() {
-        // Implementation for removing promotion
-        showInfo("Chức năng đang phát triển");
     }
 
     @FXML
@@ -301,6 +272,32 @@ public class CartController {
             .findFirst()
             .map(w -> w.getId())
             .orElseThrow(() -> new IllegalStateException("Không tìm thấy kho hoạt động"));
+    }
+    
+    private Long findWarehouseForItem(Long itemId) {
+        // Find warehouse that has this item with available stock
+        try {
+            var stockService = new com.example.shopgaubong.service.StockService();
+            var stockItems = stockService.getStockItemsByItem(itemId);
+            
+            // Find warehouse with available stock
+            for (var stockItem : stockItems) {
+                if (stockItem.getAvailable() > 0) {
+                    return stockItem.getWarehouse().getId();
+                }
+            }
+            
+            // If no warehouse has available stock, return first warehouse with this item
+            if (!stockItems.isEmpty()) {
+                return stockItems.get(0).getWarehouse().getId();
+            }
+            
+            // Fallback to default warehouse
+            return getDefaultWarehouseId();
+        } catch (Exception e) {
+            logger.warn("Cannot find warehouse for item {}, using default", itemId);
+            return getDefaultWarehouseId();
+        }
     }
 
     private String formatCurrency(BigDecimal amount) {

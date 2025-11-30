@@ -59,7 +59,13 @@
                 </padding>
             </Button>
 
-            <Button alignment="CENTER_LEFT" onAction="#handleViewOrders" prefHeight="35" prefWidth="230" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="Đơn hàng của tôi">
+            <Button alignment="CENTER_LEFT" onAction="#handleViewPromotions" prefHeight="35" prefWidth="230" text="🎁 Khuyến mãi" style="-fx-background-color: #e74c3c; -fx-text-fill: white;">
+                <padding>
+                    <Insets left="10" />
+                </padding>
+            </Button>
+
+            <Button alignment="CENTER_LEFT" onAction="#handleViewOrders" prefHeight="35" prefWidth="230" text="Đơn hàng của tôi">
                 <padding>
                     <Insets left="10" />
                 </padding>

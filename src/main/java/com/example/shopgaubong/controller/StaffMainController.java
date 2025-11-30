@@ -49,7 +49,7 @@ public class StaffMainController {
 
     @FXML
     private void handleManageShipments() {
-        showInfo("Quản lý vận chuyển - Chức năng đang phát triển");
+        loadView("/com/example/shopgaubong/shipment-management-view.fxml", "Quản lý vận chuyển");
     }
 
     /**

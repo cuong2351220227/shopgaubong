@@ -138,8 +138,7 @@
             </Button>
 
             <Button text="Quản lý hoàn tiền" onAction="#handleManageRefunds"
-                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT"
-                    style="-fx-background-color: #ff9800; -fx-text-fill: white;">
+                    prefWidth="230" prefHeight="35" alignment="CENTER_LEFT">
                 <padding>
                     <Insets left="10"/>
                 </padding>

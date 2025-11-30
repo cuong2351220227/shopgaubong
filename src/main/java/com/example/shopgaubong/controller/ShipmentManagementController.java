@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -28,15 +29,20 @@ public class ShipmentManagementController {
 
     @FXML private TextField txtSearch;
     @FXML private ComboBox<ShipmentStatus> cboStatusFilter;
+    @FXML private ComboBox<String> cbStatusFilter; // For new FXML
+    @FXML private ComboBox<String> cbCarrierFilter; // For new FXML
     @FXML private CheckBox cbOverdueOnly;
     
     @FXML private TableView<Shipment> shipmentTable;
     @FXML private TableColumn<Shipment, String> colTrackingNumber;
     @FXML private TableColumn<Shipment, String> colOrderNumber;
     @FXML private TableColumn<Shipment, String> colCarrier;
+    @FXML private TableColumn<Shipment, String> colReceiver; // For new FXML
+    @FXML private TableColumn<Shipment, String> colPhone; // For new FXML
     @FXML private TableColumn<Shipment, String> colStatus;
     @FXML private TableColumn<Shipment, String> colShippedDate;
     @FXML private TableColumn<Shipment, String> colEstimatedDelivery;
+    @FXML private TableColumn<Shipment, String> colCreatedAt; // For new FXML
 
     @FXML private TextField txtTrackingNumber;
     @FXML private ComboBox<String> cboCarrier;
@@ -54,9 +60,19 @@ public class ShipmentManagementController {
 
     @FXML private Button btnSave;
     @FXML private Button btnUpdateStatus;
+    @FXML private Button btnViewDetails; // For new FXML
+    @FXML private Button btnTrackShipment; // For new FXML
+    @FXML private Button btnCancelShipment; // For new FXML
     @FXML private Button btnDelete;
     @FXML private Button btnClear;
     @FXML private Button btnRefresh;
+
+    // Labels for statistics in new FXML
+    @FXML private Label lblShipmentCount;
+    @FXML private Label lblPendingCount;
+    @FXML private Label lblInTransitCount;
+    @FXML private Label lblDeliveredCount;
+    @FXML private Label lblFailedCount;
 
     private final ShipmentService shipmentService = new ShipmentService();
     private final OrderService orderService = new OrderService();
@@ -75,6 +91,7 @@ public class ShipmentManagementController {
         setupListeners();
         loadOrders();
         loadShipments();
+        loadStatistics();
         
         logger.info("ShipmentManagementController initialized");
     }
@@ -87,20 +104,42 @@ public class ShipmentManagementController {
         
         colCarrier.setCellValueFactory(new PropertyValueFactory<>("carrier"));
         
+        // New FXML columns
+        if (colReceiver != null) {
+            colReceiver.setCellValueFactory(cellData -> 
+                new SimpleStringProperty(cellData.getValue().getReceiverName()));
+        }
+        
+        if (colPhone != null) {
+            colPhone.setCellValueFactory(cellData -> 
+                new SimpleStringProperty(cellData.getValue().getReceiverPhone()));
+        }
+        
         colStatus.setCellValueFactory(cellData -> 
             new SimpleStringProperty(cellData.getValue().getStatus().getDisplayName()));
         
-        colShippedDate.setCellValueFactory(cellData -> 
-            new SimpleStringProperty(
-                cellData.getValue().getShippedAt() != null ?
-                cellData.getValue().getShippedAt().format(dateFormatter) : "Chưa gửi"
-            ));
+        // Old FXML has colShippedDate, new FXML doesn't
+        if (colShippedDate != null) {
+            colShippedDate.setCellValueFactory(cellData -> 
+                new SimpleStringProperty(
+                    cellData.getValue().getShippedAt() != null ?
+                    cellData.getValue().getShippedAt().format(dateFormatter) : "Chưa gửi"
+                ));
+        }
         
         colEstimatedDelivery.setCellValueFactory(cellData -> 
             new SimpleStringProperty(
                 cellData.getValue().getEstimatedDeliveryAt() != null ?
                 cellData.getValue().getEstimatedDeliveryAt().format(dateFormatter) : "N/A"
             ));
+        
+        if (colCreatedAt != null) {
+            colCreatedAt.setCellValueFactory(cellData -> 
+                new SimpleStringProperty(
+                    cellData.getValue().getCreatedAt() != null ?
+                    cellData.getValue().getCreatedAt().format(dateFormatter) : ""
+                ));
+        }
 
         // Apply row styling based on status and overdue
         shipmentTable.setRowFactory(tv -> new TableRow<Shipment>() {
@@ -146,89 +185,123 @@ public class ShipmentManagementController {
     }
 
     private void setupComboBoxes() {
-        // Status filter ComboBox
-        List<ShipmentStatus> filterStatuses = Arrays.asList(
-            null, // All
-            ShipmentStatus.PENDING,
-            ShipmentStatus.PICKED_UP,
-            ShipmentStatus.IN_TRANSIT,
-            ShipmentStatus.OUT_FOR_DELIVERY,
-            ShipmentStatus.DELIVERED,
-            ShipmentStatus.FAILED,
-            ShipmentStatus.RETURNED
-        );
+        // Status filter ComboBox (old style)
+        if (cboStatusFilter != null) {
+            List<ShipmentStatus> filterStatuses = Arrays.asList(
+                null, // All
+                ShipmentStatus.PENDING,
+                ShipmentStatus.PICKED_UP,
+                ShipmentStatus.IN_TRANSIT,
+                ShipmentStatus.OUT_FOR_DELIVERY,
+                ShipmentStatus.DELIVERED,
+                ShipmentStatus.FAILED,
+                ShipmentStatus.RETURNED
+            );
+            
+            cboStatusFilter.setItems(FXCollections.observableArrayList(filterStatuses));
+            cboStatusFilter.setCellFactory(param -> new ListCell<ShipmentStatus>() {
+                @Override
+                protected void updateItem(ShipmentStatus item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty || item == null ? "-- Tất cả trạng thái --" : item.getDisplayName());
+                }
+            });
+            cboStatusFilter.setButtonCell(new ListCell<ShipmentStatus>() {
+                @Override
+                protected void updateItem(ShipmentStatus item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty || item == null ? "-- Tất cả trạng thái --" : item.getDisplayName());
+                }
+            });
+            cboStatusFilter.getSelectionModel().selectFirst();
+        }
         
-        cboStatusFilter.setItems(FXCollections.observableArrayList(filterStatuses));
-        cboStatusFilter.setCellFactory(param -> new ListCell<ShipmentStatus>() {
-            @Override
-            protected void updateItem(ShipmentStatus item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty || item == null ? "-- Tất cả trạng thái --" : item.getDisplayName());
+        // New FXML status filter (String-based)
+        if (cbStatusFilter != null) {
+            List<String> statusOptions = new ArrayList<>();
+            statusOptions.add("Tất cả");
+            for (ShipmentStatus status : ShipmentStatus.values()) {
+                statusOptions.add(status.getDisplayName());
             }
-        });
-        cboStatusFilter.setButtonCell(new ListCell<ShipmentStatus>() {
-            @Override
-            protected void updateItem(ShipmentStatus item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty || item == null ? "-- Tất cả trạng thái --" : item.getDisplayName());
-            }
-        });
-        cboStatusFilter.getSelectionModel().selectFirst();
+            cbStatusFilter.setItems(FXCollections.observableArrayList(statusOptions));
+            cbStatusFilter.getSelectionModel().selectFirst();
+        }
+        
+        // New FXML carrier filter
+        if (cbCarrierFilter != null) {
+            List<String> carriers = Arrays.asList(
+                "Tất cả",
+                "Giao hàng nhanh", 
+                "Giao hàng tiết kiệm",
+                "VNPost",
+                "J&T Express",
+                "Viettel Post",
+                "Ninja Van"
+            );
+            cbCarrierFilter.setItems(FXCollections.observableArrayList(carriers));
+            cbCarrierFilter.getSelectionModel().selectFirst();
+        }
 
         // Status ComboBox (for creating/updating)
-        List<ShipmentStatus> allStatuses = Arrays.asList(ShipmentStatus.values());
-        cboStatus.setItems(FXCollections.observableArrayList(allStatuses));
-        cboStatus.setCellFactory(param -> new ListCell<ShipmentStatus>() {
-            @Override
-            protected void updateItem(ShipmentStatus item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty || item == null ? "" : item.getDisplayName());
-            }
-        });
-        cboStatus.setButtonCell(new ListCell<ShipmentStatus>() {
-            @Override
-            protected void updateItem(ShipmentStatus item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty || item == null ? "" : item.getDisplayName());
-            }
-        });
+        if (cboStatus != null) {
+            List<ShipmentStatus> allStatuses = Arrays.asList(ShipmentStatus.values());
+            cboStatus.setItems(FXCollections.observableArrayList(allStatuses));
+            cboStatus.setCellFactory(param -> new ListCell<ShipmentStatus>() {
+                @Override
+                protected void updateItem(ShipmentStatus item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty || item == null ? "" : item.getDisplayName());
+                }
+            });
+            cboStatus.setButtonCell(new ListCell<ShipmentStatus>() {
+                @Override
+                protected void updateItem(ShipmentStatus item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty || item == null ? "" : item.getDisplayName());
+                }
+            });
+        }
 
         // Carrier ComboBox
-        List<String> carriers = Arrays.asList(
-            "Giao hàng nhanh", "Giao hàng tiết kiệm", "VNPost", 
-            "J&T Express", "BEST Express", "Ninja Van", "Viettel Post"
-        );
-        cboCarrier.setItems(FXCollections.observableArrayList(carriers));
+        if (cboCarrier != null) {
+            List<String> carriers = Arrays.asList(
+                "Giao hàng nhanh", "Giao hàng tiết kiệm", "VNPost", 
+                "J&T Express", "BEST Express", "Ninja Van", "Viettel Post"
+            );
+            cboCarrier.setItems(FXCollections.observableArrayList(carriers));
+        }
 
         // Order ComboBox
-        cboOrder.setCellFactory(param -> new ListCell<Order>() {
-            @Override
-            protected void updateItem(Order item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText("");
-                } else {
-                    setText(item.getOrderNumber() + " - " + 
-                           (item.getCustomer().getAccountProfile() != null ?
-                            item.getCustomer().getAccountProfile().getFullName() :
-                            item.getCustomer().getUsername()));
+        if (cboOrder != null) {
+            cboOrder.setCellFactory(param -> new ListCell<Order>() {
+                @Override
+                protected void updateItem(Order item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText("");
+                    } else {
+                        setText(item.getOrderNumber() + " - " + 
+                               (item.getCustomer().getAccountProfile() != null ?
+                                item.getCustomer().getAccountProfile().getFullName() :
+                                item.getCustomer().getUsername()));
+                    }
                 }
-            }
-        });
-        cboOrder.setButtonCell(new ListCell<Order>() {
-            @Override
-            protected void updateItem(Order item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText("");
-                } else {
-                    setText(item.getOrderNumber() + " - " + 
-                           (item.getCustomer().getAccountProfile() != null ?
-                            item.getCustomer().getAccountProfile().getFullName() :
-                            item.getCustomer().getUsername()));
+            });
+            cboOrder.setButtonCell(new ListCell<Order>() {
+                @Override
+                protected void updateItem(Order item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText("");
+                    } else {
+                        setText(item.getOrderNumber() + " - " + 
+                               (item.getCustomer().getAccountProfile() != null ?
+                                item.getCustomer().getAccountProfile().getFullName() :
+                                item.getCustomer().getUsername()));
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     private void setupListeners() {
@@ -266,6 +339,7 @@ public class ShipmentManagementController {
             List<Shipment> shipments = shipmentService.getAllShipments();
             shipmentList.setAll(shipments);
             shipmentTable.setItems(shipmentList);
+            loadStatistics();
             logger.info("Loaded {} shipments", shipments.size());
         } catch (Exception e) {
             logger.error("Error loading shipments: {}", e.getMessage());
@@ -592,5 +666,134 @@ public class ShipmentManagementController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    // Thêm các method cho FXML mới
+    @FXML
+    private void handleCreateShipment() {
+        showInfo("Tạo vận đơn mới", "Chức năng đang được phát triển");
+    }
+
+    @FXML
+    private void handleSearch() {
+        String keyword = txtSearch.getText().trim();
+        
+        // Get filters from new FXML combo boxes if available
+        String statusFilter = cbStatusFilter != null && cbStatusFilter.getValue() != null ? 
+                             cbStatusFilter.getValue() : "Tất cả";
+        String carrierFilter = cbCarrierFilter != null && cbCarrierFilter.getValue() != null ? 
+                              cbCarrierFilter.getValue() : "Tất cả";
+        
+        // Filter shipments based on keyword, status, and carrier
+        List<Shipment> filtered = shipmentList.stream()
+            .filter(s -> {
+                // Keyword filter
+                if (!keyword.isEmpty()) {
+                    String search = keyword.toLowerCase();
+                    boolean matchesKeyword = 
+                        s.getTrackingNumber().toLowerCase().contains(search) ||
+                        s.getOrder().getOrderNumber().toLowerCase().contains(search) ||
+                        s.getCarrier().toLowerCase().contains(search) ||
+                        (s.getReceiverName() != null && s.getReceiverName().toLowerCase().contains(search));
+                    if (!matchesKeyword) return false;
+                }
+                
+                // Status filter
+                if (!statusFilter.equals("Tất cả") && !s.getStatus().getDisplayName().equals(statusFilter)) {
+                    return false;
+                }
+                
+                // Carrier filter
+                if (!carrierFilter.equals("Tất cả") && !s.getCarrier().equals(carrierFilter)) {
+                    return false;
+                }
+                
+                return true;
+            })
+            .collect(Collectors.toList());
+        
+        shipmentTable.setItems(FXCollections.observableArrayList(filtered));
+    }
+
+    @FXML
+    private void handleViewDetails() {
+        if (selectedShipment != null) {
+            showShipmentDetails();
+        } else {
+            showWarning("Cảnh báo", "Vui lòng chọn vận đơn để xem chi tiết");
+        }
+    }
+
+    @FXML
+    private void handleTrackShipment() {
+        if (selectedShipment != null) {
+            showInfo("Theo dõi vận đơn", "Mã vận đơn: " + selectedShipment.getTrackingNumber() + "\nChức năng theo dõi chi tiết đang được phát triển");
+        } else {
+            showWarning("Cảnh báo", "Vui lòng chọn vận đơn cần theo dõi");
+        }
+    }
+
+    @FXML
+    private void handleCancelShipment() {
+        if (selectedShipment != null) {
+            handleDelete();
+        } else {
+            showWarning("Cảnh báo", "Vui lòng chọn vận đơn cần hủy");
+        }
+    }
+
+    private void showShipmentDetails() {
+        StringBuilder details = new StringBuilder();
+        details.append("Mã vận đơn: ").append(selectedShipment.getTrackingNumber()).append("\n");
+        details.append("Đơn hàng: ").append(selectedShipment.getOrder().getOrderNumber()).append("\n");
+        details.append("Nhà vận chuyển: ").append(selectedShipment.getCarrier()).append("\n");
+        details.append("Trạng thái: ").append(selectedShipment.getStatus().getDisplayName()).append("\n");
+        if (selectedShipment.getShippedAt() != null) {
+            details.append("Ngày gửi: ").append(selectedShipment.getShippedAt().format(dateFormatter)).append("\n");
+        }
+        if (selectedShipment.getEstimatedDeliveryAt() != null) {
+            details.append("Dự kiến giao: ").append(selectedShipment.getEstimatedDeliveryAt().format(dateFormatter)).append("\n");
+        }
+        if (selectedShipment.getNotes() != null && !selectedShipment.getNotes().isEmpty()) {
+            details.append("Ghi chú: ").append(selectedShipment.getNotes()).append("\n");
+        }
+        
+        showInfo("Chi tiết vận đơn", details.toString());
+    }
+    
+    private void loadStatistics() {
+        if (lblShipmentCount != null) {
+            lblShipmentCount.setText(String.valueOf(shipmentList.size()));
+        }
+        
+        if (lblPendingCount != null) {
+            long pendingCount = shipmentList.stream()
+                .filter(s -> s.getStatus() == ShipmentStatus.PENDING || s.getStatus() == ShipmentStatus.PREPARING)
+                .count();
+            lblPendingCount.setText(String.valueOf(pendingCount));
+        }
+        
+        if (lblInTransitCount != null) {
+            long inTransitCount = shipmentList.stream()
+                .filter(s -> s.getStatus() == ShipmentStatus.IN_TRANSIT || 
+                           s.getStatus() == ShipmentStatus.OUT_FOR_DELIVERY)
+                .count();
+            lblInTransitCount.setText(String.valueOf(inTransitCount));
+        }
+        
+        if (lblDeliveredCount != null) {
+            long deliveredCount = shipmentList.stream()
+                .filter(s -> s.getStatus() == ShipmentStatus.DELIVERED)
+                .count();
+            lblDeliveredCount.setText(String.valueOf(deliveredCount));
+        }
+        
+        if (lblFailedCount != null) {
+            long failedCount = shipmentList.stream()
+                .filter(s -> s.getStatus() == ShipmentStatus.FAILED || 
+                           s.getStatus() == ShipmentStatus.CANCELLED)
+                .count();
+            lblFailedCount.setText(String.valueOf(failedCount));
+        }
     }
 }

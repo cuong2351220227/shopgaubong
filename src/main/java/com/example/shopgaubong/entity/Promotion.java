@@ -94,6 +94,8 @@ public class Promotion extends AuditEntity {
 
         BigDecimal discount;
         if (type == PromotionType.PERCENTAGE) {
+            // Debug log
+            System.out.println("DEBUG Promotion: code=" + code + ", type=" + type + ", value=" + value + ", orderAmount=" + orderAmount);
             discount = orderAmount.multiply(value.divide(BigDecimal.valueOf(100)))
                     .setScale(2, BigDecimal.ROUND_HALF_UP);
             if (maxDiscountAmount != null && discount.compareTo(maxDiscountAmount) > 0) {
@@ -103,6 +105,7 @@ public class Promotion extends AuditEntity {
             discount = value;
         }
 
+        System.out.println("DEBUG Calculated discount=" + discount);
         return discount;
     }
 

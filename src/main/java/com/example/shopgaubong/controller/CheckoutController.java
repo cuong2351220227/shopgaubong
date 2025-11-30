@@ -30,6 +30,9 @@ public class CheckoutController {
     @FXML private TableColumn<OrderItem, String> colUnitPrice;
     @FXML private TableColumn<OrderItem, String> colLineTotal;
 
+    @FXML private Label lblCartItemCount;
+    @FXML private Label lblCartSummary;
+
     @FXML private TextField txtReceiverName;
     @FXML private TextField txtPhone;
     @FXML private TextField txtAddress;
@@ -43,10 +46,16 @@ public class CheckoutController {
     @FXML private Label lblDiscount;
     @FXML private Label lblShippingFee;
     @FXML private Label lblGrandTotal;
+    
+    @FXML private TextField txtPromotionCode;
+    @FXML private Button btnApplyPromotion;
+    @FXML private Button btnRemovePromotion;
+    @FXML private Label lblPromotionInfo;
 
     private final CartService cartService = new CartService();
     private final AuthService authService = new AuthService();
     private final WarehouseService warehouseService = new WarehouseService();
+    private final com.example.shopgaubong.service.PromotionService promotionService = new com.example.shopgaubong.service.PromotionService();
 
     private Order cart;
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
@@ -97,6 +106,22 @@ public class CheckoutController {
         if (cart != null) {
             orderItems.clear();
             orderItems.addAll(cart.getOrderItems());
+            updateCartInfo();
+        }
+    }
+
+    private void updateCartInfo() {
+        if (cart != null && !cart.getOrderItems().isEmpty()) {
+            int totalItems = cart.getOrderItems().stream()
+                .mapToInt(OrderItem::getQuantity)
+                .sum();
+            int uniqueItems = cart.getOrderItems().size();
+            
+            lblCartItemCount.setText(uniqueItems + " sản phẩm (" + totalItems + " món)");
+            lblCartSummary.setText(String.format("Tổng %d loại sản phẩm, %d món", uniqueItems, totalItems));
+        } else {
+            lblCartItemCount.setText("0 sản phẩm");
+            lblCartSummary.setText("Giỏ hàng trống");
         }
     }
 
@@ -107,6 +132,80 @@ public class CheckoutController {
             lblDiscount.setText(formatCurrency(cart.getDiscount()));
             lblShippingFee.setText(formatCurrency(cart.getShippingFee()));
             lblGrandTotal.setText(formatCurrency(cart.getGrandTotal()));
+        }
+    }
+
+    @FXML
+    private void handleApplyPromotion() {
+        String code = txtPromotionCode.getText().trim().toUpperCase();
+        if (code.isEmpty()) {
+            showWarning("Vui lòng nhập mã khuyến mãi");
+            return;
+        }
+        
+        try {
+            Long customerId = authService.getCurrentAccount().getId();
+            cartService.applyPromotionCode(customerId, code);
+            
+            // Reload cart to get updated discount
+            cart = cartService.getCurrentCart(customerId);
+            updateSummary();
+            
+            // Show promotion info
+            if (cart.getPromotion() != null) {
+                var promo = cart.getPromotion();
+                String info = String.format("✓ Đã áp dụng: %s - %s", 
+                    promo.getCode(), promo.getName());
+                lblPromotionInfo.setText(info);
+                lblPromotionInfo.setVisible(true);
+                btnRemovePromotion.setVisible(true);
+                txtPromotionCode.setDisable(true);
+                btnApplyPromotion.setDisable(true);
+                
+                showSuccess("Áp dụng mã khuyến mãi thành công!");
+            }
+        } catch (Exception e) {
+            logger.error("Error applying promotion: {}", e.getMessage(), e);
+            showError("Không thể áp dụng mã khuyến mãi: " + e.getMessage());
+        }
+    }
+    
+    @FXML
+    private void handleRemovePromotion() {
+        try {
+            Long customerId = authService.getCurrentAccount().getId();
+            cartService.removePromotionCode(customerId);
+            
+            // Reload cart to get updated values
+            cart = cartService.getCurrentCart(customerId);
+            updateSummary();
+            
+            // Update UI
+            lblPromotionInfo.setVisible(false);
+            btnRemovePromotion.setVisible(false);
+            txtPromotionCode.setDisable(false);
+            txtPromotionCode.clear();
+            btnApplyPromotion.setDisable(false);
+            
+            showSuccess("Đã hủy mã khuyến mãi");
+        } catch (Exception e) {
+            logger.error("Error removing promotion: {}", e.getMessage(), e);
+            showError("Không thể hủy mã khuyến mãi: " + e.getMessage());
+        }
+    }
+    
+    @FXML
+    private void handleViewPromotions() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/shopgaubong/promotion-list-view.fxml"));
+            VBox promotionsView = loader.load();
+            
+            VBox parentView = (VBox) orderItemsTable.getParent().getParent();
+            parentView.getChildren().clear();
+            parentView.getChildren().add(promotionsView);
+        } catch (Exception e) {
+            logger.error("Error viewing promotions: {}", e.getMessage(), e);
+            showError("Không thể xem danh sách khuyến mãi: " + e.getMessage());
         }
     }
 
@@ -237,9 +336,9 @@ public class CheckoutController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/shopgaubong/payment-view.fxml"));
             VBox paymentView = loader.load();
             
-            // You might want to pass the order to payment controller
-            // PaymentController paymentController = loader.getController();
-            // paymentController.setOrder(order);
+            // Pass the order to payment controller
+            PaymentController paymentController = loader.getController();
+            paymentController.setOrder(order);
             
             VBox parentView = (VBox) orderItemsTable.getParent().getParent().getParent();
             parentView.getChildren().clear();
