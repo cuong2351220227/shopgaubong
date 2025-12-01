@@ -76,7 +76,7 @@ public class AdminMainController {
     @FXML
     private void handleManagePayments() {
         // Load refund management view
-        loadView("/com/example/shopgaubong/refund-management-view.fxml", "Quản lý hoàn tiền");
+        loadView("/com/example/shopgaubong/payment-management-view.fxml", "Quản lý hoàn tiền");
     }
 
     @FXML
