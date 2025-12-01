@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.PaymentManagementController"
+      spacing="10" prefHeight="700" prefWidth="950">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="QUẢN LÝ THANH TOÁN">
+            <font>
+                <Font name="System Bold" size="20"/>
+            </font>
+        </Label>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Statistics Cards -->
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <VBox styleClass="stat-card" spacing="5" style="-fx-background-color: #e3f2fd; -fx-padding: 15; -fx-background-radius: 5;">
+            <Label text="Tổng thanh toán" style="-fx-font-size: 12; -fx-text-fill: #666;"/>
+            <Label fx:id="lblTotalPayments" text="0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #1976D2;"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="5" style="-fx-background-color: #e8f5e9; -fx-padding: 15; -fx-background-radius: 5;">
+            <Label text="Đã xác nhận" style="-fx-font-size: 12; -fx-text-fill: #666;"/>
+            <Label fx:id="lblConfirmedPayments" text="0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #388E3C;"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="5" style="-fx-background-color: #fff3e0; -fx-padding: 15; -fx-background-radius: 5;">
+            <Label text="Chờ xác nhận" style="-fx-font-size: 12; -fx-text-fill: #666;"/>
+            <Label fx:id="lblPendingPayments" text="0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #F57C00;"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="5" style="-fx-background-color: #ffebee; -fx-padding: 15; -fx-background-radius: 5;">
+            <Label text="Thất bại" style="-fx-font-size: 12; -fx-text-fill: #666;"/>
+            <Label fx:id="lblFailedPayments" text="0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #D32F2F;"/>
+        </VBox>
+    </HBox>
+
+    <!-- Filters -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Tìm kiếm:"/>
+        <TextField fx:id="txtSearch" promptText="Nhập mã đơn, khách hàng..." prefWidth="250"/>
+        
+        <Label text="Trạng thái thanh toán:"/>
+        <ComboBox fx:id="cbPaymentStatus" prefWidth="150"/>
+        
+        <Label text="Phương thức:"/>
+        <ComboBox fx:id="cbPaymentMethod" prefWidth="150"/>
+        
+        <Button text="Tìm kiếm" onAction="#handleSearch" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+        <Button text="Làm mới" onAction="#handleRefresh" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    </HBox>
+
+    <!-- Payment Table -->
+    <TableView fx:id="paymentTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colOrderNumber" text="Mã đơn hàng" prefWidth="120"/>
+            <TableColumn fx:id="colCustomer" text="Khách hàng" prefWidth="150"/>
+            <TableColumn fx:id="colPaymentMethod" text="Phương thức" prefWidth="130"/>
+            <TableColumn fx:id="colAmount" text="Số tiền" prefWidth="110"/>
+            <TableColumn fx:id="colPaymentStatus" text="TT Thanh toán" prefWidth="120"/>
+            <TableColumn fx:id="colOrderStatus" text="TT Đơn hàng" prefWidth="120"/>
+            <TableColumn fx:id="colPaymentDate" text="Ngày thanh toán" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <!-- Action Buttons -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="Xem chi tiết" onAction="#handleViewDetails" prefWidth="120" 
+                style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+        <Button text="Xác nhận thanh toán" onAction="#handleConfirmPayment" prefWidth="150"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Button text="Cập nhật trạng thái đơn" onAction="#handleUpdateOrderStatus" prefWidth="160"
+                style="-fx-background-color: #FF9800; -fx-text-fill: white;"/>
+        <Button text="Hoàn tiền" onAction="#handleRefund" prefWidth="120"
+                style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+    </HBox>
+
+    <!-- Details Panel -->
+    <TitledPane text="Chi tiết thanh toán" collapsible="true" expanded="false">
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="150" prefWidth="150"/>
+                    <ColumnConstraints minWidth="250" prefWidth="250"/>
+                    <ColumnConstraints minWidth="150" prefWidth="150"/>
+                    <ColumnConstraints minWidth="250" prefWidth="250"/>
+                </columnConstraints>
+
+                <Label text="Mã đơn hàng:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblDetailOrderNumber" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                
+                <Label text="Khách hàng:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblDetailCustomer" text="-" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                <Label text="Phương thức TT:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblDetailPaymentMethod" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                
+                <Label text="Số tiền:" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblDetailAmount" text="-" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                <Label text="Trạng thái TT:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblDetailPaymentStatus" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                
+                <Label text="Trạng thái ĐH:" GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblDetailOrderStatus" text="-" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+
+                <Label text="Ngày thanh toán:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblDetailPaymentDate" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                
+                <Label text="Mã giao dịch:" GridPane.columnIndex="2" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblDetailTransactionId" text="-" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+            </GridPane>
+
+            <Separator/>
+
+            <Label text="Ghi chú:" style="-fx-font-weight: bold;"/>
+            <TextArea fx:id="txtDetailNotes" prefHeight="80" editable="false" wrapText="true"/>
+        </VBox>
+    </TitledPane>
+</VBox>

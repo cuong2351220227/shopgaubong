@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.PromotionListController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="🎁 KHUYẾN MÃI ĐANG DIỄN RA" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Filter -->
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 12;">
+        <Label text="Lọc theo:" style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+        <ComboBox fx:id="cbFilterType" promptText="Tất cả loại" prefWidth="150" style="-fx-font-size: 13px;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="lblPromotionCount" text="Có 0 khuyến mãi" style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
+    </HBox>
+
+    <!-- Promotions Grid -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
+        <VBox fx:id="promotionsContainer" spacing="15" style="-fx-background-color: transparent;">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="5"/>
+            </padding>
+            <!-- Promotion cards will be added dynamically -->
+        </VBox>
+    </ScrollPane>
+
+    <!-- Back Button -->
+    <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10;">
+        <Button text="← Quay lại" onAction="#handleBack"
+                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 30;"/>
+    </HBox>
+
+</VBox>

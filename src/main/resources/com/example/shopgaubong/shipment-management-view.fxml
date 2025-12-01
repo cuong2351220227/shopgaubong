@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shopgaubong.controller.ShipmentManagementController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="🚚 QUẢN LÝ VẬN CHUYỂN" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="➕ Tạo vận đơn mới" onAction="#handleCreateShipment"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+        <Button text="🔄 Làm mới" onAction="#handleRefresh"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8 16;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Search and Filter -->
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Label text="Tìm kiếm:" style="-fx-font-size: 14px;"/>
+        <TextField fx:id="txtSearch" promptText="Mã vận đơn, đơn hàng..." prefWidth="300"
+                   style="-fx-font-size: 13px;"/>
+        <Button text="🔍 Tìm" onAction="#handleSearch"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8 16;"/>
+        
+        <Region HBox.hgrow="ALWAYS"/>
+        
+        <Label text="Trạng thái:" style="-fx-font-size: 14px;"/>
+        <ComboBox fx:id="cbStatusFilter" prefWidth="200" style="-fx-font-size: 13px;"/>
+        
+        <Label text="Nhà vận chuyển:" style="-fx-font-size: 14px;"/>
+        <ComboBox fx:id="cbCarrierFilter" prefWidth="200" style="-fx-font-size: 13px;"/>
+    </HBox>
+
+    <!-- Shipment Table -->
+    <TableView fx:id="shipmentTable" VBox.vgrow="ALWAYS" style="-fx-background-color: white;">
+        <columns>
+            <TableColumn fx:id="colTrackingNumber" text="Mã vận đơn" prefWidth="150"/>
+            <TableColumn fx:id="colOrderNumber" text="Đơn hàng" prefWidth="150"/>
+            <TableColumn fx:id="colCarrier" text="Nhà vận chuyển" prefWidth="150"/>
+            <TableColumn fx:id="colReceiver" text="Người nhận" prefWidth="180"/>
+            <TableColumn fx:id="colPhone" text="SĐT" prefWidth="120"/>
+            <TableColumn fx:id="colStatus" text="Trạng thái" prefWidth="150"/>
+            <TableColumn fx:id="colEstimatedDelivery" text="Dự kiến giao" prefWidth="150"/>
+            <TableColumn fx:id="colCreatedAt" text="Ngày tạo" prefWidth="150"/>
+        </columns>
+        <placeholder>
+            <Label text="Không có vận đơn nào" style="-fx-text-fill: #999; -fx-font-size: 14px;"/>
+        </placeholder>
+    </TableView>
+
+    <!-- Action Buttons -->
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button text="📝 Cập nhật trạng thái" onAction="#handleUpdateStatus" fx:id="btnUpdateStatus"
+                style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" disable="true"/>
+        <Button text="📋 Xem chi tiết" onAction="#handleViewDetails" fx:id="btnViewDetails"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" disable="true"/>
+        <Button text="🔍 Theo dõi vận đơn" onAction="#handleTrackShipment" fx:id="btnTrackShipment"
+                style="-fx-background-color: #9C27B0; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" disable="true"/>
+        <Button text="❌ Hủy vận đơn" onAction="#handleCancelShipment" fx:id="btnCancelShipment"
+                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" disable="true"/>
+        
+        <Region HBox.hgrow="ALWAYS"/>
+        
+        <Label fx:id="lblShipmentCount" text="Tổng: 0 vận đơn" 
+               style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Statistics -->
+    <HBox spacing="20" alignment="CENTER">
+        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+            <Label text="Chờ xử lý" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+            <Label fx:id="lblPendingCount" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #FF9800;"/>
+        </VBox>
+        
+        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+            <Label text="Đang vận chuyển" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+            <Label fx:id="lblInTransitCount" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+        </VBox>
+        
+        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+            <Label text="Đã giao" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+            <Label fx:id="lblDeliveredCount" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+        </VBox>
+        
+        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+            <Label text="Thất bại" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+            <Label fx:id="lblFailedCount" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f44336;"/>
+        </VBox>
+    </HBox>
+
+</VBox>
