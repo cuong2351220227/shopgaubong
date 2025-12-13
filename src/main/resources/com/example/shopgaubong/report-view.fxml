@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.shopgaubong.controller.ReportController"
+            prefHeight="700" prefWidth="1000"
+            stylesheets="@report-styles.css">
+
+    <top>
+        <VBox>
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" spacing="20" styleClass="header">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+                <Label text="BÁO CÁO &amp; THỐNG KÊ">
+                    <font>
+                        <Font name="System Bold" size="20"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🔄 Làm mới" onAction="#handleRefresh" styleClass="btn-refresh"/>
+            </HBox>
+            <Separator/>
+
+            <!-- Filter Bar -->
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="filter-bar">
+                <padding>
+                    <Insets top="10" right="20" bottom="10" left="20"/>
+                </padding>
+                <Label text="Thời gian:">
+                    <font>
+                        <Font name="System Bold" size="12"/>
+                    </font>
+                </Label>
+                <DatePicker fx:id="dpStartDate" promptText="Từ ngày" prefWidth="140"/>
+                <Label text="đến"/>
+                <DatePicker fx:id="dpEndDate" promptText="Đến ngày" prefWidth="140"/>
+                <Button text="Lọc" onAction="#handleFilter" styleClass="btn-filter"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <ComboBox fx:id="cbTimePeriod" promptText="Chọn kỳ" prefWidth="150"/>
+            </HBox>
+            <Separator/>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <VBox spacing="20">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+
+                <!-- Thống kê tổng quan -->
+                <VBox spacing="10">
+                    <Label text="TỔNG QUAN">
+                        <font>
+                            <Font name="System Bold" size="14"/>
+                        </font>
+                    </Label>
+                    <GridPane hgap="15" vgap="15">
+                        <!-- Row 1 -->
+                        <VBox spacing="5" styleClass="stat-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <padding>
+                                <Insets top="15" right="15" bottom="15" left="15"/>
+                            </padding>
+                            <Label text="Doanh thu hôm nay" styleClass="stat-label"/>
+                            <Label fx:id="lblTodayRevenue" text="0 ₫" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="24"/>
+                                </font>
+                            </Label>
+                        </VBox>
+
+                        <VBox spacing="5" styleClass="stat-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <padding>
+                                <Insets top="15" right="15" bottom="15" left="15"/>
+                            </padding>
+                            <Label text="Doanh thu tuần này" styleClass="stat-label"/>
+                            <Label fx:id="lblWeekRevenue" text="0 ₫" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="24"/>
+                                </font>
+                            </Label>
+                        </VBox>
+
+                        <VBox spacing="5" styleClass="stat-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <padding>
+                                <Insets top="15" right="15" bottom="15" left="15"/>
+                            </padding>
+                            <Label text="Doanh thu tháng này" styleClass="stat-label"/>
+                            <Label fx:id="lblMonthRevenue" text="0 ₫" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="24"/>
+                                </font>
+                            </Label>
+                        </VBox>
+
+                        <!-- Row 2 -->
+                        <VBox spacing="5" styleClass="stat-card" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <padding>
+                                <Insets top="15" right="15" bottom="15" left="15"/>
+                            </padding>
+                            <Label text="Đơn hàng hôm nay" styleClass="stat-label"/>
+                            <Label fx:id="lblTodayOrders" text="0" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="24"/>
+                                </font>
+                            </Label>
+                        </VBox>
+
+                        <VBox spacing="5" styleClass="stat-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <padding>
+                                <Insets top="15" right="15" bottom="15" left="15"/>
+                            </padding>
+                            <Label text="Giá trị TB đơn hàng" styleClass="stat-label"/>
+                            <Label fx:id="lblAverageOrderValue" text="0 ₫" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="24"/>
+                                </font>
+                            </Label>
+                        </VBox>
+
+                        <VBox spacing="5" styleClass="stat-card" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <padding>
+                                <Insets top="15" right="15" bottom="15" left="15"/>
+                            </padding>
+                            <Label text="Tỷ lệ hoàn thành" styleClass="stat-label"/>
+                            <Label fx:id="lblCompletionRate" text="0%" styleClass="stat-value">
+                                <font>
+                                    <Font name="System Bold" size="24"/>
+                                </font>
+                            </Label>
+                        </VBox>
+
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="33.33" hgrow="ALWAYS"/>
+                            <ColumnConstraints percentWidth="33.33" hgrow="ALWAYS"/>
+                            <ColumnConstraints percentWidth="33.33" hgrow="ALWAYS"/>
+                        </columnConstraints>
+                    </GridPane>
+                </VBox>
+
+                <!-- Charts Section -->
+                <HBox spacing="20">
+                    <!-- Biểu đồ doanh thu -->
+                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                        <Label text="DOANH THU THEO THỜI GIAN">
+                            <font>
+                                <Font name="System Bold" size="14"/>
+                            </font>
+                        </Label>
+                        <LineChart fx:id="revenueChart" title="Doanh thu" legendVisible="false" 
+                                   prefHeight="300" minHeight="300">
+                            <xAxis>
+                                <CategoryAxis side="BOTTOM" label="Ngày"/>
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis side="LEFT" label="Doanh thu (VND)"/>
+                            </yAxis>
+                        </LineChart>
+                    </VBox>
+
+                    <!-- Biểu đồ trạng thái đơn hàng -->
+                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                        <Label text="TRẠNG THÁI ĐƠN HÀNG">
+                            <font>
+                                <Font name="System Bold" size="14"/>
+                            </font>
+                        </Label>
+                        <PieChart fx:id="orderStatusChart" title="Phân bố đơn hàng" 
+                                  legendSide="BOTTOM" prefHeight="300" minHeight="300"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Top sản phẩm bán chạy -->
+                <VBox spacing="10">
+                    <Label text="TOP 10 SẢN PHẨM BÁN CHẠY">
+                        <font>
+                            <Font name="System Bold" size="14"/>
+                        </font>
+                    </Label>
+                    <BarChart fx:id="topProductsChart" title="Số lượng đã bán" 
+                              legendVisible="false" prefHeight="350">
+                        <xAxis>
+                            <CategoryAxis side="BOTTOM" label="Sản phẩm"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis side="LEFT" label="Số lượng"/>
+                        </yAxis>
+                    </BarChart>
+                </VBox>
+
+                <!-- Cảnh báo tồn kho thấp -->
+                <VBox spacing="10">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="⚠️ CẢNH BÁO TỒN KHO THẤP">
+                            <font>
+                                <Font name="System Bold" size="14"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="lblLowStockCount" text="(0 sản phẩm)" 
+                               style="-fx-text-fill: #ff5252;">
+                            <font>
+                                <Font name="System Bold" size="12"/>
+                            </font>
+                        </Label>
+                    </HBox>
+                    <TableView fx:id="lowStockTable" prefHeight="200">
+                        <columns>
+                            <TableColumn fx:id="colLowStockSKU" text="SKU" prefWidth="100"/>
+                            <TableColumn fx:id="colLowStockName" text="Tên sản phẩm" prefWidth="250"/>
+                            <TableColumn fx:id="colLowStockWarehouse" text="Kho" prefWidth="150"/>
+                            <TableColumn fx:id="colLowStockQuantity" text="Tồn kho" prefWidth="100"/>
+                            <TableColumn fx:id="colLowStockReorderPoint" text="Điểm đặt lại" prefWidth="120"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="✅ Không có sản phẩm nào tồn kho thấp"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
