@@ -6999,3 +6999,845 @@ java.lang.ClassCastException: class javafx.scene.layout.HBox cannot be cast to c
 2025-12-13 10:45:45.296 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 0 sản phẩm
 2025-12-13 10:45:49.471 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
 2025-12-13 10:45:49.499 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 13:49:54.925 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 13:49:55.107 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 13:49:55.147 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 13:49:55.169 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 13:49:55.450 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 13:49:55.455 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 13:49:55.455 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 13:49:55.456 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 13:49:55.456 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 13:49:55.458 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 13:49:55.540 [main] WARN  o.h.e.j.e.i.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+java.lang.IllegalStateException: Cannot get a connection as the driver manager is not properly initialized
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:259)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:52)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:136)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:247)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:132)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:43)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:61)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:499)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.<init>(DriverManagerConnectionProviderImpl.java:372)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections$Builder.build(DriverManagerConnectionProviderImpl.java:550)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.buildPool(DriverManagerConnectionProviderImpl.java:102)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.configure(DriverManagerConnectionProviderImpl.java:82)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:136)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:247)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.buildJdbcConnectionAccess(JdbcEnvironmentInitiator.java:395)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:262)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:55)
+	at jakarta.persistence@3.1.0/jakarta.persistence.Persistence.createEntityManagerFactory(Persistence.java:80)
+	at jakarta.persistence@3.1.0/jakarta.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
+	at com.example.shopgaubong/com.example.shopgaubong.util.HibernateUtil.<clinit>(HibernateUtil.java:16)
+	at com.example.shopgaubong/com.example.shopgaubong.dao.BaseDAO.getEntityManager(BaseDAO.java:23)
+	at com.example.shopgaubong/com.example.shopgaubong.dao.BaseDAO.findAll(BaseDAO.java:43)
+	at com.example.shopgaubong/com.example.shopgaubong.service.AuthService.getAllAccounts(AuthService.java:154)
+	at com.example.shopgaubong/com.example.shopgaubong.util.DatabaseInitializer.createDefaultAccounts(DatabaseInitializer.java:42)
+	at com.example.shopgaubong/com.example.shopgaubong.util.DatabaseInitializer.initializeSampleData(DatabaseInitializer.java:25)
+	at com.example.shopgaubong/com.example.shopgaubong.Launcher.main(Launcher.java:9)
+2025-12-13 13:49:55.556 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 13:49:55.563 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: 08S01
+2025-12-13 13:49:55.563 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2025-12-13 13:49:55.564 [main] ERROR c.e.shopgaubong.util.HibernateUtil - Lỗi khởi tạo EntityManagerFactory
+org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Error calling Driver#connect [Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.] [null]
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:276)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:55)
+	at jakarta.persistence@3.1.0/jakarta.persistence.Persistence.createEntityManagerFactory(Persistence.java:80)
+	at jakarta.persistence@3.1.0/jakarta.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
+	at com.example.shopgaubong/com.example.shopgaubong.util.HibernateUtil.<clinit>(HibernateUtil.java:16)
+	at com.example.shopgaubong/com.example.shopgaubong.dao.BaseDAO.getEntityManager(BaseDAO.java:23)
+	at com.example.shopgaubong/com.example.shopgaubong.dao.BaseDAO.findAll(BaseDAO.java:43)
+	at com.example.shopgaubong/com.example.shopgaubong.service.AuthService.getAllAccounts(AuthService.java:154)
+	at com.example.shopgaubong/com.example.shopgaubong.util.DatabaseInitializer.createDefaultAccounts(DatabaseInitializer.java:42)
+	at com.example.shopgaubong/com.example.shopgaubong.util.DatabaseInitializer.initializeSampleData(DatabaseInitializer.java:25)
+	at com.example.shopgaubong/com.example.shopgaubong.Launcher.main(Launcher.java:9)
+Caused by: org.hibernate.exception.JDBCConnectionException: Error calling Driver#connect [Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.] [null]
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:100)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:134)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:43)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:61)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:499)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.<init>(DriverManagerConnectionProviderImpl.java:372)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections$Builder.build(DriverManagerConnectionProviderImpl.java:550)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.buildPool(DriverManagerConnectionProviderImpl.java:102)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.configure(DriverManagerConnectionProviderImpl.java:82)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:136)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:247)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.buildJdbcConnectionAccess(JdbcEnvironmentInitiator.java:395)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:262)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	... 18 common frames omitted
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:815)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:438)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:189)
+	at org.hibernate.orm.core@6.4.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:40)
+	... 33 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:104)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:149)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:165)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:88)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:120)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:935)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:805)
+	... 37 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:589)
+	at java.base/sun.nio.ch.Net.connect(Net.java:578)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:583)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:153)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:62)
+	... 40 common frames omitted
+2025-12-13 13:50:17.182 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 13:50:17.309 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 13:50:17.338 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 13:50:17.360 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 13:50:17.587 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 13:50:17.593 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 13:50:17.593 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 13:50:17.593 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 13:50:17.593 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 13:50:17.595 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 13:50:17.784 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 13:50:18.225 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 13:50:19.141 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@64381526] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 13:50:19.362 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 13:50:19.643 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 13:50:19.731 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 13:50:19.731 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 13:50:27.946 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: customer
+2025-12-13 13:50:30.593 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 0 sản phẩm
+2025-12-13 13:50:31.865 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 7 đơn
+2025-12-13 13:50:39.848 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 7 đơn
+2025-12-13 13:50:51.705 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 0 sản phẩm
+2025-12-13 13:50:53.081 [JavaFX Application Thread] ERROR c.e.s.controller.CartController - Lỗi khi quay lại catalog: class javafx.scene.layout.HBox cannot be cast to class javafx.scene.layout.VBox (javafx.scene.layout.HBox and javafx.scene.layout.VBox are in module javafx.graphics@21.0.6 of loader 'app')
+java.lang.ClassCastException: class javafx.scene.layout.HBox cannot be cast to class javafx.scene.layout.VBox (javafx.scene.layout.HBox and javafx.scene.layout.VBox are in module javafx.graphics@21.0.6 of loader 'app')
+	at com.example.shopgaubong/com.example.shopgaubong.controller.CartController.handleContinueShopping(CartController.java:235)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at javafx.base@21.0.6/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at javafx.fxml@21.0.6/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml@21.0.6/javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1855)
+	at javafx.fxml@21.0.6/javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1726)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.base@21.0.6/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics@21.0.6/javafx.scene.Node.fireEvent(Node.java:8875)
+	at javafx.controls@21.0.6/javafx.scene.control.Button.fire(Button.java:203)
+	at javafx.controls@21.0.6/com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:207)
+	at javafx.controls@21.0.6/com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.base@21.0.6/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics@21.0.6/javafx.scene.Scene$MouseHandler.process(Scene.java:3984)
+	at javafx.graphics@21.0.6/javafx.scene.Scene.processMouseEvent(Scene.java:1890)
+	at javafx.graphics@21.0.6/javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2708)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-13 13:51:06.021 [JavaFX Application Thread] DEBUG c.e.shopgaubong.service.StockService - Check availability: Item ID 3, On Hand: 100, Reserved: 0, Available: 100, Required: 1, Result: true
+2025-12-13 13:51:06.064 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.OrderService - Thêm sản phẩm vào đơn hàng ORD-20251201050724-525: gau bong moc khoa mau vang x1
+2025-12-13 13:51:08.225 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 1 sản phẩm
+2025-12-13 13:51:10.324 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.CartService - Xóa khỏi giỏ hàng: OrderItem ID 15 cho khách hàng ID 3
+2025-12-13 13:51:10.330 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 0 sản phẩm
+2025-12-13 13:51:12.975 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 0 sản phẩm
+2025-12-13 13:51:14.896 [JavaFX Application Thread] INFO  c.e.s.c.CustomerProfileController - Loaded account information for user: customer
+2025-12-13 13:51:14.897 [JavaFX Application Thread] INFO  c.e.s.c.CustomerProfileController - Loaded profile data for user: customer
+2025-12-13 13:51:22.067 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: customer
+2025-12-13 13:51:45.428 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 13:52:16.409 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: admin
+2025-12-13 13:52:18.468 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 13:52:18.477 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 17:01:40.100 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 17:01:40.334 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 17:01:40.362 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 17:01:40.388 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 17:01:40.724 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 17:01:40.734 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 17:01:40.735 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:01:40.736 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 17:01:40.736 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 17:01:40.740 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 17:01:40.978 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 17:01:41.395 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 17:01:42.198 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@399fd710] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 17:01:42.351 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 17:01:42.607 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 17:01:42.712 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 17:01:42.712 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 17:01:49.006 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 17:01:52.519 [JavaFX Application Thread] INFO  c.e.s.c.UserManagementController - Loaded 3 accounts
+2025-12-13 17:02:26.179 [JavaFX Application Thread] INFO  c.e.shopgaubong.dao.CategoryDAO - Đã lưu entity: com.example.shopgaubong.entity.Category@1e4160a9
+2025-12-13 17:02:26.179 [JavaFX Application Thread] INFO  c.e.s.service.CategoryService - Tạo danh mục mới: Gấu bông loại lớn
+2025-12-13 17:03:15.357 [JavaFX Application Thread] INFO  com.example.shopgaubong.dao.ItemDAO - Đã lưu entity: com.example.shopgaubong.entity.Item@610becf1
+2025-12-13 17:03:15.357 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.ItemService - Tạo sản phẩm mới: GB123 - Gấu bông loại lớn
+2025-12-13 17:03:24.954 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:03:29.126 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:03:29.757 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 4 stock items
+2025-12-13 17:03:29.757 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:03:44.878 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 4 stock items
+2025-12-13 17:03:44.878 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:03:45.555 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:03:46.750 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 4 stock items
+2025-12-13 17:03:46.751 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:04:13.895 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.StockService - Tạo tồn kho mới: kho me linh - Gấu bông loại lớn (số lượng: 10)
+2025-12-13 17:04:15.191 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 5 stock items
+2025-12-13 17:04:23.403 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: admin
+2025-12-13 17:04:31.898 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: customer
+2025-12-13 17:04:40.675 [JavaFX Application Thread] DEBUG c.e.shopgaubong.service.StockService - Check availability: Item ID 4, On Hand: 10, Reserved: 0, Available: 10, Required: 1, Result: true
+2025-12-13 17:04:40.695 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.OrderService - Thêm sản phẩm vào đơn hàng ORD-20251201050724-525: Gấu bông loại lớn x1
+2025-12-13 17:04:43.190 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 1 sản phẩm
+2025-12-13 17:05:02.363 [JavaFX Application Thread] ERROR c.e.s.controller.CheckoutController - Error viewing promotions: class javafx.scene.layout.HBox cannot be cast to class javafx.scene.layout.VBox (javafx.scene.layout.HBox and javafx.scene.layout.VBox are in module javafx.graphics@21.0.6 of loader 'app')
+java.lang.ClassCastException: class javafx.scene.layout.HBox cannot be cast to class javafx.scene.layout.VBox (javafx.scene.layout.HBox and javafx.scene.layout.VBox are in module javafx.graphics@21.0.6 of loader 'app')
+	at com.example.shopgaubong/com.example.shopgaubong.controller.CheckoutController.handleViewPromotions(CheckoutController.java:203)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at javafx.base@21.0.6/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at javafx.fxml@21.0.6/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml@21.0.6/javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1855)
+	at javafx.fxml@21.0.6/javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1726)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.base@21.0.6/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics@21.0.6/javafx.scene.Node.fireEvent(Node.java:8875)
+	at javafx.controls@21.0.6/javafx.scene.control.Button.fire(Button.java:203)
+	at javafx.controls@21.0.6/com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:207)
+	at javafx.controls@21.0.6/com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.base@21.0.6/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics@21.0.6/javafx.scene.Scene$MouseHandler.process(Scene.java:3984)
+	at javafx.graphics@21.0.6/javafx.scene.Scene.processMouseEvent(Scene.java:1890)
+	at javafx.graphics@21.0.6/javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2708)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-13 17:05:10.401 [JavaFX Application Thread] ERROR c.e.s.controller.CheckoutController - Error applying promotion: Mã khuyến mãi không tồn tại
+java.lang.IllegalArgumentException: Mã khuyến mãi không tồn tại
+	at com.example.shopgaubong/com.example.shopgaubong.service.PromotionService.applyPromotion(PromotionService.java:147)
+	at com.example.shopgaubong/com.example.shopgaubong.service.OrderService.applyPromotion(OrderService.java:246)
+	at com.example.shopgaubong/com.example.shopgaubong.service.CartService.applyPromotionCode(CartService.java:79)
+	at com.example.shopgaubong/com.example.shopgaubong.controller.CheckoutController.handleApplyPromotion(CheckoutController.java:148)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at javafx.base@21.0.6/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at javafx.fxml@21.0.6/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml@21.0.6/javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1855)
+	at javafx.fxml@21.0.6/javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1726)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.base@21.0.6/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics@21.0.6/javafx.scene.Node.fireEvent(Node.java:8875)
+	at javafx.controls@21.0.6/javafx.scene.control.Button.fire(Button.java:203)
+	at javafx.controls@21.0.6/com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:207)
+	at javafx.controls@21.0.6/com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.base@21.0.6/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics@21.0.6/javafx.scene.Scene$MouseHandler.process(Scene.java:3984)
+	at javafx.graphics@21.0.6/javafx.scene.Scene.processMouseEvent(Scene.java:1890)
+	at javafx.graphics@21.0.6/javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2708)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-13 17:05:14.108 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.OrderService - DEBUG: Subtotal=5000000.00, ItemDiscount=0.00, PromotionDiscount=8.00, OldDiscount=0.00
+2025-12-13 17:05:14.108 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.OrderService - DEBUG: After apply - NewDiscount=8.00, GrandTotal=5499991.20
+2025-12-13 17:05:14.117 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.CartService - Áp dụng mã khuyến mãi SUM123 cho khách hàng ID 3
+2025-12-13 17:05:18.433 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.StockService - Giữ chỗ tồn kho cho Item ID 4: tổng giữ = 1
+2025-12-13 17:05:18.450 [JavaFX Application Thread] INFO  c.e.shopgaubong.dao.PromotionDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Promotion@7656a55a
+2025-12-13 17:05:18.450 [JavaFX Application Thread] INFO  c.e.s.service.PromotionService - Tăng số lần sử dụng khuyến mãi: SUM123 (lần 1)
+2025-12-13 17:05:18.456 [JavaFX Application Thread] INFO  c.e.s.controller.CheckoutController - Đặt hàng thành công: ORD-20251201050724-525
+2025-12-13 17:05:19.754 [JavaFX Application Thread] INFO  c.e.s.controller.PaymentController - Displaying 1 items for order ORD-20251201050724-525
+2025-12-13 17:05:19.754 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Calculated fees for order ORD-20251201050724-525: COD=50000, Gateway=0, Total=5579991.20
+2025-12-13 17:05:19.755 [JavaFX Application Thread] INFO  c.e.s.controller.PaymentController - Loaded order ORD-20251201050724-525 for payment
+2025-12-13 17:05:23.327 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Calculated fees for order ORD-20251201050724-525: COD=50000, Gateway=0, Total=5579991.20
+2025-12-13 17:05:23.343 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.PaymentDAO - Đã lưu entity: com.example.shopgaubong.entity.Payment@424771fe
+2025-12-13 17:05:23.343 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Created payment 4 for order ORD-20251201050724-525 with method COD
+2025-12-13 17:05:26.275 [JavaFX Application Thread] INFO  c.e.s.controller.PaymentController - Payment created successfully for order ORD-20251201050724-525
+2025-12-13 17:05:30.774 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 8 đơn
+2025-12-13 17:05:33.862 [JavaFX Application Thread] INFO  c.e.s.c.CustomerProfileController - Loaded account information for user: customer
+2025-12-13 17:05:33.862 [JavaFX Application Thread] INFO  c.e.s.c.CustomerProfileController - Loaded profile data for user: customer
+2025-12-13 17:05:38.167 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 8 đơn
+2025-12-13 17:05:40.965 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: customer
+2025-12-13 17:05:47.176 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 17:05:49.411 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 8 đơn
+2025-12-13 17:05:58.687 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 4 payments
+2025-12-13 17:05:58.687 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-13 17:06:06.002 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.PaymentDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Payment@3802af11
+2025-12-13 17:06:06.018 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Order@6f52e958
+2025-12-13 17:06:06.026 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 4 payments
+2025-12-13 17:06:06.857 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Confirmed payment for order: ORD-20251201050724-525
+2025-12-13 17:06:09.254 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: admin
+2025-12-13 17:06:10.727 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:06:10.738 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 17:13:43.699 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 17:13:43.890 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 17:13:43.943 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 17:13:43.975 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 17:13:44.284 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 17:13:44.292 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 17:13:44.292 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:13:44.293 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 17:13:44.293 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 17:13:44.296 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 17:13:44.501 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 17:13:44.988 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 17:13:45.910 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@64381526] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 17:13:46.112 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 17:13:46.405 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 17:13:46.490 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 17:13:46.490 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 17:13:55.604 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 17:13:57.953 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Revenue chart loaded with 31 data points
+2025-12-13 17:13:57.967 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Order status chart loaded with 4 statuses
+2025-12-13 17:13:57.970 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Top products chart loaded with 0 products
+2025-12-13 17:13:57.975 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Low stock data loaded with 1 items
+2025-12-13 17:13:57.975 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - Dashboard data loaded successfully
+2025-12-13 17:13:57.975 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - ReportController initialized
+2025-12-13 17:14:11.921 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Revenue chart loaded with 1 data points
+2025-12-13 17:14:11.932 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Order status chart loaded with 4 statuses
+2025-12-13 17:14:11.937 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Top products chart loaded with 0 products
+2025-12-13 17:14:13.201 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - Filtered data loaded for period: 2025-12-13 to 2025-12-13
+2025-12-13 17:14:34.897 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Revenue chart loaded with 1 data points
+2025-12-13 17:14:34.911 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Order status chart loaded with 4 statuses
+2025-12-13 17:14:34.914 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Top products chart loaded with 0 products
+2025-12-13 17:14:34.918 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Low stock data loaded with 1 items
+2025-12-13 17:14:34.920 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - Dashboard data loaded successfully
+2025-12-13 17:15:01.695 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Revenue chart loaded with 378 data points
+2025-12-13 17:15:01.703 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Order status chart loaded with 4 statuses
+2025-12-13 17:15:01.705 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Top products chart loaded with 0 products
+2025-12-13 17:15:03.059 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - Filtered data loaded for period: 2024-12-01 to 2025-12-13
+2025-12-13 17:15:15.515 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 8 đơn
+2025-12-13 17:15:17.254 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:15:34.867 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:15:35.859 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 5 stock items
+2025-12-13 17:15:35.860 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:15:47.421 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:15:48.283 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 5 stock items
+2025-12-13 17:15:48.283 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:15:51.365 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: admin
+2025-12-13 17:15:58.367 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: customer
+2025-12-13 17:15:59.655 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 8 đơn
+2025-12-13 17:16:03.269 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 8 đơn
+2025-12-13 17:16:26.802 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã lưu entity: com.example.shopgaubong.entity.Order@206526bd
+2025-12-13 17:16:26.828 [JavaFX Application Thread] DEBUG c.e.shopgaubong.service.StockService - Check availability: Item ID 4, On Hand: 10, Reserved: 1, Available: 9, Required: 1, Result: true
+2025-12-13 17:16:26.852 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.OrderService - Thêm sản phẩm vào đơn hàng ORD-20251213171626-624: Gấu bông loại lớn x1
+2025-12-13 17:16:30.362 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 8 đơn
+2025-12-13 17:16:31.598 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 1 sản phẩm
+2025-12-13 17:16:33.677 [JavaFX Application Thread] DEBUG c.e.shopgaubong.service.StockService - Get available quantity: Item ID 4, On Hand: 10, Reserved: 1, Available: 9
+2025-12-13 17:16:33.687 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.CartService - Cập nhật giỏ hàng: OrderItem ID 17 -> số lượng 2
+2025-12-13 17:16:33.697 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 1 sản phẩm
+2025-12-13 17:16:42.721 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.StockService - Giữ chỗ tồn kho cho Item ID 4: tổng giữ = 2
+2025-12-13 17:16:42.728 [JavaFX Application Thread] INFO  c.e.s.controller.CheckoutController - Đặt hàng thành công: ORD-20251213171626-624
+2025-12-13 17:16:43.640 [JavaFX Application Thread] INFO  c.e.s.controller.PaymentController - Displaying 1 items for order ORD-20251213171626-624
+2025-12-13 17:16:43.640 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Calculated fees for order ORD-20251213171626-624: COD=50000, Gateway=0, Total=11080000.00
+2025-12-13 17:16:43.641 [JavaFX Application Thread] INFO  c.e.s.controller.PaymentController - Loaded order ORD-20251213171626-624 for payment
+2025-12-13 17:16:45.403 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Calculated fees for order ORD-20251213171626-624: COD=50000, Gateway=0, Total=11080000.00
+2025-12-13 17:16:45.413 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.PaymentDAO - Đã lưu entity: com.example.shopgaubong.entity.Payment@4c9398be
+2025-12-13 17:16:45.413 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Created payment 5 for order ORD-20251213171626-624 with method COD
+2025-12-13 17:16:46.072 [JavaFX Application Thread] INFO  c.e.s.controller.PaymentController - Payment created successfully for order ORD-20251213171626-624
+2025-12-13 17:16:52.029 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 9 đơn
+2025-12-13 17:16:57.721 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: customer
+2025-12-13 17:17:04.894 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 17:17:06.573 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 5 payments
+2025-12-13 17:17:06.573 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-13 17:17:28.989 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.PaymentDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Payment@64779712
+2025-12-13 17:17:29.010 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Order@1771f3f4
+2025-12-13 17:17:29.020 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 5 payments
+2025-12-13 17:17:31.174 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Confirmed payment for order: ORD-20251213171626-624
+2025-12-13 17:17:33.804 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Revenue chart loaded with 31 data points
+2025-12-13 17:17:33.811 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Order status chart loaded with 4 statuses
+2025-12-13 17:17:33.813 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Top products chart loaded with 0 products
+2025-12-13 17:17:33.818 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Low stock data loaded with 1 items
+2025-12-13 17:17:33.819 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - Dashboard data loaded successfully
+2025-12-13 17:17:33.819 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - ReportController initialized
+2025-12-13 17:17:45.024 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Revenue chart loaded with 31 data points
+2025-12-13 17:17:45.030 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Order status chart loaded with 4 statuses
+2025-12-13 17:17:45.032 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Top products chart loaded with 0 products
+2025-12-13 17:17:45.034 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Low stock data loaded with 1 items
+2025-12-13 17:17:45.034 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - Dashboard data loaded successfully
+2025-12-13 17:17:45.034 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - ReportController initialized
+2025-12-13 17:17:48.630 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 5 payments
+2025-12-13 17:17:48.630 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-13 17:18:12.969 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 5 payments
+2025-12-13 17:18:12.969 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-13 17:18:14.509 [JavaFX Application Thread] INFO  c.e.s.c.PromotionManagementController - Tải khuyến mãi thành công: 1 khuyến mãi
+2025-12-13 17:18:15.489 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 9 đơn
+2025-12-13 17:18:16.164 [JavaFX Application Thread] INFO  c.e.s.c.PromotionManagementController - Tải khuyến mãi thành công: 1 khuyến mãi
+2025-12-13 17:18:27.204 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: admin
+2025-12-13 17:18:35.116 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: staff
+2025-12-13 17:18:36.439 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 5 stock items
+2025-12-13 17:18:36.439 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:18:40.880 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 5 payments
+2025-12-13 17:18:40.880 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-13 17:18:50.694 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:18:50.703 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 17:19:49.833 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 17:19:49.968 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 17:19:50.000 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 17:19:50.028 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 17:19:50.306 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 17:19:50.312 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 17:19:50.312 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:19:50.312 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 17:19:50.312 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 17:19:50.315 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 17:19:50.458 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 17:19:50.886 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 17:19:51.682 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@64381526] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 17:19:51.842 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 17:19:52.096 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 17:19:52.197 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 17:19:52.197 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 17:20:07.514 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: staff
+2025-12-13 17:20:11.148 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 5 payments
+2025-12-13 17:20:11.149 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-13 17:20:13.756 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 5 stock items
+2025-12-13 17:20:13.756 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:20:14.566 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:20:16.562 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 9 đơn
+2025-12-13 17:20:17.857 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:20:18.992 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 5 stock items
+2025-12-13 17:20:18.992 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:20:19.927 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 5 payments
+2025-12-13 17:20:19.927 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-13 17:20:23.350 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: staff
+2025-12-13 17:20:25.366 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:20:25.373 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 17:24:44.068 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 17:24:44.299 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 17:24:44.351 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 17:24:44.392 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 17:24:44.759 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 17:24:44.767 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 17:24:44.768 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:24:44.768 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 17:24:44.768 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 17:24:44.770 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 17:24:44.979 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 17:24:45.592 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 17:24:46.758 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@46290193] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 17:24:46.991 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 17:24:47.347 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 17:24:47.453 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 17:24:47.454 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 17:24:54.578 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 17:24:58.121 [JavaFX Application Thread] INFO  c.e.s.c.UserManagementController - Loaded 3 accounts
+2025-12-13 17:25:32.057 [JavaFX Application Thread] INFO  c.e.shopgaubong.dao.CategoryDAO - Đã lưu entity: com.example.shopgaubong.entity.Category@29934c70
+2025-12-13 17:25:32.057 [JavaFX Application Thread] INFO  c.e.s.service.CategoryService - Tạo danh mục mới: Gấu bông loại nhỏ
+2025-12-13 17:26:07.357 [JavaFX Application Thread] INFO  com.example.shopgaubong.dao.ItemDAO - Đã lưu entity: com.example.shopgaubong.entity.Item@3a3ce1e0
+2025-12-13 17:26:07.357 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.ItemService - Tạo sản phẩm mới: GB124 - Gấu bông loại nhỏ màu xám
+2025-12-13 17:26:13.420 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:26:23.962 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 5 stock items
+2025-12-13 17:26:23.962 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:26:42.939 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.StockService - Tạo tồn kho mới: da nang - Gấu bông loại nhỏ màu xám (số lượng: 20)
+2025-12-13 17:26:44.057 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 6 stock items
+2025-12-13 17:26:48.257 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 9 đơn
+2025-12-13 17:26:50.002 [JavaFX Application Thread] INFO  c.e.s.c.PromotionManagementController - Tải khuyến mãi thành công: 1 khuyến mãi
+2025-12-13 17:27:00.574 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: admin
+2025-12-13 17:27:08.739 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: customer
+2025-12-13 17:27:21.042 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã lưu entity: com.example.shopgaubong.entity.Order@e33770d
+2025-12-13 17:27:21.067 [JavaFX Application Thread] WARN  c.e.shopgaubong.service.StockService - Không tìm thấy StockItem cho Warehouse ID 1 và Item ID 5
+2025-12-13 17:27:21.071 [JavaFX Application Thread] WARN  c.e.shopgaubong.service.StockService - Không tìm thấy StockItem cho Warehouse ID 1 và Item ID 5 khi lấy available quantity
+2025-12-13 17:27:21.072 [JavaFX Application Thread] ERROR c.e.shopgaubong.service.OrderService - Lỗi khi thêm sản phẩm: Không đủ hàng trong kho. Sản phẩm: Gấu bông loại nhỏ màu xám, Tồn kho khả dụng: 0, Tổng yêu cầu: 1 (trong giỏ: 0 + thêm: 1)
+2025-12-13 17:27:24.489 [JavaFX Application Thread] WARN  c.e.shopgaubong.service.StockService - Không tìm thấy StockItem cho Warehouse ID 1 và Item ID 5
+2025-12-13 17:27:24.491 [JavaFX Application Thread] WARN  c.e.shopgaubong.service.StockService - Không tìm thấy StockItem cho Warehouse ID 1 và Item ID 5 khi lấy available quantity
+2025-12-13 17:27:24.491 [JavaFX Application Thread] ERROR c.e.shopgaubong.service.OrderService - Lỗi khi thêm sản phẩm: Không đủ hàng trong kho. Sản phẩm: Gấu bông loại nhỏ màu xám, Tồn kho khả dụng: 0, Tổng yêu cầu: 1 (trong giỏ: 0 + thêm: 1)
+2025-12-13 17:27:48.371 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: customer
+2025-12-13 17:27:54.882 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 17:27:57.285 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:28:32.245 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:28:32.258 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 17:28:45.807 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 17:28:45.999 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 17:28:46.037 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 17:28:46.073 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 17:28:46.360 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 17:28:46.369 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 17:28:46.369 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:28:46.369 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 17:28:46.369 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 17:28:46.374 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 17:28:46.612 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 17:28:47.163 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 17:28:48.195 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@64381526] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 17:28:48.385 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 17:28:48.715 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 17:28:48.826 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 17:28:48.826 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 17:28:54.925 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 17:28:57.505 [JavaFX Application Thread] INFO  c.e.s.c.UserManagementController - Loaded 3 accounts
+2025-12-13 17:29:25.860 [JavaFX Application Thread] INFO  c.e.shopgaubong.dao.CategoryDAO - Đã lưu entity: com.example.shopgaubong.entity.Category@2f17e315
+2025-12-13 17:29:25.860 [JavaFX Application Thread] INFO  c.e.s.service.CategoryService - Tạo danh mục mới: Gau bong
+2025-12-13 17:29:30.164 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:29:36.009 [JavaFX Application Thread] INFO  c.e.shopgaubong.dao.WarehouseDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Warehouse@7e9ce97b
+2025-12-13 17:29:36.010 [JavaFX Application Thread] INFO  c.e.s.service.WarehouseService - Xóa kho: DN123 - da nang
+2025-12-13 17:29:36.999 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Xóa kho: da nang
+2025-12-13 17:29:37.004 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:29:43.201 [JavaFX Application Thread] INFO  c.e.shopgaubong.dao.WarehouseDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Warehouse@26c25eb
+2025-12-13 17:29:43.202 [JavaFX Application Thread] INFO  c.e.s.service.WarehouseService - Xóa kho: DN123 - da nang
+2025-12-13 17:29:44.138 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Xóa kho: da nang
+2025-12-13 17:29:44.144 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:29:46.619 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:29:47.109 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 6 stock items
+2025-12-13 17:29:47.109 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:29:49.208 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:29:50.343 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:29:52.465 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:30:21.959 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:30:21.969 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 17:30:48.011 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 17:30:48.185 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 17:30:48.212 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 17:30:48.240 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 17:30:48.508 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 17:30:48.514 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 17:30:48.515 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:30:48.516 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 17:30:48.516 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 17:30:48.519 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 17:30:48.753 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 17:30:49.255 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 17:30:50.265 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@64381526] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 17:30:50.440 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 17:30:50.759 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 17:30:50.883 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 17:30:50.884 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 17:30:56.285 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 17:30:58.765 [JavaFX Application Thread] INFO  c.e.s.c.UserManagementController - Loaded 3 accounts
+2025-12-13 17:31:18.668 [JavaFX Application Thread] INFO  c.e.shopgaubong.dao.CategoryDAO - Đã lưu entity: com.example.shopgaubong.entity.Category@2c05aec
+2025-12-13 17:31:18.669 [JavaFX Application Thread] INFO  c.e.s.service.CategoryService - Tạo danh mục mới: gau bong
+2025-12-13 17:31:55.611 [JavaFX Application Thread] INFO  com.example.shopgaubong.dao.ItemDAO - Đã lưu entity: com.example.shopgaubong.entity.Item@fa124fa
+2025-12-13 17:31:55.612 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.ItemService - Tạo sản phẩm mới: GB12345 - Gấu bông màu xám
+2025-12-13 17:31:59.647 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:32:06.527 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 6 stock items
+2025-12-13 17:32:06.527 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:32:21.902 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.StockService - Tạo tồn kho mới: kho me linh - Gấu bông màu xám (số lượng: 20)
+2025-12-13 17:32:22.871 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 7 stock items
+2025-12-13 17:32:27.969 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: admin
+2025-12-13 17:32:35.838 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: customer
+2025-12-13 17:32:50.951 [JavaFX Application Thread] DEBUG c.e.shopgaubong.service.StockService - Check availability: Item ID 6, On Hand: 20, Reserved: 0, Available: 20, Required: 1, Result: true
+2025-12-13 17:32:50.986 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.OrderService - Thêm sản phẩm vào đơn hàng ORD-20251213172721-227: Gấu bông màu xám x1
+2025-12-13 17:32:54.448 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 1 sản phẩm
+2025-12-13 17:32:55.649 [JavaFX Application Thread] DEBUG c.e.shopgaubong.service.StockService - Get available quantity: Item ID 6, On Hand: 20, Reserved: 0, Available: 20
+2025-12-13 17:32:55.659 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.CartService - Cập nhật giỏ hàng: OrderItem ID 18 -> số lượng 2
+2025-12-13 17:32:55.671 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 1 sản phẩm
+2025-12-13 17:33:08.214 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.OrderService - DEBUG: Subtotal=40000.00, ItemDiscount=0.00, PromotionDiscount=8.00, OldDiscount=0.00
+2025-12-13 17:33:08.215 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.OrderService - DEBUG: After apply - NewDiscount=8.00, GrandTotal=43991.20
+2025-12-13 17:33:08.227 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.CartService - Áp dụng mã khuyến mãi SUM123 cho khách hàng ID 3
+2025-12-13 17:33:11.380 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.StockService - Giữ chỗ tồn kho cho Item ID 6: tổng giữ = 2
+2025-12-13 17:33:11.413 [JavaFX Application Thread] INFO  c.e.shopgaubong.dao.PromotionDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Promotion@764266a8
+2025-12-13 17:33:11.413 [JavaFX Application Thread] INFO  c.e.s.service.PromotionService - Tăng số lần sử dụng khuyến mãi: SUM123 (lần 2)
+2025-12-13 17:33:11.422 [JavaFX Application Thread] INFO  c.e.s.controller.CheckoutController - Đặt hàng thành công: ORD-20251213172721-227
+2025-12-13 17:33:12.423 [JavaFX Application Thread] INFO  c.e.s.controller.PaymentController - Displaying 1 items for order ORD-20251213172721-227
+2025-12-13 17:33:12.423 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Calculated fees for order ORD-20251213172721-227: COD=10000, Gateway=0, Total=83991.20
+2025-12-13 17:33:12.423 [JavaFX Application Thread] INFO  c.e.s.controller.PaymentController - Loaded order ORD-20251213172721-227 for payment
+2025-12-13 17:33:16.272 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Calculated fees for order ORD-20251213172721-227: COD=0, Gateway=0, Total=73991.20
+2025-12-13 17:33:16.273 [JavaFX Application Thread] DEBUG c.e.s.controller.PaymentController - Updated payment method details for: BANK_TRANSFER
+2025-12-13 17:33:20.106 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Calculated fees for order ORD-20251213172721-227: COD=10000, Gateway=0, Total=83991.20
+2025-12-13 17:33:20.107 [JavaFX Application Thread] DEBUG c.e.s.controller.PaymentController - Updated payment method details for: COD
+2025-12-13 17:33:21.712 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Calculated fees for order ORD-20251213172721-227: COD=10000, Gateway=0, Total=83991.20
+2025-12-13 17:33:21.724 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.PaymentDAO - Đã lưu entity: com.example.shopgaubong.entity.Payment@605e68d2
+2025-12-13 17:33:21.724 [JavaFX Application Thread] INFO  c.e.s.service.PaymentService - Created payment 6 for order ORD-20251213172721-227 with method COD
+2025-12-13 17:33:22.526 [JavaFX Application Thread] INFO  c.e.s.controller.PaymentController - Payment created successfully for order ORD-20251213172721-227
+2025-12-13 17:33:24.483 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 10 đơn
+2025-12-13 17:33:28.130 [JavaFX Application Thread] INFO  c.e.s.c.CustomerProfileController - Loaded account information for user: customer
+2025-12-13 17:33:28.130 [JavaFX Application Thread] INFO  c.e.s.c.CustomerProfileController - Loaded profile data for user: customer
+2025-12-13 17:33:32.031 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: customer
+2025-12-13 17:33:37.249 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: staff
+2025-12-13 17:33:38.287 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 10 đơn
+2025-12-13 17:33:53.631 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 10 đơn
+2025-12-13 17:33:56.435 [JavaFX Application Thread] INFO  c.e.s.c.WarehouseManagementController - Tải kho thành công: 2 kho
+2025-12-13 17:34:01.536 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - Loaded 7 stock items
+2025-12-13 17:34:01.536 [JavaFX Application Thread] INFO  c.e.s.c.StockManagementController - StockManagementController initialized
+2025-12-13 17:34:04.746 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 6 payments
+2025-12-13 17:34:04.747 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-13 17:34:14.217 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.PaymentDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Payment@5eea5f64
+2025-12-13 17:34:14.248 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Order@d9c971f
+2025-12-13 17:34:14.268 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 6 payments
+2025-12-13 17:34:15.122 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Confirmed payment for order: ORD-20251213172721-227
+2025-12-13 17:34:17.002 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: staff
+2025-12-13 17:34:22.593 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 17:34:24.000 [JavaFX Application Thread] INFO  c.e.s.c.OrderManagementController - Tải đơn hàng thành công: 10 đơn
+2025-12-13 17:34:34.297 [JavaFX Application Thread] INFO  c.e.s.c.PromotionManagementController - Tải khuyến mãi thành công: 1 khuyến mãi
+2025-12-13 17:34:43.573 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - Loaded 6 payments
+2025-12-13 17:34:43.573 [JavaFX Application Thread] INFO  c.e.s.c.PaymentManagementController - PaymentManagementController initialized
+2025-12-13 17:34:49.483 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Revenue chart loaded with 31 data points
+2025-12-13 17:34:49.502 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Order status chart loaded with 4 statuses
+2025-12-13 17:34:49.510 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Top products chart loaded with 0 products
+2025-12-13 17:34:49.520 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Low stock data loaded with 1 items
+2025-12-13 17:34:49.520 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - Dashboard data loaded successfully
+2025-12-13 17:34:49.520 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - ReportController initialized
+2025-12-13 17:34:53.833 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Revenue chart loaded with 31 data points
+2025-12-13 17:34:53.856 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Order status chart loaded with 4 statuses
+2025-12-13 17:34:53.865 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Top products chart loaded with 0 products
+2025-12-13 17:34:53.869 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Low stock data loaded with 1 items
+2025-12-13 17:34:53.869 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - Dashboard data loaded successfully
+2025-12-13 17:35:33.517 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:35:33.527 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 17:55:03.438 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 17:55:03.645 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 17:55:03.699 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 17:55:03.736 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 17:55:04.110 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 17:55:04.120 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 17:55:04.121 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:55:04.121 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 17:55:04.121 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 17:55:04.124 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 17:55:04.537 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 17:55:05.088 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 17:55:06.046 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@399fd710] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 17:55:06.404 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 17:55:06.680 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 17:55:06.787 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 17:55:06.787 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 17:55:18.704 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: customer
+2025-12-13 17:55:21.045 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 10 đơn
+2025-12-13 17:55:22.273 [JavaFX Application Thread] INFO  c.example.shopgaubong.dao.OrderDAO - Đã lưu entity: com.example.shopgaubong.entity.Order@765b1ee2
+2025-12-13 17:55:22.289 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 0 sản phẩm
+2025-12-13 17:55:26.652 [JavaFX Application Thread] INFO  c.e.s.c.CustomerOrderController - Tải đơn hàng thành công: 10 đơn
+2025-12-13 17:55:28.247 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 0 sản phẩm
+2025-12-13 17:55:31.813 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 0 sản phẩm
+2025-12-13 17:55:36.683 [JavaFX Application Thread] WARN  c.e.shopgaubong.service.StockService - Không tìm thấy StockItem cho Warehouse ID 1 và Item ID 5
+2025-12-13 17:55:36.684 [JavaFX Application Thread] WARN  c.e.shopgaubong.service.StockService - Không tìm thấy StockItem cho Warehouse ID 1 và Item ID 5 khi lấy available quantity
+2025-12-13 17:55:36.686 [JavaFX Application Thread] ERROR c.e.shopgaubong.service.OrderService - Lỗi khi thêm sản phẩm: Không đủ hàng trong kho. Sản phẩm: Gấu bông loại nhỏ màu xám, Tồn kho khả dụng: 0, Tổng yêu cầu: 1 (trong giỏ: 0 + thêm: 1)
+2025-12-13 17:55:46.636 [JavaFX Application Thread] DEBUG c.e.shopgaubong.service.StockService - Check availability: Item ID 4, On Hand: 10, Reserved: 3, Available: 7, Required: 1, Result: true
+2025-12-13 17:55:46.659 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.OrderService - Thêm sản phẩm vào đơn hàng ORD-20251213175522-677: Gấu bông loại lớn x1
+2025-12-13 17:55:48.828 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 1 sản phẩm
+2025-12-13 17:55:52.223 [JavaFX Application Thread] ERROR c.e.s.controller.CheckoutController - Error viewing promotions: class javafx.scene.layout.HBox cannot be cast to class javafx.scene.layout.VBox (javafx.scene.layout.HBox and javafx.scene.layout.VBox are in module javafx.graphics@21.0.6 of loader 'app')
+java.lang.ClassCastException: class javafx.scene.layout.HBox cannot be cast to class javafx.scene.layout.VBox (javafx.scene.layout.HBox and javafx.scene.layout.VBox are in module javafx.graphics@21.0.6 of loader 'app')
+	at com.example.shopgaubong/com.example.shopgaubong.controller.CheckoutController.handleViewPromotions(CheckoutController.java:203)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at javafx.base@21.0.6/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at javafx.fxml@21.0.6/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml@21.0.6/javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1855)
+	at javafx.fxml@21.0.6/javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1726)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.base@21.0.6/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics@21.0.6/javafx.scene.Node.fireEvent(Node.java:8875)
+	at javafx.controls@21.0.6/javafx.scene.control.Button.fire(Button.java:203)
+	at javafx.controls@21.0.6/com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:207)
+	at javafx.controls@21.0.6/com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at javafx.base@21.0.6/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base@21.0.6/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.base@21.0.6/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics@21.0.6/javafx.scene.Scene$MouseHandler.process(Scene.java:3984)
+	at javafx.graphics@21.0.6/javafx.scene.Scene.processMouseEvent(Scene.java:1890)
+	at javafx.graphics@21.0.6/javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2708)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at javafx.graphics@21.0.6/com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.6/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-13 17:57:44.814 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 17:57:44.827 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 18:00:17.674 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 18:00:17.831 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 18:00:17.861 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 18:00:17.887 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 18:00:18.158 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 18:00:18.167 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 18:00:18.167 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 18:00:18.168 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 18:00:18.168 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 18:00:18.170 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 18:00:18.442 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 18:00:18.843 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 18:00:19.687 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@176e839e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 18:00:19.830 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 18:00:20.095 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 18:00:20.214 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 18:00:20.214 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 18:00:27.900 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: customer
+2025-12-13 18:00:29.066 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 1 sản phẩm
+2025-12-13 18:00:54.870 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 18:00:54.877 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng

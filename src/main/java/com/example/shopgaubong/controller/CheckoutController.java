@@ -11,8 +11,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -198,11 +202,19 @@ public class CheckoutController {
     private void handleViewPromotions() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/shopgaubong/promotion-list-view.fxml"));
-            VBox promotionsView = loader.load();
+            Parent promotionsView = loader.load();
             
-            VBox parentView = (VBox) orderItemsTable.getParent().getParent();
-            parentView.getChildren().clear();
-            parentView.getChildren().add(promotionsView);
+            // Open in a new window/dialog instead of replacing content
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(orderItemsTable.getScene().getWindow());
+            dialogStage.setTitle("Danh sách khuyến mãi");
+            
+            Scene scene = new Scene(promotionsView);
+            dialogStage.setScene(scene);
+            dialogStage.setWidth(800);
+            dialogStage.setHeight(600);
+            dialogStage.showAndWait();
         } catch (Exception e) {
             logger.error("Error viewing promotions: {}", e.getMessage(), e);
             showError("Không thể xem danh sách khuyến mãi: " + e.getMessage());
