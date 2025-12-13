@@ -28,7 +28,7 @@ public class ItemService {
      * Tạo sản phẩm mới
      */
     public Item createItem(String sku, String name, String description, BigDecimal price,
-                          Long categoryId, String unit, BigDecimal weight, String imageUrl) {
+                          Long categoryId, String unit, BigDecimal weight, String imageData) {
         // Validate SKU uniqueness
         Optional<Item> existing = itemDAO.findBySku(sku);
         if (existing.isPresent()) {
@@ -47,7 +47,7 @@ public class ItemService {
         item.setCategory(category);
         item.setUnit(unit != null ? unit : "Cái");
         item.setWeight(weight);
-        item.setImageUrl(imageUrl);
+        item.setImageData(imageData);
         item.setIsActive(true);
 
         String currentUser = SessionManager.getInstance().getCurrentUsername();
@@ -63,7 +63,7 @@ public class ItemService {
      * Cập nhật sản phẩm
      */
     public Item updateItem(Long id, String sku, String name, String description, BigDecimal price,
-                          Long categoryId, String unit, BigDecimal weight, String imageUrl, Boolean isActive) {
+                          Long categoryId, String unit, BigDecimal weight, String imageData, Boolean isActive) {
         Item item = itemDAO.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Sản phẩm không tồn tại"));
 
@@ -88,7 +88,7 @@ public class ItemService {
         item.setPrice(price);
         item.setUnit(unit);
         item.setWeight(weight);
-        item.setImageUrl(imageUrl);
+        item.setImageData(imageData);
         item.setIsActive(isActive);
 
         String currentUser = SessionManager.getInstance().getCurrentUsername();

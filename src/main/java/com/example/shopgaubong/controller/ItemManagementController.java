@@ -4,6 +4,7 @@ import com.example.shopgaubong.entity.Category;
 import com.example.shopgaubong.entity.Item;
 import com.example.shopgaubong.service.CategoryService;
 import com.example.shopgaubong.service.ItemService;
+import com.example.shopgaubong.util.ImageUtil;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -11,7 +12,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.List;
@@ -35,7 +40,9 @@ public class ItemManagementController {
     @FXML private ComboBox<Category> cmbCategory;
     @FXML private TextField txtUnit;
     @FXML private TextField txtWeight;
-    @FXML private TextField txtImageUrl;
+    @FXML private Button btnChooseImage;
+    @FXML private Label lblImageFileName;
+    @FXML private javafx.scene.image.ImageView imgPreview;
     @FXML private CheckBox chkActive;
     @FXML private Button btnSave;
     @FXML private Button btnCancel;
@@ -45,6 +52,7 @@ public class ItemManagementController {
     private final CategoryService categoryService = new CategoryService();
     private final ObservableList<Item> itemList = FXCollections.observableArrayList();
     private Item selectedItem = null;
+    private String currentImageData = null; // Lưu ảnh Base64 tạm thời
 
     @FXML
     public void initialize() {
@@ -159,7 +167,20 @@ public class ItemManagementController {
         cmbCategory.setValue(item.getCategory());
         txtUnit.setText(item.getUnit());
         txtWeight.setText(item.getWeight() != null ? item.getWeight().toString() : "");
-        txtImageUrl.setText(item.getImageUrl());
+        
+        // Load image
+        currentImageData = item.getImageData();
+        if (currentImageData != null && !currentImageData.isEmpty()) {
+            Image image = ImageUtil.base64ToImage(currentImageData);
+            if (image != null) {
+                imgPreview.setImage(image);
+                lblImageFileName.setText("Ảnh hiện tại");
+            }
+        } else {
+            imgPreview.setImage(null);
+            lblImageFileName.setText("Chưa có ảnh");
+        }
+        
         chkActive.setSelected(item.getIsActive());
     }
 
@@ -185,18 +206,17 @@ public class ItemManagementController {
             String unit = txtUnit.getText().trim();
             BigDecimal weight = txtWeight.getText().trim().isEmpty() ? null : 
                 new BigDecimal(txtWeight.getText().trim());
-            String imageUrl = txtImageUrl.getText().trim();
             Boolean isActive = chkActive.isSelected();
 
             if (selectedItem == null) {
                 // Create new item
                 itemService.createItem(sku, name, description, price, category.getId(), 
-                    unit, weight, imageUrl);
+                    unit, weight, currentImageData);
                 showSuccess("Thêm sản phẩm thành công!");
             } else {
                 // Update existing item
                 itemService.updateItem(selectedItem.getId(), sku, name, description, price, 
-                    category.getId(), unit, weight, imageUrl, isActive);
+                    category.getId(), unit, weight, currentImageData, isActive);
                 showSuccess("Cập nhật sản phẩm thành công!");
             }
 
@@ -209,6 +229,49 @@ public class ItemManagementController {
         } catch (Exception e) {
             showError("Lỗi khi lưu sản phẩm: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleChooseImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Chọn hình ảnh sản phẩm");
+        fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp")
+        );
+
+        Stage stage = (Stage) btnChooseImage.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            try {
+                // Kiểm tra file có phải là ảnh hợp lệ
+                if (!ImageUtil.isValidImageFile(selectedFile)) {
+                    showError("File không phải là ảnh hợp lệ!");
+                    return;
+                }
+
+                // Kiểm tra kích thước file (max 5MB)
+                double fileSizeMB = ImageUtil.getFileSizeMB(selectedFile);
+                if (fileSizeMB > 5.0) {
+                    showError("Kích thước ảnh quá lớn! Vui lòng chọn ảnh nhỏ hơn 5MB.");
+                    return;
+                }
+
+                // Resize và convert ảnh sang Base64 (max 800x800)
+                currentImageData = ImageUtil.resizeAndConvertToBase64(selectedFile, 800, 800);
+
+                // Preview ảnh
+                Image image = ImageUtil.base64ToImage(currentImageData);
+                if (image != null) {
+                    imgPreview.setImage(image);
+                    lblImageFileName.setText(selectedFile.getName() + " (" + String.format("%.2f MB", fileSizeMB) + ")");
+                }
+
+            } catch (Exception e) {
+                showError("Không thể tải ảnh: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
@@ -307,7 +370,9 @@ public class ItemManagementController {
         cmbCategory.setValue(null);
         txtUnit.setText("Cái");
         txtWeight.clear();
-        txtImageUrl.clear();
+        imgPreview.setImage(null);
+        lblImageFileName.setText("Chưa chọn ảnh");
+        currentImageData = null;
         chkActive.setSelected(true);
     }
 

@@ -70,7 +70,7 @@ public class AdminMainController {
 
     @FXML
     private void handleViewReports() {
-        showInfo("Báo cáo - Chức năng đang phát triển");
+        loadView("/com/example/shopgaubong/report-view.fxml", "Báo cáo & Thống kê");
     }
 
     @FXML
@@ -99,7 +99,7 @@ public class AdminMainController {
                 return;
             }
 
-            VBox view = loader.load();
+            javafx.scene.Node view = loader.load();
             contentPane.setCenter(view);
             System.out.println("View loaded successfully: " + title);
         } catch (Exception e) {

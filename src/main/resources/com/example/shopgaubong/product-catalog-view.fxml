@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -58,6 +59,15 @@
                     <Font name="System Bold" size="16"/>
                 </font>
             </Label>
+
+            <Separator/>
+
+            <!-- Product Image -->
+            <HBox alignment="CENTER" style="-fx-padding: 10;">
+                <ImageView fx:id="imgProduct" fitWidth="300" fitHeight="300" 
+                           preserveRatio="true" smooth="true"
+                           style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);"/>
+            </HBox>
 
             <Separator/>
 

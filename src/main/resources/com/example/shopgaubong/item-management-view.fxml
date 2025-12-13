@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -123,12 +124,18 @@
                                promptText="kg"/>
                 </HBox>
 
-                <!-- Row 5: Image URL -->
+                <!-- Row 5: Image -->
                 <Label text="Hình ảnh:" GridPane.rowIndex="5" GridPane.columnIndex="0">
                     <font><Font name="System Bold" size="12"/></font>
                 </Label>
-                <TextField fx:id="txtImageUrl" GridPane.rowIndex="5" GridPane.columnIndex="1"
-                           promptText="URL hình ảnh"/>
+                <VBox spacing="5" GridPane.rowIndex="5" GridPane.columnIndex="1">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button fx:id="btnChooseImage" text="Chọn ảnh" onAction="#handleChooseImage"/>
+                        <Label fx:id="lblImageFileName" text="Chưa chọn ảnh" style="-fx-text-fill: #666;"/>
+                    </HBox>
+                    <ImageView fx:id="imgPreview" fitWidth="150" fitHeight="150" 
+                               preserveRatio="true" smooth="true"/>
+                </VBox>
 
                 <!-- Row 6: Description -->
                 <Label text="Mô tả:" GridPane.rowIndex="6" GridPane.columnIndex="0">

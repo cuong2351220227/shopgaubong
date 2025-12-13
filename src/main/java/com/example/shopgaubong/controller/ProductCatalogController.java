@@ -8,12 +8,14 @@ import com.example.shopgaubong.service.AuthService;
 import com.example.shopgaubong.service.CategoryService;
 import com.example.shopgaubong.service.ItemService;
 import com.example.shopgaubong.service.OrderService;
+import com.example.shopgaubong.util.ImageUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -36,6 +38,7 @@ public class ProductCatalogController {
     @FXML private Label lblProductPrice;
     @FXML private Label lblProductCategory;
     @FXML private TextArea txtProductDescription;
+    @FXML private ImageView imgProduct;
     @FXML private Spinner<Integer> spnQuantity;
     @FXML private Button btnAddToCart;
 
@@ -168,6 +171,14 @@ public class ProductCatalogController {
         lblProductPrice.setText(String.format("%,.0f đ / %s", item.getPrice(), item.getUnit()));
         lblProductCategory.setText("Danh mục: " + item.getCategory().getName());
         txtProductDescription.setText(item.getDescription() != null ? item.getDescription() : "Không có mô tả");
+        
+        // Load image from Base64
+        if (item.getImageData() != null && !item.getImageData().isEmpty()) {
+            ImageUtil.loadImageToView(item.getImageData(), imgProduct, 300, 300);
+        } else {
+            imgProduct.setImage(null);
+        }
+        
         btnAddToCart.setDisable(false);
     }
 
@@ -178,6 +189,7 @@ public class ProductCatalogController {
         lblProductPrice.setText("");
         lblProductCategory.setText("");
         txtProductDescription.setText("");
+        imgProduct.setImage(null);
         btnAddToCart.setDisable(true);
     }
 

@@ -6741,3 +6741,202 @@ java.lang.ClassCastException: class javafx.scene.layout.HBox cannot be cast to c
 2025-12-01 17:23:47.925 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: admin
 2025-12-01 17:23:49.095 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
 2025-12-01 17:23:49.103 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 10:06:46.727 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 10:06:46.886 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 10:06:46.909 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 10:06:46.927 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 10:06:47.144 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 10:06:47.150 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 10:06:47.150 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:06:47.150 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 10:06:47.150 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 10:06:47.151 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 10:06:47.330 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 10:06:47.705 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 10:06:48.466 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3fe5ad73] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 10:06:48.610 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 10:06:48.856 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 10:06:48.926 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 10:06:48.926 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 10:06:51.725 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:06:51.735 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 10:17:36.731 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 10:17:36.921 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 10:17:36.950 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 10:17:36.973 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 10:17:37.217 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 10:17:37.224 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 10:17:37.224 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:17:37.224 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 10:17:37.224 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 10:17:37.226 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 10:17:37.422 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 10:17:37.842 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 10:17:38.648 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3e0327dd] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 10:17:38.793 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 10:17:39.042 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 10:17:39.115 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 10:17:39.116 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 10:17:45.233 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 10:18:56.510 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:18:56.518 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 10:19:22.059 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 10:19:22.233 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 10:19:22.259 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 10:19:22.283 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 10:19:22.500 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 10:19:22.508 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 10:19:22.509 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:19:22.510 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 10:19:22.510 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 10:19:22.512 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 10:19:22.756 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 10:19:23.221 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 10:19:24.064 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3361d286] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 10:19:24.214 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 10:19:24.474 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 10:19:24.552 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 10:19:24.552 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 10:19:30.389 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 10:19:31.285 [JavaFX Application Thread] INFO  c.e.s.c.UserManagementController - Loaded 3 accounts
+2025-12-13 10:19:32.734 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Revenue chart loaded with 31 data points
+2025-12-13 10:19:32.743 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Order status chart loaded with 4 statuses
+2025-12-13 10:19:32.746 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Top products chart loaded with 0 products
+2025-12-13 10:19:32.748 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Low stock data loaded with 0 items
+2025-12-13 10:19:32.748 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - Dashboard data loaded successfully
+2025-12-13 10:19:32.749 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - ReportController initialized
+2025-12-13 10:20:20.755 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 10:20:20.891 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 10:20:20.917 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 10:20:20.939 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 10:20:21.180 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 10:20:21.184 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 10:20:21.184 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:20:21.184 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 10:20:21.185 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 10:20:21.186 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 10:20:21.334 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 10:20:21.702 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 10:20:22.435 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3d2b13f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 10:20:22.576 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 10:20:22.822 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 10:20:22.896 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 10:20:22.897 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 10:20:27.791 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 10:20:28.910 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Revenue chart loaded with 31 data points
+2025-12-13 10:20:28.920 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Order status chart loaded with 4 statuses
+2025-12-13 10:20:28.925 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Top products chart loaded with 0 products
+2025-12-13 10:20:28.929 [JavaFX Application Thread] DEBUG c.e.s.controller.ReportController - Low stock data loaded with 0 items
+2025-12-13 10:20:28.929 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - Dashboard data loaded successfully
+2025-12-13 10:20:28.929 [JavaFX Application Thread] INFO  c.e.s.controller.ReportController - ReportController initialized
+2025-12-13 10:20:48.948 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:20:48.957 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 10:28:49.897 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 10:28:50.021 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 10:28:50.051 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 10:28:50.073 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 10:28:50.303 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 10:28:50.308 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 10:28:50.308 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:28:50.308 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 10:28:50.308 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 10:28:50.310 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 10:28:50.469 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 10:28:50.828 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 10:28:51.589 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2dfd157b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 10:28:51.759 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 10:28:52.012 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 10:28:52.092 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 10:28:52.092 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 10:28:57.715 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 10:30:06.906 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 10:30:07.038 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 10:30:07.071 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 10:30:07.092 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 10:30:07.314 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 10:30:07.318 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 10:30:07.320 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:30:07.320 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 10:30:07.320 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 10:30:07.322 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 10:30:07.471 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 10:30:07.834 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 10:30:08.591 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@64381526] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 10:30:08.739 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 10:30:09.000 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 10:30:09.088 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 10:30:09.088 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 10:30:14.252 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 10:31:18.604 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:31:18.612 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 10:31:32.486 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 10:31:32.601 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 10:31:32.629 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 10:31:32.649 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 10:31:32.879 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 10:31:32.885 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 10:31:32.885 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:31:32.885 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 10:31:32.885 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 10:31:32.887 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 10:31:33.030 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 10:31:33.406 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 10:31:34.171 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2dfd157b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 10:31:34.331 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 10:31:34.593 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 10:31:34.691 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 10:31:34.691 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 10:31:39.378 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 10:32:08.539 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:32:08.557 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 10:32:57.635 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 10:32:57.941 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 10:32:58.024 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 10:32:58.093 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 10:32:58.665 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 10:32:58.681 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 10:32:58.684 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:32:58.684 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 10:32:58.684 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 10:32:58.689 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 10:32:59.026 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 10:32:59.687 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 10:33:00.543 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2dfd157b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 10:33:00.683 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 10:33:00.935 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 10:33:01.006 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 10:33:01.006 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 10:33:06.466 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 10:34:09.080 [JavaFX Application Thread] INFO  com.example.shopgaubong.dao.ItemDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Item@4908e6ca
+2025-12-13 10:34:09.080 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.ItemService - Cập nhật sản phẩm: gs4 - gau bong moc khoa mau vang
+2025-12-13 10:34:14.838 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: admin
+2025-12-13 10:34:26.892 [JavaFX Application Thread] WARN  c.e.shopgaubong.service.AuthService - Đăng nhập thất bại: Sai mật khẩu cho tài khoản customer
+2025-12-13 10:34:30.779 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: customer
+2025-12-13 10:34:32.439 [JavaFX Application Thread] INFO  c.e.s.controller.CartController - Tải giỏ hàng thành công: 0 sản phẩm
+2025-12-13 10:34:39.753 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: customer
+2025-12-13 10:34:56.125 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: admin
+2025-12-13 10:35:01.558 [JavaFX Application Thread] INFO  com.example.shopgaubong.dao.ItemDAO - Đã cập nhật entity: com.example.shopgaubong.entity.Item@38c1aa55
+2025-12-13 10:35:01.558 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.ItemService - Cập nhật sản phẩm: gs4 - gau bong moc khoa mau vang
+2025-12-13 10:35:43.996 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:35:44.006 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng
+2025-12-13 10:37:49.744 [main] INFO  c.e.s.util.DatabaseInitializer - Bắt đầu khởi tạo dữ liệu mẫu...
+2025-12-13 10:37:49.877 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: shopgaubongPU]
+2025-12-13 10:37:49.904 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-12-13 10:37:49.925 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-13 10:37:50.196 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-12-13 10:37:50.201 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: com.mysql.cj.jdbc.Driver
+2025-12-13 10:37:50.202 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:37:50.202 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, useUnicode=true, characterEncoding=UTF-8, user=root}
+2025-12-13 10:37:50.202 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-12-13 10:37:50.206 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 10 (min=1)
+2025-12-13 10:37:50.400 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-13 10:37:50.795 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator null
+2025-12-13 10:37:51.562 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1238a074] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-12-13 10:37:51.698 [main] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được khởi tạo thành công
+2025-12-13 10:37:51.935 [main] INFO  c.e.s.util.DatabaseInitializer - Sử dụng kho: kho me linh (ID: 1)
+2025-12-13 10:37:52.003 [main] INFO  c.e.s.util.DatabaseInitializer - Đã tạo 0 mục tồn kho trong kho kho me linh
+2025-12-13 10:37:52.004 [main] INFO  c.e.s.util.DatabaseInitializer - Hoàn tất khởi tạo dữ liệu mẫu
+2025-12-13 10:37:59.896 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng nhập thành công: customer
+2025-12-13 10:38:15.163 [JavaFX Application Thread] INFO  c.e.shopgaubong.service.AuthService - Đăng xuất: customer
+2025-12-13 10:38:16.332 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/shopgaubong?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=utf8mb4]
+2025-12-13 10:38:16.340 [JavaFX Application Thread] INFO  c.e.shopgaubong.util.HibernateUtil - EntityManagerFactory đã được đóng

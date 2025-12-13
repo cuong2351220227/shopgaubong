@@ -46,8 +46,9 @@ public class Item extends AuditEntity {
     @Column(precision = 10, scale = 2)
     private BigDecimal weight; // Khối lượng (kg) - dùng cho vận chuyển
 
-    @Column(length = 500)
-    private String imageUrl;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String imageData; // Lưu ảnh dưới dạng Base64
 
     @Column(nullable = false)
     private Boolean isActive = true;
@@ -134,12 +135,12 @@ public class Item extends AuditEntity {
         this.weight = weight;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageData() {
+        return imageData;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageData(String imageData) {
+        this.imageData = imageData;
     }
 
     public Boolean getIsActive() {
