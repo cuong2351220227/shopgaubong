@@ -18,7 +18,9 @@ public class AccountManagementService {
     private final AccountDAO accountDAO = new AccountDAO();
 
     /**
-     * Get all accounts
+     * Lấy tất cả tài khoản trong hệ thống
+     * @return Danh sách tất cả tài khoản
+     * @throws RuntimeException nếu có lỗi khi truy vấn database
      */
     public List<Account> getAllAccounts() {
         try {
@@ -30,7 +32,10 @@ public class AccountManagementService {
     }
 
     /**
-     * Get accounts by role
+     * Lấy danh sách tài khoản theo vai trò
+     * @param role Vai trò cần lọc (ADMIN, STAFF, CUSTOMER)
+     * @return Danh sách tài khoản có vai trò tương ứng
+     * @throws RuntimeException nếu có lỗi khi truy vấn database
      */
     public List<Account> getAccountsByRole(Role role) {
         try {
@@ -42,7 +47,9 @@ public class AccountManagementService {
     }
 
     /**
-     * Get active accounts only
+     * Lấy danh sách tài khoản đang hoạt động
+     * @return Danh sách tài khoản có trạng thái isActive = true
+     * @throws RuntimeException nếu có lỗi khi truy vấn database
      */
     public List<Account> getActiveAccounts() {
         try {
@@ -54,7 +61,16 @@ public class AccountManagementService {
     }
 
     /**
-     * Create new account with profile
+     * Tạo tài khoản mới kèm thông tin profile
+     * @param username Tên đăng nhập (phải duy nhất)
+     * @param password Mật khẩu (sẽ được mã hóa bằng BCrypt)
+     * @param role Vai trò của tài khoản
+     * @param fullName Họ tên đầy đủ
+     * @param email Email (có thể null, phải duy nhất nếu cung cấp)
+     * @param phone Số điện thoại (có thể null)
+     * @return Tài khoản vừa được tạo
+     * @throws IllegalArgumentException nếu username hoặc email đã tồn tại
+     * @throws RuntimeException nếu có lỗi khi lưu database
      */
     public Account createAccount(String username, String password, Role role, String fullName,
                                  String email, String phone) {
@@ -101,7 +117,16 @@ public class AccountManagementService {
     }
 
     /**
-     * Update account information
+     * Cập nhật thông tin tài khoản
+     * @param accountId ID của tài khoản cần cập nhật
+     * @param username Tên đăng nhập mới (phải duy nhất nếu thay đổi)
+     * @param role Vai trò mới
+     * @param fullName Họ tên mới
+     * @param email Email mới (phải duy nhất nếu thay đổi)
+     * @param phone Số điện thoại mới
+     * @param isActive Trạng thái hoạt động
+     * @throws IllegalArgumentException nếu tài khoản không tồn tại hoặc username/email đã được sử dụng
+     * @throws RuntimeException nếu có lỗi khi cập nhật database
      */
     public void updateAccount(Long accountId, String username, Role role, String fullName,
                              String email, String phone, Boolean isActive) {
@@ -151,7 +176,11 @@ public class AccountManagementService {
     }
 
     /**
-     * Reset account password
+     * Đặt lại mật khẩu cho tài khoản
+     * @param accountId ID của tài khoản cần đặt lại mật khẩu
+     * @param newPassword Mật khẩu mới (sẽ được mã hóa bằng BCrypt)
+     * @throws IllegalArgumentException nếu tài khoản không tồn tại
+     * @throws RuntimeException nếu có lỗi khi cập nhật database
      */
     public void resetPassword(Long accountId, String newPassword) {
         try {
@@ -172,7 +201,10 @@ public class AccountManagementService {
     }
 
     /**
-     * Delete account (soft delete by deactivating)
+     * Vô hiệu hóa tài khoản (soft delete)
+     * Đặt trạng thái isActive = false, không xóa khỏi database
+     * @param accountId ID của tài khoản cần vô hiệu hóa
+     * @throws RuntimeException nếu có lỗi khi cập nhật database
      */
     public void deactivateAccount(Long accountId) {
         try {
@@ -185,7 +217,10 @@ public class AccountManagementService {
     }
 
     /**
-     * Activate account
+     * Kích hoạt lại tài khoản
+     * Đặt trạng thái isActive = true
+     * @param accountId ID của tài khoản cần kích hoạt
+     * @throws RuntimeException nếu có lỗi khi cập nhật database
      */
     public void activateAccount(Long accountId) {
         try {
@@ -198,7 +233,10 @@ public class AccountManagementService {
     }
 
     /**
-     * Permanently delete account
+     * Xóa vĩnh viễn tài khoản khỏi database (hard delete)
+     * Cảnh báo: Thao tác này không thể hoàn tác
+     * @param accountId ID của tài khoản cần xóa
+     * @throws RuntimeException nếu có lỗi khi xóa database
      */
     public void deleteAccount(Long accountId) {
         try {
@@ -211,7 +249,9 @@ public class AccountManagementService {
     }
 
     /**
-     * Check if email exists
+     * Kiểm tra email đã tồn tại trong hệ thống chưa
+     * @param email Email cần kiểm tra
+     * @return true nếu email đã được sử dụng, false nếu chưa
      */
     private boolean isEmailExists(String email) {
         EntityManager em = accountDAO.getEntityManager();
@@ -231,7 +271,11 @@ public class AccountManagementService {
     }
 
     /**
-     * Check if email exists excluding specific account
+     * Kiểm tra email đã tồn tại ở tài khoản khác chưa
+     * Dùng khi cập nhật tài khoản để loại trừ email của chính tài khoản đó
+     * @param email Email cần kiểm tra
+     * @param excludeAccountId ID tài khoản được loại trừ khỏi kiểm tra
+     * @return true nếu email đã được sử dụng bởi tài khoản khác
      */
     private boolean isEmailExistsExcluding(String email, Long excludeAccountId) {
         EntityManager em = accountDAO.getEntityManager();
@@ -252,7 +296,10 @@ public class AccountManagementService {
     }
 
     /**
-     * Validate username format
+     * Kiểm tra định dạng tên đăng nhập hợp lệ
+     * Yêu cầu: 3-50 ký tự, chỉ chứa chữ, số và gạch dưới
+     * @param username Tên đăng nhập cần kiểm tra
+     * @return true nếu hợp lệ, false nếu không hợp lệ
      */
     public boolean isValidUsername(String username) {
         if (username == null || username.trim().isEmpty()) {
@@ -263,14 +310,20 @@ public class AccountManagementService {
     }
 
     /**
-     * Validate password strength
+     * Kiểm tra độ mạnh mật khẩu
+     * Yêu cầu: Tối thiểu 6 ký tự
+     * @param password Mật khẩu cần kiểm tra
+     * @return true nếu hợp lệ, false nếu không hợp lệ
      */
     public boolean isValidPassword(String password) {
         return password != null && password.length() >= 6;
     }
 
     /**
-     * Validate email format
+     * Kiểm tra định dạng email hợp lệ
+     * Cho phép để trống, nếu có thì phải đúng format email
+     * @param email Email cần kiểm tra
+     * @return true nếu hợp lệ hoặc rỗng, false nếu không đúng định dạng
      */
     public boolean isValidEmail(String email) {
         if (email == null || email.trim().isEmpty()) {
@@ -280,7 +333,10 @@ public class AccountManagementService {
     }
 
     /**
-     * Validate phone number format (Vietnamese)
+     * Kiểm tra định dạng số điện thoại Việt Nam
+     * Cho phép để trống, nếu có thì phải bắt đầu bằng 0 và có 10-11 chữ số
+     * @param phone Số điện thoại cần kiểm tra
+     * @return true nếu hợp lệ hoặc rỗng, false nếu không đúng định dạng
      */
     public boolean isValidPhone(String phone) {
         if (phone == null || phone.trim().isEmpty()) {

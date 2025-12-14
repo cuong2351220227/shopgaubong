@@ -31,6 +31,12 @@ public class RefundManagementController {
 
     private final PaymentService paymentService = new PaymentService();
 
+    /**
+     * Khởi tạo controller
+     * - Thiết lập bảng hiển thị
+     * - Load danh sách yêu cầu hoàn tiền đang chờ xử lý
+     * - Lắng nghe sự kiện chọn dòng
+     */
     @FXML
     public void initialize() {
         setupTable();
@@ -47,6 +53,11 @@ public class RefundManagementController {
         });
     }
 
+    /**
+     * Thiết lập cấu hình bảng hiển thị yêu cầu hoàn tiền
+     * - Bind dữ liệu vào các cột
+     * - Format tiền tệ, trạng thái, ngày giờ
+     */
     private void setupTable() {
         refundNumberCol.setCellValueFactory(new PropertyValueFactory<>("refundNumber"));
         amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
@@ -102,6 +113,10 @@ public class RefundManagementController {
         });
     }
 
+    /**
+     * Tải danh sách yêu cầu hoàn tiền đang chờ duyệt
+     * Hiển thị thông báo nếu không có yêu cầu nào
+     */
     private void loadPendingRefunds() {
         try {
             System.out.println("Loading pending refunds...");
@@ -121,6 +136,10 @@ public class RefundManagementController {
         }
     }
 
+    /**
+     * Hiển thị chi tiết yêu cầu hoàn tiền
+     * @param refund Yêu cầu hoàn tiền cần hiển thị
+     */
     private void displayRefundDetails(Refund refund) {
         reasonArea.setText(refund.getReason());
         adminNotesArea.setText(refund.getAdminNotes() != null ? refund.getAdminNotes() : "");
@@ -209,11 +228,18 @@ public class RefundManagementController {
         }
     }
 
+    /**
+     * Làm mới danh sách yêu cầu hoàn tiền
+     */
     @FXML
     private void handleRefresh() {
         loadPendingRefunds();
     }
 
+    /**
+     * Hiển thị thông báo thông tin
+     * @param message Nội dung thông báo
+     */
     private void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");
@@ -222,6 +248,10 @@ public class RefundManagementController {
         alert.showAndWait();
     }
 
+    /**
+     * Hiển thị thông báo thành công
+     * @param message Nội dung thông báo
+     */
     private void showSuccess(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thành công");
@@ -230,6 +260,10 @@ public class RefundManagementController {
         alert.showAndWait();
     }
 
+    /**
+     * Hiển thị thông báo lỗi
+     * @param message Nội dung thông báo
+     */
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Lỗi");

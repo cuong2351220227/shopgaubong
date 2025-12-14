@@ -65,18 +65,30 @@ public class CheckoutController {
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
     private final ObservableList<OrderItem> orderItems = FXCollections.observableArrayList();
 
+    /**
+     * Khởi tạo controller khi load view
+     * Thiết lập cột bảng và tải thông tin khách hàng
+     */
     @FXML
     public void initialize() {
         setupTableColumns();
         loadCustomerInfo();
     }
 
+    /**
+     * Đặt giỏ hàng hiện tại và cập nhật giao diện
+     * @param cart Giỏ hàng cần hiển thị
+     */
     public void setCart(Order cart) {
         this.cart = cart;
         loadCartItems();
         updateSummary();
     }
 
+    /**
+     * Thiết lập cách hiển thị dữ liệu cho các cột trong bảng
+     * Các cột: Tên sản phẩm, Số lượng, Giá, Thành tiền
+     */
     private void setupTableColumns() {
         colItemName.setCellValueFactory(cellData -> 
             new SimpleStringProperty(cellData.getValue().getItem().getName()));
@@ -93,6 +105,10 @@ public class CheckoutController {
         orderItemsTable.setItems(orderItems);
     }
 
+    /**
+     * Tải thông tin khách hàng từ profile đã đăng nhập
+     * Điền sẵn tên, số điện thoại, địa chỉ vào form
+     */
     private void loadCustomerInfo() {
         try {
             var profile = authService.getCurrentAccount().getProfile();
@@ -106,6 +122,9 @@ public class CheckoutController {
         }
     }
 
+    /**
+     * Tải danh sách sản phẩm trong giỏ hàng và hiển thị lên bảng
+     */
     private void loadCartItems() {
         if (cart != null) {
             orderItems.clear();
@@ -114,6 +133,10 @@ public class CheckoutController {
         }
     }
 
+    /**
+     * Cập nhật thông tin tóm tắt giỏ hàng
+     * Hiển thị số loại sản phẩm và tổng số lượng
+     */
     private void updateCartInfo() {
         if (cart != null && !cart.getOrderItems().isEmpty()) {
             int totalItems = cart.getOrderItems().stream()
@@ -129,6 +152,10 @@ public class CheckoutController {
         }
     }
 
+    /**
+     * Cập nhật bảng tóm tắt tiền
+     * Gồm: Tạm tính, Thuế, Giảm giá, Phí ship, Tổng cộng
+     */
     private void updateSummary() {
         if (cart != null) {
             lblSubtotal.setText(formatCurrency(cart.getSubtotal()));
@@ -139,6 +166,12 @@ public class CheckoutController {
         }
     }
 
+    /**
+     * Xử lý khi người dùng áp dụng mã khuyến mãi
+     * - Kiểm tra mã nhập
+     * - Gọi service áp dụng khuyến mãi
+     * - Cập nhật giỏ hàng và hiển thị thông tin khuyến mãi
+     */
     @FXML
     private void handleApplyPromotion() {
         String code = txtPromotionCode.getText().trim().toUpperCase();
@@ -174,6 +207,11 @@ public class CheckoutController {
         }
     }
     
+    /**
+     * Xử lý khi người dùng hủy mã khuyến mãi
+     * - Gọi service xóa khuyến mãi
+     * - Cập nhật lại giỏ hàng và giao diện
+     */
     @FXML
     private void handleRemovePromotion() {
         try {
@@ -221,6 +259,13 @@ public class CheckoutController {
         }
     }
 
+    /**
+     * Xử lý khi người dùng đặt hàng
+     * - Kiểm tra thông tin giao hàng
+     * - Hiển thị xác nhận
+     * - Gọi service tạo đơn hàng
+     * - Chuyển sang màn hình thanh toán
+     */
     @FXML
     private void handlePlaceOrder() {
         // Validate inputs
@@ -241,6 +286,13 @@ public class CheckoutController {
         });
     }
 
+    /**
+     * Kiểm tra tính hợp lệ của thông tin giao hàng
+     * - Tên người nhận
+     * - Số điện thoại
+     * - Địa chỉ giao hàng
+     * @return true nếu hợp lệ, false nếu thiếu thông tin
+     */
     private boolean validateInputs() {
         if (txtReceiverName.getText().trim().isEmpty()) {
             showWarning("Vui lòng nhập tên người nhận!");

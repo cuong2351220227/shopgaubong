@@ -24,11 +24,21 @@ public class LoginController {
 
     private final AuthService authService = new AuthService();
 
+    /**
+     * Khởi tạo controller khi load view
+     * Xóa sạch message label
+     */
     @FXML
     public void initialize() {
         messageLabel.setText("");
     }
 
+    /**
+     * Xử lý sự kiện khi người dùng nhấn nút đăng nhập
+     * - Kiểm tra thông tin nhập
+     * - Gọi AuthService để xác thực
+     * - Chuyển đến màn hình chính theo vai trò
+     */
     @FXML
     private void handleLogin() {
         String username = usernameField.getText().trim();
@@ -52,6 +62,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * Chuyển đến màn hình chính tùy theo vai trò người dùng
+     * @param role Vai trò của người dùng (ADMIN, STAFF, CUSTOMER)
+     */
     private void navigateToMainScreen(Role role) {
         try {
             Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -81,11 +95,19 @@ public class LoginController {
         }
     }
 
+    /**
+     * Hiển thị thông báo lỗi màu đỏ
+     * @param message Nội dung thông báo
+     */
     private void showError(String message) {
         messageLabel.setStyle("-fx-text-fill: red;");
         messageLabel.setText(message);
     }
 
+    /**
+     * Hiển thị thông báo thành công màu xanh
+     * @param message Nội dung thông báo
+     */
     private void showSuccess(String message) {
         messageLabel.setStyle("-fx-text-fill: green;");
         messageLabel.setText(message);
